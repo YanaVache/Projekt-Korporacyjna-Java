@@ -11,9 +11,14 @@ public class Main {
                 --------------------""");
         Scanner scanner = new Scanner(System.in);
         try {
-            if (scanner.nextInt() == 1) {
+            int choice = scanner.nextInt();
+            if (choice == 1) {
                 createCircle();
-            } // else if 2 createSquare, else print "Wrong numberos"
+            } else if (choice == 2) {
+                createSquare();
+            } else {
+                System.out.println("Wrong number");
+            }
         } catch (InputMismatchException e) {
             System.out.println("Wrong input");
         }
@@ -25,7 +30,7 @@ public class Main {
                 --------------------
                 How do you want to create a circle?
                 1 - From Radius
-                2 - From Diamater
+                2 - From Diameter
                 3 - From Circumference
                 4 - From Area
                 --------------------""");
@@ -43,7 +48,7 @@ public class Main {
                 case 2 -> {                                                   // Albo stworzyć nową w klasie Circle
                     System.out.println("""
                             --------------------
-                            Enter Diamater
+                            Enter Diameter
                             --------------------""");
                     Circle circle = new Circle(scanner.nextDouble(), option);
                     System.out.println(circle);
@@ -71,4 +76,46 @@ public class Main {
         }
     }
 
+    private static void createSquare() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("""
+                --------------------
+                How do you want to create a square?
+                1 - From Side Length
+                2 - From Diagonal
+                3 - From Area
+                --------------------""");
+        try {
+            int option = scanner.nextInt();
+            switch (option) {
+                case 1 -> {
+                    System.out.println("""
+                            --------------------
+                            Enter Side Length
+                            --------------------""");
+                    Square square = new Square(scanner.nextDouble(), option);
+                    System.out.println(square);
+                }
+                case 2 -> {
+                    System.out.println("""
+                            --------------------
+                            Enter Diagonal
+                            --------------------""");
+                    Square square = new Square(scanner.nextDouble(), option);
+                    System.out.println(square);
+                }
+                case 3 -> {
+                    System.out.println("""
+                            --------------------
+                            Enter Area
+                            --------------------""");
+                    Square square = new Square(scanner.nextDouble(), option);
+                    System.out.println(square);
+                }
+                default -> System.out.println("Wrong number");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Wrong input");
+        }
+    }
 }
