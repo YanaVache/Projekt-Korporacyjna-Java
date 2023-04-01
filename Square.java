@@ -38,4 +38,16 @@ public class Square implements Figure {
                 + "\nArea: " + String.format("%.2f", this.area)
                 + "\n--------------------";
     }
+
+    public double getSideLength() {
+        return sideLength;
+    }
+
+    public double getDiagonalLength() {
+        return diagonalLength;
+    }
+
+    public double getArea() {
+        return area;
+    }
 }

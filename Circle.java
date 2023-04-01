@@ -51,4 +51,20 @@ public class Circle implements Figure { // Muszę sprawdzić, czy obliczenia si�
                 + "\nArea: " + String.format("%.2f", this.area)
                 + "\n--------------------";
     }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public double getDiameter() {
+        return diameter;
+    }
+
+    public double getCircumference() {
+        return circumference;
+    }
+
+    public double getArea() {
+        return area;
+    }
 }
