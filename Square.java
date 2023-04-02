@@ -1,4 +1,4 @@
-public class Square implements Figure {
+public class Square extends Figure {
     private double sideLength;    // Długość boku
     private double diagonalLength;// Długość przekątnej
     private double area;          // Pole powierzchni
@@ -35,8 +35,7 @@ public class Square implements Figure {
                 + "\nSquare"
                 + "\nSide Length: " + String.format("%.2f", this.sideLength)
                 + "\nDiagonal Length: " + String.format("%.2f", this.diagonalLength)
-                + "\nArea: " + String.format("%.2f", this.area)
-                + "\n--------------------";
+                + "\nArea: " + String.format("%.2f", this.area);
     }
 
     public double getSideLength() {

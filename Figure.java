@@ -1,2 +1,2 @@
-public interface Figure {
+public abstract class Figure {
 }

@@ -1,4 +1,4 @@
-public class Circle implements Figure { // Muszę sprawdzić, czy obliczenia się zgadzają
+public class Circle extends Figure {
     private double radius;         // Promień
     private double diameter;       // Średnica
     private double circumference;  // Obwód
@@ -48,8 +48,7 @@ public class Circle implements Figure { // Muszę sprawdzić, czy obliczenia si�
                 + "\nRadius: " + String.format("%.2f", this.radius)
                 + "\nDiameter: " + String.format("%.2f", this.diameter)
                 + "\nCircumference: " + String.format("%.2f", this.circumference)
-                + "\nArea: " + String.format("%.2f", this.area)
-                + "\n--------------------";
+                + "\nArea: " + String.format("%.2f", this.area);
     }
 
     public double getRadius() {
