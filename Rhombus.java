@@ -9,6 +9,7 @@ class Rhombus extends Figure {
             case 1 -> calculateFromDiagonals(a, b);
             case 2 -> calculateFromDiagonalAndArea(a, b);
             case 3 -> calculateFromDiagonalAndSideLength(a, b);
+            case 4 -> calculateFromAreaAndSideLength(a, b);
             default -> System.out.println("Rhombus: Option Error");
         }
     }
@@ -35,6 +36,31 @@ class Rhombus extends Figure {
 
         this.diagonalSnd = Math.sqrt(Math.pow(rLength, 2) - Math.pow(rDiagonal / 2, 2)) * 2;
         this.area = (this.diagonalFst * this.diagonalSnd) / 2;
+    }
+
+    private void calculateFromAreaAndSideLength(double rArea, double rLength){
+        this.area = rArea;
+        this.length = rLength;
+
+        double a = 1;
+        double b = -4 * Math.pow(this.length, 2);
+        double c = 4 * Math.pow(this.area, 2);
+
+        double delta = Math.pow(b, 2) - (4 * a * c);
+
+        if (delta >= 0) {
+            double d2Squared1 = (-b + Math.sqrt(delta)) / (2 * a);
+            double d2Squared2 = (-b - Math.sqrt(delta)) / (2 * a);
+
+            double d2Squared = Math.max(d2Squared1, d2Squared2);
+            double d2 = Math.sqrt(d2Squared);
+            double d1 = (2 * this.area) / d2;
+
+            this.diagonalFst = d1;
+            this.diagonalSnd = d2;
+        } else {
+            System.out.println("Invalid input, the area and side length combination is not possible for a rhombus.");
+        }
     }
 
     @Override

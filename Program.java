@@ -145,7 +145,8 @@ public class Program {
                     1 - From Diagonals
                     2 - From Diagonal and Area
                     3 - From Diagonal and Side Length
-                    4 - Go back
+                    4 - From Area and Side Length
+                    5 - Go back
                     --------------------""");
             try {
                 int option = scanner.nextInt();
@@ -153,7 +154,8 @@ public class Program {
                     case 1 -> createFigure(scanner, option, 2, new String[]{"First Diagonal", "Second Diagonal"}, "Rhombus");
                     case 2 -> createFigure(scanner, option, 2, new String[]{"Diagonal", "Area"}, "Rhombus");
                     case 3 -> createFigure(scanner, option, 2, new String[]{"Diagonal", "Side Length"}, "Rhombus");
-                    case 4 -> {
+                    case 4 -> createFigure(scanner, option, 2, new String[] { "Area", "Side Length" }, "Rhombus");
+                    case 5 -> {
                         return;
                     }
                     default -> System.out.println("Wrong number");
