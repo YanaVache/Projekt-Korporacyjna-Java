@@ -37,7 +37,7 @@ class Rectangle extends Figure {
     private void calculateFromAreaAndDiagonal(double a, double d) {
         this.area = a;
         this.diagonal = d;
-        this.length = Math.sqrt(Math.pow(d, 2) - Math.pow(a / d, 2));
+        this.length = Math.sqrt(Math.pow(d, 2) / 2 + Math.sqrt(Math.pow(d, 4) / 4 - Math.pow(a, 2)));
         this.width = a / this.length;
     }
 
