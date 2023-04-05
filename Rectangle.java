@@ -1,10 +1,10 @@
-class Rectancle extends Figure {
+class Rectangle extends Figure {
     private double length;
     private double width;
     private double area;
     private double diagonal;
 
-    public Rectancle(double a, double b, int option) {
+    public Rectangle(double a, double b, int option) {
         switch (option) {
             case 1 -> calculateFromLengthAndWidth(a, b);
             case 2 -> calculateFromDiagonalAndWidth(a, b);

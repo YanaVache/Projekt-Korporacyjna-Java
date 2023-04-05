@@ -11,7 +11,8 @@ public class Program {
                     1 - Circle
                     2 - Square
                     3 - Rectangle
-                    4 - Exit
+                    4 - Rhombus
+                    5 - Exit
                     --------------------""");
             try {
                 int choice = scanner.nextInt();
@@ -26,6 +27,9 @@ public class Program {
                         createRectangle(scanner);
                         break;
                     case 4:
+                        createRhombus(scanner);
+                        break;
+                    case 5:
                         System.out.println("Exiting program...");
                         return;
                     default:
@@ -64,8 +68,12 @@ public class Program {
                 System.out.println(square);
             }
             case "Rectangle" -> {
-                Rectancle rectangle = new Rectancle(values[0], values[1], option);
-                System.out.println(rectangle);
+                Rectangle Rectangle = new Rectangle(values[0], values[1], option);
+                System.out.println(Rectangle);
+            }
+            case "Rhombus" -> {
+                Rhombus rhombus = new Rhombus(values[0], values[1], option);
+                System.out.println(rhombus);
             }
             default -> throw new IllegalArgumentException("");
         }
@@ -129,11 +137,39 @@ public class Program {
         }
     }
 
+    private void createRhombus(Scanner scanner){
+        while (true) {
+            System.out.println("""
+                    --------------------
+                    How do you want to create a rhombus?
+                    1 - From Diagonals
+                    2 - From Diagonal and Area
+                    3 - From Diagonal and Side Length
+                    4 - Go back
+                    --------------------""");
+            try {
+                int option = scanner.nextInt();
+                switch (option) {
+                    case 1 -> createFigure(scanner, option, 2, new String[]{"First Diagonal", "Second Diagonal"}, "Rhombus");
+                    case 2 -> createFigure(scanner, option, 2, new String[]{"Diagonal", "Area"}, "Rhombus");
+                    case 3 -> createFigure(scanner, option, 2, new String[]{"Diagonal", "Side Length"}, "Rhombus");
+                    case 4 -> {
+                        return;
+                    }
+                    default -> System.out.println("Wrong number");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong input");
+                scanner.nextLine();
+            }
+        }
+    }
+
     private void createRectangle(Scanner scanner) {
         while (true) {
             System.out.println("""
                     --------------------
-                    How do you want to create a rectangle?
+                    How do you want to create a Rectangle?
                     1 - From Side Lengths
                     2 - From Diagonal and Side Length
                     3 - From Area and Side Length
