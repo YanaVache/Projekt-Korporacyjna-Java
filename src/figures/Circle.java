@@ -12,6 +12,7 @@ public class Circle extends Figure {
             case 2 -> calculateFromDiameter(n);
             case 3 -> calculateFromCircumference(n);
             case 4 -> calculateFromArea(n);
+            default -> throw new IllegalArgumentException("Wrong option");
         }
     }
 
@@ -46,7 +47,7 @@ public class Circle extends Figure {
     @Override
     public String toString() {
         return "--------------------"
-                + "\nfigures.Circle"
+                + "\nCircle"
                 + "\nRadius: " + String.format("%.2f", this.radius)
                 + "\nDiameter: " + String.format("%.2f", this.diameter)
                 + "\nCircumference: " + String.format("%.2f", this.circumference)

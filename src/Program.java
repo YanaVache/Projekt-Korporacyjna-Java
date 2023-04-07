@@ -53,7 +53,7 @@ public class Program {
             }
             values[i] = value;
         }
-    
+
         switch (figureToCreate) {
             case "Circle" -> {
                 Circle circle = new Circle(values[0], option);
@@ -133,7 +133,7 @@ public class Program {
         }
     }
 
-    private void createRhombus(Scanner scanner){
+    private void createRhombus(Scanner scanner) {
         while (true) {
             System.out.println("""
                     --------------------
@@ -147,10 +147,11 @@ public class Program {
             try {
                 int option = scanner.nextInt();
                 switch (option) {
-                    case 1 -> createFigure(scanner, option, 2, new String[]{"First Diagonal", "Second Diagonal"}, "Rhombus");
+                    case 1 ->
+                            createFigure(scanner, option, 2, new String[]{"First Diagonal", "Second Diagonal"}, "Rhombus");
                     case 2 -> createFigure(scanner, option, 2, new String[]{"Diagonal", "Area"}, "Rhombus");
                     case 3 -> createFigure(scanner, option, 2, new String[]{"Diagonal", "Side Length"}, "Rhombus");
-                    case 4 -> createFigure(scanner, option, 2, new String[] { "Area", "Side Length" }, "Rhombus");
+                    case 4 -> createFigure(scanner, option, 2, new String[]{"Area", "Side Length"}, "Rhombus");
                     case 5 -> {
                         return;
                     }
@@ -177,7 +178,8 @@ public class Program {
             try {
                 int option = scanner.nextInt();
                 switch (option) {
-                    case 1 -> createFigure(scanner, option, 2, new String[]{"Side length 1", "Side length 2"}, "Rectangle");
+                    case 1 ->
+                            createFigure(scanner, option, 2, new String[]{"Side length 1", "Side length 2"}, "Rectangle");
                     case 2 -> createFigure(scanner, option, 2, new String[]{"Diagonal", "Side length"}, "Rectangle");
                     case 3 -> createFigure(scanner, option, 2, new String[]{"Area", "Side length"}, "Rectangle");
                     case 4 -> createFigure(scanner, option, 2, new String[]{"Area", "Diagonal"}, "Rectangle");
@@ -190,6 +192,6 @@ public class Program {
                 System.out.println("Wrong input");
                 scanner.nextLine();
             }
-        }         
+        }
     }
 }

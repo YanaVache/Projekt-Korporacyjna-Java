@@ -12,6 +12,7 @@ public class Rectangle extends Figure {
             case 2 -> calculateFromDiagonalAndWidth(a, b);
             case 3 -> calculateFromAreaAndWidth(a, b);
             case 4 -> calculateFromAreaAndDiagonal(a, b);
+            default -> throw new IllegalArgumentException("Wrong option");
         }
     }
 
@@ -46,7 +47,7 @@ public class Rectangle extends Figure {
     @Override
     public String toString() {
         return "--------------------"
-                + "\nfigures.Rectangle"
+                + "\nRectangle"
                 + "\nLength: " + String.format("%.2f", this.length)
                 + "\nWidth: " + String.format("%.2f", this.width)
                 + "\nDiagonal: " + String.format("%.2f", this.diagonal)
