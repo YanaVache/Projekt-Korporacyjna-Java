@@ -1,7 +1,4 @@
-import figures.Circle;
-import figures.Rectangle;
-import figures.Rhombus;
-import figures.Square;
+import figures.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -17,7 +14,8 @@ public class Program {
                     2 - Square
                     3 - Rectangle
                     4 - Rhombus
-                    5 - Exit
+                    5 - Equilateral Triangle
+                    6 - Exit
                     --------------------""");
             try {
                 int choice = scanner.nextInt();
@@ -26,7 +24,8 @@ public class Program {
                     case 2 -> createSquare(scanner);
                     case 3 -> createRectangle(scanner);
                     case 4 -> createRhombus(scanner);
-                    case 5 -> {
+                    case 5 -> createEquilateralTriangle(scanner);
+                    case 6 -> {
                         System.out.println("Exiting program...");
                         return;
                     }
@@ -38,6 +37,7 @@ public class Program {
             }
         }
     }
+
 
     private void createFigure(Scanner scanner, int option, int args, String[] s, String figureToCreate) {
         double[] values = new double[args];
@@ -70,6 +70,10 @@ public class Program {
             case "Rhombus" -> {
                 Rhombus rhombus = new Rhombus(values[0], values[1], option);
                 System.out.println(rhombus);
+            }
+            case "EquilateralTriangle" -> {
+                EquilateralTriangle eqTriangle = new EquilateralTriangle(values[0], option);
+                System.out.println(eqTriangle);
             }
             default -> throw new IllegalArgumentException("");
         }
@@ -168,7 +172,7 @@ public class Program {
         while (true) {
             System.out.println("""
                     --------------------
-                    How do you want to create a figures.Rectangle?
+                    How do you want to create a Rectangle?
                     1 - From Side Lengths
                     2 - From Diagonal and Side Length
                     3 - From Area and Side Length
@@ -194,4 +198,35 @@ public class Program {
             }
         }
     }
+
+    private void createEquilateralTriangle(Scanner scanner) {
+        while (true) {
+            System.out.println("""
+                    --------------------
+                    How do you want to create a Equilateral Triangle?
+                    1 - From Edge Length
+                    2 - From Area
+                    3 - From Perimeter
+                    4 - From Height
+                    5 - Go back
+                    --------------------""");
+            try {
+                int option = scanner.nextInt();
+                switch (option) {
+                    case 1 -> createFigure(scanner, option, 1, new String[]{"Edge Length"}, "EquilateralTriangle");
+                    case 2 -> createFigure(scanner, option, 1, new String[]{"Area"}, "EquilateralTriangle");
+                    case 3 -> createFigure(scanner, option, 1, new String[]{"From Perimeter"}, "EquilateralTriangle");
+                    case 4 -> createFigure(scanner, option, 1, new String[]{"From Height"}, "EquilateralTriangle");
+                    case 5 -> {
+                        return;
+                    }
+                    default -> System.out.println("Wrong number");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong input");
+                scanner.nextLine();
+            }
+        }
+    }
 }
+
