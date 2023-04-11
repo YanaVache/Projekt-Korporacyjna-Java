@@ -66,13 +66,22 @@ public class Rhombus extends Figure {
     }
 
     @Override
-    public String toString() {
+    public String prettyString() {
         return "--------------------"
                 + "\nRhombus"
                 + "\nSide Length: " + String.format("%.2f", this.length)
                 + "\nFirst Diagonal: " + String.format("%.2f", this.diagonalFst)
                 + "\nSecond Diagonal: " + String.format("%.2f", this.diagonalSnd)
                 + "\nArea: " + String.format("%.2f", this.area);
+    }
+
+    @Override
+    public String toString() {
+        return "[Rhombus,"
+                + " Side Length: " + String.format("%.2f", this.length)
+                + " First Diagonal: " + String.format("%.2f", this.diagonalFst)
+                + " Second Diagonal: " + String.format("%.2f", this.diagonalSnd)
+                + " Area: " + String.format("%.2f", this.area);
     }
 
     public double getLength() {

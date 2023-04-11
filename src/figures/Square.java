@@ -33,12 +33,20 @@ public class Square extends Figure {
     }
 
     @Override
-    public String toString() {
+    public String prettyString() {
         return "--------------------"
                 + "\nSquare"
                 + "\nSide Length: " + String.format("%.2f", this.sideLength)
                 + "\nDiagonal Length: " + String.format("%.2f", this.diagonalLength)
                 + "\nArea: " + String.format("%.2f", this.area);
+    }
+
+    @Override
+    public String toString() {
+        return "[Square,"
+                + " Side Length: " + String.format("%.2f", this.sideLength)
+                + " Diagonal Length: " + String.format("%.2f", this.diagonalLength)
+                + " Area: " + String.format("%.2f", this.area) + "]";
     }
 
     public double getSideLength() {

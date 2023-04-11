@@ -45,13 +45,22 @@ public class Circle extends Figure {
     }
 
     @Override
-    public String toString() {
+    public String prettyString() {
         return "--------------------"
                 + "\nCircle"
                 + "\nRadius: " + String.format("%.2f", this.radius)
                 + "\nDiameter: " + String.format("%.2f", this.diameter)
                 + "\nCircumference: " + String.format("%.2f", this.circumference)
                 + "\nArea: " + String.format("%.2f", this.area);
+    }
+
+    @Override
+    public String toString() {
+        return "[Circle,"
+                + " Radius: " + String.format("%.2f", this.radius)
+                + " Diameter: " + String.format("%.2f", this.diameter)
+                + " Circumference: " + String.format("%.2f", this.circumference)
+                + " Area: " + String.format("%.2f", this.area) + "]";
     }
 
     public double getRadius() {

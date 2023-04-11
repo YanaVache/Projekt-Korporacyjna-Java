@@ -44,14 +44,21 @@ public class Rectangle extends Figure {
         this.width = a / this.length;
     }
 
-    @Override
-    public String toString() {
+    public String prettyString() {
         return "--------------------"
                 + "\nRectangle"
                 + "\nLength: " + String.format("%.2f", this.length)
                 + "\nWidth: " + String.format("%.2f", this.width)
                 + "\nDiagonal: " + String.format("%.2f", this.diagonal)
                 + "\nArea: " + String.format("%.2f", this.area);
+    }
+
+    @Override
+    public String toString() {
+        return "[Rectangle," + "Length:" + String.format("%.2f", this.length)
+                + " Width: " + String.format("%.2f", this.width)
+                + " Diagonal: " + String.format("%.2f", this.diagonal)
+                + " Area: " + String.format("%.2f", this.area) + "]";
     }
 
     public double getLength() {

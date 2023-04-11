@@ -45,7 +45,7 @@ public class EquilateralTriangle extends Figure {
     }
 
     @Override
-    public String toString() {
+    public String prettyString() {
         return "--------------------"
                 + "\nEquilateral Triangle"
                 + "\nEdge Length: " + String.format("%.2f", this.edgeLength)
@@ -54,4 +54,28 @@ public class EquilateralTriangle extends Figure {
                 + "\nHeight: " + String.format("%.2f", this.height);
     }
 
+    @Override
+    public String toString() {
+        return "[Equilateral Triangle"
+                + " Edge Length: " + String.format("%.2f", this.edgeLength)
+                + " Area: " + String.format("%.2f", this.area)
+                + " Perimeter: " + String.format("%.2f", this.perimeter)
+                + " Height: " + String.format("%.2f", this.height) + "]";
+    }
+
+    public double getEdgeLength() {
+        return edgeLength;
+    }
+
+    public double getArea() {
+        return area;
+    }
+
+    public double getPerimeter() {
+        return perimeter;
+    }
+
+    public double getHeight() {
+        return height;
+    }
 }

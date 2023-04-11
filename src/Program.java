@@ -1,9 +1,10 @@
 import figures.*;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Program {
+    private ArrayList<Figure> createdFigures = new ArrayList<>();
+
     public void runProgram() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -15,7 +16,8 @@ public class Program {
                     3 - Rectangle
                     4 - Rhombus
                     5 - Equilateral Triangle
-                    6 - Exit
+                    6 - Show all created figures
+                    7 - Exit
                     --------------------""");
             try {
                 int choice = scanner.nextInt();
@@ -26,6 +28,10 @@ public class Program {
                     case 4 -> createRhombus(scanner);
                     case 5 -> createEquilateralTriangle(scanner);
                     case 6 -> {
+                        Collections.sort(this.createdFigures);
+                        System.out.println(this.createdFigures);
+                    } // Chwilowo z tym sortem
+                    case 7 -> {
                         System.out.println("Exiting program...");
                         return;
                     }
@@ -37,7 +43,6 @@ public class Program {
             }
         }
     }
-
 
     private void createFigure(Scanner scanner, int option, int args, String[] s, String figureToCreate) {
         double[] values = new double[args];
@@ -53,30 +58,17 @@ public class Program {
             }
             values[i] = value;
         }
-
+        Figure newFigure;
         switch (figureToCreate) {
-            case "Circle" -> {
-                Circle circle = new Circle(values[0], option);
-                System.out.println(circle);
-            }
-            case "Square" -> {
-                Square square = new Square(values[0], option);
-                System.out.println(square);
-            }
-            case "Rectangle" -> {
-                Rectangle Rectangle = new Rectangle(values[0], values[1], option);
-                System.out.println(Rectangle);
-            }
-            case "Rhombus" -> {
-                Rhombus rhombus = new Rhombus(values[0], values[1], option);
-                System.out.println(rhombus);
-            }
-            case "EquilateralTriangle" -> {
-                EquilateralTriangle eqTriangle = new EquilateralTriangle(values[0], option);
-                System.out.println(eqTriangle);
-            }
+            case "Circle" -> newFigure = new Circle(values[0], option);
+            case "Square" -> newFigure = new Square(values[0], option);
+            case "Rectangle" -> newFigure = new Rectangle(values[0], values[1], option);
+            case "Rhombus" -> newFigure = new Rhombus(values[0], values[1], option);
+            case "EquilateralTriangle" -> newFigure = new EquilateralTriangle(values[0], option);
             default -> throw new IllegalArgumentException("");
         }
+        System.out.println(newFigure.prettyString());
+        this.createdFigures.add(newFigure);
     }
 
     private void createCircle(Scanner scanner) {
