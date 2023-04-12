@@ -12,7 +12,7 @@ public class Rhombus extends Figure {
             case 2 -> calculateFromDiagonalAndArea(a, b);
             case 3 -> calculateFromDiagonalAndSideLength(a, b);
             case 4 -> calculateFromAreaAndSideLength(a, b);
-            default -> System.out.println("figures.Rhombus: Option Error");
+            default -> throw new IllegalArgumentException("Wrong option");
         }
     }
 
@@ -40,7 +40,7 @@ public class Rhombus extends Figure {
         this.area = (this.diagonalFst * this.diagonalSnd) / 2;
     }
 
-    private void calculateFromAreaAndSideLength(double rArea, double rLength){
+    private void calculateFromAreaAndSideLength(double rArea, double rLength) {
         this.area = rArea;
         this.length = rLength;
 
@@ -66,13 +66,22 @@ public class Rhombus extends Figure {
     }
 
     @Override
-    public String toString() {
+    public String prettyString() {
         return "--------------------"
-                + "\nfigures.Rhombus"
+                + "\nRhombus"
                 + "\nSide Length: " + String.format("%.2f", this.length)
                 + "\nFirst Diagonal: " + String.format("%.2f", this.diagonalFst)
                 + "\nSecond Diagonal: " + String.format("%.2f", this.diagonalSnd)
                 + "\nArea: " + String.format("%.2f", this.area);
+    }
+
+    @Override
+    public String toString() {
+        return "[Rhombus,"
+                + " Side Length: " + String.format("%.2f", this.length)
+                + " First Diagonal: " + String.format("%.2f", this.diagonalFst)
+                + " Second Diagonal: " + String.format("%.2f", this.diagonalSnd)
+                + " Area: " + String.format("%.2f", this.area);
     }
 
     public double getLength() {

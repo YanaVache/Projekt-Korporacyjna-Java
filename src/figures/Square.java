@@ -10,6 +10,7 @@ public class Square extends Figure {
             case 1 -> calculateFromSideLength(n);
             case 2 -> calculateFromDiagonalLength(n);
             case 3 -> calculateFromArea(n);
+            default -> throw new IllegalArgumentException("Wrong option");
         }
     }
 
@@ -32,12 +33,20 @@ public class Square extends Figure {
     }
 
     @Override
-    public String toString() {
+    public String prettyString() {
         return "--------------------"
-                + "\nfigures.Square"
+                + "\nSquare"
                 + "\nSide Length: " + String.format("%.2f", this.sideLength)
                 + "\nDiagonal Length: " + String.format("%.2f", this.diagonalLength)
                 + "\nArea: " + String.format("%.2f", this.area);
+    }
+
+    @Override
+    public String toString() {
+        return "[Square,"
+                + " Side Length: " + String.format("%.2f", this.sideLength)
+                + " Diagonal Length: " + String.format("%.2f", this.diagonalLength)
+                + " Area: " + String.format("%.2f", this.area) + "]";
     }
 
     public double getSideLength() {
