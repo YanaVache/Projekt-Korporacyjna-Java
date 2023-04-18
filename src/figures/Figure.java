@@ -2,6 +2,7 @@ package figures;
 
 public abstract class Figure implements Comparable<Figure> {
     public abstract double getArea();
+    public abstract double getPerimeter();
 
     public abstract String prettyString();
 
