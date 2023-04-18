@@ -16,8 +16,9 @@ public class Program {
                     3 - Rectangle
                     4 - Rhombus
                     5 - Equilateral Triangle
-                    6 - Show all created figures
-                    7 - Exit
+                    6 - Isosceles Triangle
+                    7 - Show all created figures
+                    8 - Exit
                     --------------------""");
             try {
                 int choice = scanner.nextInt();
@@ -27,11 +28,12 @@ public class Program {
                     case 3 -> createRectangle(scanner);
                     case 4 -> createRhombus(scanner);
                     case 5 -> createEquilateralTriangle(scanner);
-                    case 6 -> {
+                    case 6 -> createIsoscelesTriangle(scanner);
+                    case 7 -> {
                         Collections.sort(this.createdFigures);
                         System.out.println(this.createdFigures);
                     } // Chwilowo z tym sortem
-                    case 7 -> {
+                    case 8 -> {
                         System.out.println("Exiting program...");
                         return;
                     }
@@ -65,6 +67,7 @@ public class Program {
             case "Rectangle" -> newFigure = new Rectangle(values[0], values[1], option);
             case "Rhombus" -> newFigure = new Rhombus(values[0], values[1], option);
             case "EquilateralTriangle" -> newFigure = new EquilateralTriangle(values[0], option);
+            case "IsoscelesTriangle" -> newFigure = new IsoscelesTriangle(values[0], values[1], option);
             default -> throw new IllegalArgumentException("");
         }
         System.out.println(newFigure.prettyString());
@@ -205,11 +208,45 @@ public class Program {
             try {
                 int option = scanner.nextInt();
                 switch (option) {
-                    case 1 -> createFigure(scanner, option, 1, new String[]{"Edge Length"}, "EquilateralTriangle");
-                    case 2 -> createFigure(scanner, option, 1, new String[]{"Area"}, "EquilateralTriangle");
-                    case 3 -> createFigure(scanner, option, 1, new String[]{"From Perimeter"}, "EquilateralTriangle");
-                    case 4 -> createFigure(scanner, option, 1, new String[]{"From Height"}, "EquilateralTriangle");
+                    case 1 -> createFigure(scanner, option, 1, new String[] { "Edge Length" }, "EquilateralTriangle");
+                    case 2 -> createFigure(scanner, option, 1, new String[] { "Area" }, "EquilateralTriangle");
+                    case 3 ->
+                        createFigure(scanner, option, 1, new String[] { "From Perimeter" }, "EquilateralTriangle");
+                    case 4 -> createFigure(scanner, option, 1, new String[] { "From Height" }, "EquilateralTriangle");
                     case 5 -> {
+                        return;
+                    }
+                    default -> System.out.println("Wrong number");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong input");
+                scanner.nextLine();
+            }
+        }
+    }
+    
+    private void createIsoscelesTriangle(Scanner scanner) {
+        while (true) {
+            System.out.println("""
+                    --------------------
+                    How do you want to create a Isosceles Triangle?
+                    1 - From Arm Length and Base Length
+                    2 - From Arm Length and Area
+                    3 - From Arm Length and Height (Dropped on Base)
+                    4 - From Base Length and Area
+                    5 - From Base Length and Height (Dropped on Base)
+                    6 - From Area and Height (Dropped on Base)
+                    --------------------""");
+            try {
+                int option = scanner.nextInt();
+                switch (option) {
+                    case 1 -> createFigure(scanner, option, 2, new String[]{"Arm Length", "Base Length"}, "IsoscelesTriangle");
+                    case 2 -> createFigure(scanner, option, 2, new String[]{"Arm Length", "Area"}, "IsoscelesTriangle");
+                    case 3 -> createFigure(scanner, option, 2, new String[]{"Arm Length", "Height"}, "IsoscelesTriangle");
+                    case 4 -> createFigure(scanner, option, 2, new String[]{"Base Length", "Area"}, "IsoscelesTriangle");
+                    case 5 -> createFigure(scanner, option, 2, new String[]{"Base Length", "Height"}, "IsoscelesTriangle");
+                    case 6 -> createFigure(scanner, option, 2, new String[]{"Area", "Height"}, "IsoscelesTriangle");
+                    case 7 -> {
                         return;
                     }
                     default -> System.out.println("Wrong number");
