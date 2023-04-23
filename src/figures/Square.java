@@ -3,8 +3,8 @@ package figures;
 public class Square extends Figure {
     private double sideLength;    // Długość boku
     private double diagonalLength;// Długość przekątnej
-    private double area;          // Pole powierzchni
-
+    private double area; // Pole powierzchni
+    
     public Square(double n, int option) {
         switch (option) {
             case 1 -> calculateFromSideLength(n);
@@ -12,6 +12,33 @@ public class Square extends Figure {
             case 3 -> calculateFromArea(n);
             default -> throw new IllegalArgumentException("Wrong option");
         }
+    }
+
+    public static void printGuide() {
+        System.out.println("""
+                    --------------------
+                    How do you want to create a square?
+                    1 - From Side Length
+                    2 - From Diagonal
+                    3 - From Area
+                    4 - Go back
+                    --------------------""");
+    }
+
+    public static String[] getRequiredProperties(int option) {
+        switch (option) {
+            case 1 -> {
+                return new String[] { "Side" };
+            }
+            case 2 -> {
+                return new String[] { "Diagonal" };
+            }
+            case 3 -> {
+                return new String[] { "Area" };
+            }
+            default -> throw new IllegalArgumentException("Wrong option");
+        }
+
     }
 
     private void calculateFromSideLength(double s) {
@@ -31,6 +58,8 @@ public class Square extends Figure {
         this.sideLength = Math.sqrt(a);
         this.diagonalLength = this.sideLength * Math.sqrt(2);
     }
+
+    // TODO tworzenie koła opisanego
 
     @Override
     public String prettyString() {

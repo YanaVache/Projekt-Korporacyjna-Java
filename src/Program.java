@@ -1,9 +1,10 @@
 import figures.*;
-
 import java.util.*;
+import workers.*;
 
 public class Program {
     private ArrayList<Figure> createdFigures = new ArrayList<>();
+    private FigureFactory factory = new FigureFactory();
 
     public void runProgram() {
         Scanner scanner = new Scanner(System.in);
@@ -22,9 +23,13 @@ public class Program {
                     --------------------""");
             try {
                 int choice = scanner.nextInt();
+                // TODO - przerobić
                 switch (choice) {
                     case 1 -> createCircle(scanner);
-                    case 2 -> createSquare(scanner);
+                    case 2 -> {
+                        Square.printGuide();
+                        NEWCreateFigure(scanner, FigureType.Square);
+                    }
                     case 3 -> createRectangle(scanner);
                     case 4 -> createRhombus(scanner);
                     case 5 -> createEquilateralTriangle(scanner);
@@ -43,6 +48,34 @@ public class Program {
         }
     }
 
+    private void NEWCreateFigure(Scanner scanner, FigureType fig) {
+        try {
+            int option = scanner.nextInt();
+            String[] requiredProperties = factory.getProperties(fig, option);
+            Double[] properties = inputProperties(scanner, requiredProperties);
+            Figure newFigure = factory.createFigure(fig, properties, option);
+            createdFigures.add(newFigure);
+            System.out.println(newFigure.prettyString());
+        } catch (InputMismatchException e) {
+            System.out.println("Wrong input");
+            scanner.nextLine();
+        }
+    }
+    
+    private Double[] inputProperties(Scanner scanner, String[] props) {
+        Double[] values = new Double[props.length];
+        for (int i = 0; i < props.length; i++) {
+            System.out.printf("""
+                    --------------------
+                    Enter %s
+                    --------------------
+                    """, props[i]);
+            values[i] = scanner.nextDouble();
+        }
+        return values;
+    }
+
+    // TODO - wszystko poniżej do usunięcia
     private void createFigure(Scanner scanner, int option, int args, String[] s, String figureToCreate) {
         double[] values = new double[args];
         for (int i = 0; i < args; i++) {
@@ -96,34 +129,6 @@ public class Program {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input, enter a positive number");
-                scanner.nextLine();
-            }
-        }
-    }
-
-    private void createSquare(Scanner scanner) {
-        while (true) {
-            System.out.println("""
-                    --------------------
-                    How do you want to create a square?
-                    1 - From Side Length
-                    2 - From Diagonal
-                    3 - From Area
-                    4 - Go back
-                    --------------------""");
-            try {
-                int option = scanner.nextInt();
-                switch (option) {
-                    case 1 -> createFigure(scanner, option, 1, new String[]{"Side length"}, "Square");
-                    case 2 -> createFigure(scanner, option, 1, new String[]{"Diagonal"}, "Square");
-                    case 3 -> createFigure(scanner, option, 1, new String[]{"Area"}, "Square");
-                    case 4 -> {
-                        return;
-                    }
-                    default -> System.out.println("Wrong number");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Wrong input");
                 scanner.nextLine();
             }
         }
@@ -310,11 +315,12 @@ public class Program {
                 System.out.printf("\n#%d ", i++);
                 System.out.println(figure);
             }
-            makeCircle(scanner);
+            createDziwneCircle(scanner);
         }
     }
 
-    private void makeCircle(Scanner scanner) {
+    // TODO - do wywalenia
+    private void createDziwneCircle(Scanner scanner) {
         while (true) {
             System.out.println("""
                     --------------------
