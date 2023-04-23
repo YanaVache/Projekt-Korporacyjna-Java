@@ -85,10 +85,10 @@ public class Program {
             try {
                 int option = scanner.nextInt();
                 switch (option) {
-                    case 1 -> createFigure(scanner, option, 1, new String[] { "Radius" }, "Circle");
-                    case 2 -> createFigure(scanner, option, 1, new String[] { "Diameter" }, "Circle");
-                    case 3 -> createFigure(scanner, option, 1, new String[] { "Circumference" }, "Circle");
-                    case 4 -> createFigure(scanner, option, 1, new String[] { "Area" }, "Circle");
+                    case 1 -> createFigure(scanner, option, 1, new String[]{"Radius"}, "Circle");
+                    case 2 -> createFigure(scanner, option, 1, new String[]{"Diameter"}, "Circle");
+                    case 3 -> createFigure(scanner, option, 1, new String[]{"Circumference"}, "Circle");
+                    case 4 -> createFigure(scanner, option, 1, new String[]{"Area"}, "Circle");
                     case 5 -> {
                         return;
                     }
@@ -114,9 +114,9 @@ public class Program {
             try {
                 int option = scanner.nextInt();
                 switch (option) {
-                    case 1 -> createFigure(scanner, option, 1, new String[] { "Side length" }, "Square");
-                    case 2 -> createFigure(scanner, option, 1, new String[] { "Diagonal" }, "Square");
-                    case 3 -> createFigure(scanner, option, 1, new String[] { "Area" }, "Square");
+                    case 1 -> createFigure(scanner, option, 1, new String[]{"Side length"}, "Square");
+                    case 2 -> createFigure(scanner, option, 1, new String[]{"Diagonal"}, "Square");
+                    case 3 -> createFigure(scanner, option, 1, new String[]{"Area"}, "Square");
                     case 4 -> {
                         return;
                     }
@@ -143,12 +143,11 @@ public class Program {
             try {
                 int option = scanner.nextInt();
                 switch (option) {
-                    case 1 ->
-                        createFigure(scanner, option, 2, new String[] { "First Diagonal", "Second Diagonal" },
-                                "Rhombus");
-                    case 2 -> createFigure(scanner, option, 2, new String[] { "Diagonal", "Area" }, "Rhombus");
-                    case 3 -> createFigure(scanner, option, 2, new String[] { "Diagonal", "Side Length" }, "Rhombus");
-                    case 4 -> createFigure(scanner, option, 2, new String[] { "Area", "Side Length" }, "Rhombus");
+                    case 1 -> createFigure(scanner, option, 2, new String[]{"First Diagonal", "Second Diagonal"},
+                            "Rhombus");
+                    case 2 -> createFigure(scanner, option, 2, new String[]{"Diagonal", "Area"}, "Rhombus");
+                    case 3 -> createFigure(scanner, option, 2, new String[]{"Diagonal", "Side Length"}, "Rhombus");
+                    case 4 -> createFigure(scanner, option, 2, new String[]{"Area", "Side Length"}, "Rhombus");
                     case 5 -> {
                         return;
                     }
@@ -175,12 +174,11 @@ public class Program {
             try {
                 int option = scanner.nextInt();
                 switch (option) {
-                    case 1 ->
-                        createFigure(scanner, option, 2, new String[] { "Side length 1", "Side length 2" },
-                                "Rectangle");
-                    case 2 -> createFigure(scanner, option, 2, new String[] { "Diagonal", "Side length" }, "Rectangle");
-                    case 3 -> createFigure(scanner, option, 2, new String[] { "Area", "Side length" }, "Rectangle");
-                    case 4 -> createFigure(scanner, option, 2, new String[] { "Area", "Diagonal" }, "Rectangle");
+                    case 1 -> createFigure(scanner, option, 2, new String[]{"Side length 1", "Side length 2"},
+                            "Rectangle");
+                    case 2 -> createFigure(scanner, option, 2, new String[]{"Diagonal", "Side length"}, "Rectangle");
+                    case 3 -> createFigure(scanner, option, 2, new String[]{"Area", "Side length"}, "Rectangle");
+                    case 4 -> createFigure(scanner, option, 2, new String[]{"Area", "Diagonal"}, "Rectangle");
                     case 5 -> {
                         return;
                     }
@@ -207,11 +205,10 @@ public class Program {
             try {
                 int option = scanner.nextInt();
                 switch (option) {
-                    case 1 -> createFigure(scanner, option, 1, new String[] { "Edge Length" }, "EquilateralTriangle");
-                    case 2 -> createFigure(scanner, option, 1, new String[] { "Area" }, "EquilateralTriangle");
-                    case 3 ->
-                        createFigure(scanner, option, 1, new String[] { "From Perimeter" }, "EquilateralTriangle");
-                    case 4 -> createFigure(scanner, option, 1, new String[] { "From Height" }, "EquilateralTriangle");
+                    case 1 -> createFigure(scanner, option, 1, new String[]{"Edge Length"}, "EquilateralTriangle");
+                    case 2 -> createFigure(scanner, option, 1, new String[]{"Area"}, "EquilateralTriangle");
+                    case 3 -> createFigure(scanner, option, 1, new String[]{"From Perimeter"}, "EquilateralTriangle");
+                    case 4 -> createFigure(scanner, option, 1, new String[]{"From Height"}, "EquilateralTriangle");
                     case 5 -> {
                         return;
                     }
@@ -240,17 +237,16 @@ public class Program {
             try {
                 int option = scanner.nextInt();
                 switch (option) {
-                    case 1 -> createFigure(scanner, option, 2, new String[] { "Arm Length", "Base Length" },
+                    case 1 -> createFigure(scanner, option, 2, new String[]{"Arm Length", "Base Length"},
                             "IsoscelesTriangle");
-                    case 2 ->
-                        createFigure(scanner, option, 2, new String[] { "Arm Length", "Area" }, "IsoscelesTriangle");
+                    case 2 -> createFigure(scanner, option, 2, new String[]{"Arm Length", "Area"}, "IsoscelesTriangle");
                     case 3 ->
-                        createFigure(scanner, option, 2, new String[] { "Arm Length", "Height" }, "IsoscelesTriangle");
+                            createFigure(scanner, option, 2, new String[]{"Arm Length", "Height"}, "IsoscelesTriangle");
                     case 4 ->
-                        createFigure(scanner, option, 2, new String[] { "Base Length", "Area" }, "IsoscelesTriangle");
+                            createFigure(scanner, option, 2, new String[]{"Base Length", "Area"}, "IsoscelesTriangle");
                     case 5 ->
-                        createFigure(scanner, option, 2, new String[] { "Base Length", "Height" }, "IsoscelesTriangle");
-                    case 6 -> createFigure(scanner, option, 2, new String[] { "Area", "Height" }, "IsoscelesTriangle");
+                            createFigure(scanner, option, 2, new String[]{"Base Length", "Height"}, "IsoscelesTriangle");
+                    case 6 -> createFigure(scanner, option, 2, new String[]{"Area", "Height"}, "IsoscelesTriangle");
                     case 7 -> {
                         return;
                     }
@@ -265,33 +261,13 @@ public class Program {
 
     private void sortFigures(int option) {
         if (option == 1) {
-            Collections.sort(this.createdFigures, new Comparator<Figure>() {
-                @Override
-                public int compare(Figure f1, Figure f2) {
-                    return Double.compare(f1.getArea(), f2.getArea());
-                }
-            });
+            this.createdFigures.sort((f1, f2) -> Double.compare(f1.getArea(), f2.getArea()));
         } else if (option == 2) {
-            Collections.sort(this.createdFigures, new Comparator<Figure>() {
-                @Override
-                public int compare(Figure f1, Figure f2) {
-                    return Double.compare(f2.getArea(), f1.getArea());
-                }
-            });
+            this.createdFigures.sort((f1, f2) -> Double.compare(f2.getArea(), f1.getArea()));
         } else if (option == 3) {
-            Collections.sort(this.createdFigures, new Comparator<Figure>() {
-                @Override
-                public int compare(Figure f1, Figure f2) {
-                    return Double.compare(f1.getPerimeter(), f2.getPerimeter());
-                }
-            });
+            this.createdFigures.sort((f1, f2) -> Double.compare(f1.getPerimeter(), f2.getPerimeter()));
         } else if (option == 4) {
-            Collections.sort(this.createdFigures, new Comparator<Figure>() {
-                @Override
-                public int compare(Figure f1, Figure f2) {
-                    return Double.compare(f2.getPerimeter(), f1.getPerimeter());
-                }
-            });
+            this.createdFigures.sort((f1, f2) -> Double.compare(f2.getPerimeter(), f1.getPerimeter()));
         }
     }
 
@@ -334,7 +310,6 @@ public class Program {
                 System.out.printf("\n#%d ", i++);
                 System.out.println(figure);
             }
-
             makeCircle(scanner);
         }
     }
@@ -344,7 +319,7 @@ public class Program {
             System.out.println("""
                     --------------------
                     0 - Go back
-                    # - Create circle form figure number #
+                    # - Create circle from figure number #
                     --------------------""");
             try {
                 int choice = scanner.nextInt();
@@ -361,8 +336,7 @@ public class Program {
                     if (((Rhombus) figure).getDiagonalFst() != ((Rhombus) figure).getDiagonal()) {
                         System.out.println("Can't make circle from this figure");
                         return;
-                    }
-                    else {
+                    } else {
                         Rhombus rhombus = (Rhombus) figure;
                         Circle circle = new Circle(rhombus.getDiagonalFst(), 2);
 
@@ -392,8 +366,8 @@ public class Program {
                 }
 
                 if (figure instanceof EquilateralTriangle) {
-                    EquilateralTriangle isoscelesTriangle = (EquilateralTriangle) figure;
-                    Circle circle = new Circle(isoscelesTriangle.getHeight() * 4 / 3, 2);
+                    EquilateralTriangle equilateralTriangle = (EquilateralTriangle) figure;
+                    Circle circle = new Circle(equilateralTriangle.getHeight() * 4 / 3, 2);
 
                     System.out.println(circle.prettyString());
                 }
