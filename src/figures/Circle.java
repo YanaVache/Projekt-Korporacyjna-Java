@@ -71,7 +71,7 @@ public class Circle extends Figure {
         return diameter;
     }
 
-    public double getCircumference() {
+    public double getPerimeter() {
         return circumference;
     }
 

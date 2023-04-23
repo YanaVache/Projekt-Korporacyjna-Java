@@ -60,4 +60,8 @@ public class Square extends Figure {
     public double getArea() {
         return area;
     }
+
+    public double getPerimeter() {
+       return 4 * this.sideLength;
+    }
 }

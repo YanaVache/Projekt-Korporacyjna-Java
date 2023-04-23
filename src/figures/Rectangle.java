@@ -1,14 +1,14 @@
 package figures;
 
 public class Rectangle extends Figure {
-    private double length;
+    private double sideLength;
     private double width;
     private double area;
     private double diagonal;
 
     public Rectangle(double a, double b, int option) {
         switch (option) {
-            case 1 -> calculateFromLengthAndWidth(a, b);
+            case 1 -> calculateFromsideLengthAndWidth(a, b);
             case 2 -> calculateFromDiagonalAndWidth(a, b);
             case 3 -> calculateFromAreaAndWidth(a, b);
             case 4 -> calculateFromAreaAndDiagonal(a, b);
@@ -16,8 +16,8 @@ public class Rectangle extends Figure {
         }
     }
 
-    private void calculateFromLengthAndWidth(double l, double w) {
-        this.length = l;
+    private void calculateFromsideLengthAndWidth(double l, double w) {
+        this.sideLength = l;
         this.width = w;
         this.area = l * w;
         this.diagonal = Math.sqrt(Math.pow(l, 2) + Math.pow(w, 2));
@@ -26,28 +26,28 @@ public class Rectangle extends Figure {
     private void calculateFromDiagonalAndWidth(double d, double w) {
         this.diagonal = d;
         this.width = w;
-        this.length = Math.sqrt(Math.pow(d, 2) - Math.pow(w, 2));
-        this.area = this.length * this.width;
+        this.sideLength = Math.sqrt(Math.pow(d, 2) - Math.pow(w, 2));
+        this.area = this.sideLength * this.width;
     }
 
     private void calculateFromAreaAndWidth(double a, double w) {
         this.area = a;
         this.width = w;
-        this.length = a / w;
-        this.diagonal = Math.sqrt(Math.pow(this.length, 2) + Math.pow(this.width, 2));
+        this.sideLength = a / w;
+        this.diagonal = Math.sqrt(Math.pow(this.sideLength, 2) + Math.pow(this.width, 2));
     }
 
     private void calculateFromAreaAndDiagonal(double a, double d) {
         this.area = a;
         this.diagonal = d;
-        this.length = Math.sqrt(Math.pow(d, 2) / 2 + Math.sqrt(Math.pow(d, 4) / 4 - Math.pow(a, 2)));
-        this.width = a / this.length;
+        this.sideLength = Math.sqrt(Math.pow(d, 2) / 2 + Math.sqrt(Math.pow(d, 4) / 4 - Math.pow(a, 2)));
+        this.width = a / this.sideLength;
     }
 
     public String prettyString() {
         return "--------------------"
                 + "\nRectangle"
-                + "\nLength: " + String.format("%.2f", this.length)
+                + "\nSide Length: " + String.format("%.2f", this.sideLength)
                 + "\nWidth: " + String.format("%.2f", this.width)
                 + "\nDiagonal: " + String.format("%.2f", this.diagonal)
                 + "\nArea: " + String.format("%.2f", this.area);
@@ -55,14 +55,14 @@ public class Rectangle extends Figure {
 
     @Override
     public String toString() {
-        return "[Rectangle," + "Length:" + String.format("%.2f", this.length)
+        return "[Rectangle," + "Side Length:" + String.format("%.2f", this.sideLength)
                 + " Width: " + String.format("%.2f", this.width)
                 + " Diagonal: " + String.format("%.2f", this.diagonal)
                 + " Area: " + String.format("%.2f", this.area) + "]";
     }
 
-    public double getLength() {
-        return length;
+    public double getsideLength() {
+        return sideLength;
     }
 
     public double getWidth() {
@@ -75,6 +75,10 @@ public class Rectangle extends Figure {
 
     public double getDiagonal() {
         return diagonal;
+    }
+
+    public double getPerimeter() {
+        return 2 * this.sideLength + 2 * this.width;
     }
 }
 
