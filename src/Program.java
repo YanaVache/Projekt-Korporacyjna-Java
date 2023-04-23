@@ -331,8 +331,8 @@ public class Program {
             System.out.println("Created figures:");
             int i = 1;
             for (Figure figure : createdFigures) {
-                System.out.printf("--------------------\nFigure #%d\n", i++);
-                System.out.println(figure.prettyString());
+                System.out.printf("\n#%d ", i++);
+                System.out.println(figure);
             }
 
             makeCircle(scanner);
@@ -357,8 +357,24 @@ public class Program {
 
                 Figure figure = createdFigures.get(choice - 1);
 
-                if (figure instanceof Circle || figure instanceof Rhombus) {
-                    throw new ArithmeticException();
+                if (figure instanceof Rhombus) {
+                    if (((Rhombus) figure).getDiagonalFst() != ((Rhombus) figure).getDiagonal()) {
+                        System.out.println("Can't make circle from this figure");
+                        return;
+                    }
+                    else {
+                        Rhombus rhombus = (Rhombus) figure;
+                        Circle circle = new Circle(rhombus.getDiagonalFst(), 2);
+
+                        System.out.println(circle.prettyString());
+                    }
+                }
+
+                if (figure instanceof Circle) {
+                    Circle circle = (Circle) figure;
+                    Circle newCircle = new Circle(circle.getRadius() * 2, 2);
+
+                    System.out.println(newCircle.prettyString());
                 }
 
                 if (figure instanceof Square) {

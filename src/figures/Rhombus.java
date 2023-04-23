@@ -81,7 +81,7 @@ public class Rhombus extends Figure {
                 + " Side Length: " + String.format("%.2f", this.sideLength)
                 + " First Diagonal: " + String.format("%.2f", this.diagonalFst)
                 + " Second Diagonal: " + String.format("%.2f", this.diagonalSnd)
-                + " Area: " + String.format("%.2f", this.area);
+                + " Area: " + String.format("%.2f", this.area) + "]";
     }
 
     public double getSidesideLength() {
