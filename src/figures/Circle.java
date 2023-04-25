@@ -105,6 +105,11 @@ public class Circle extends Figure {
         return circumference;
     }
 
+    @Override
+    public Circle getCircumscribedCircle() {
+        return new Circle(this.radius, 1);
+    }
+
     public double getArea() {
         return area;
     }

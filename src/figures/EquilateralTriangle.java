@@ -108,4 +108,9 @@ public class EquilateralTriangle extends Figure {
     public double getHeight() {
         return height;
     }
+
+    @Override
+    public Circle getCircumscribedCircle() {
+        return new Circle(this.height * 4 / 3, 2);
+    }
 }

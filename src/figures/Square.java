@@ -4,7 +4,7 @@ public class Square extends Figure {
     private double sideLength;    // Długość boku
     private double diagonalLength;// Długość przekątnej
     private double area; // Pole powierzchni
-    
+
     public Square(double n, int option) {
         switch (option) {
             case 1 -> calculateFromSideLength(n);
@@ -16,25 +16,25 @@ public class Square extends Figure {
 
     public static void printGuide() {
         System.out.println("""
-                    --------------------
-                    How do you want to create a Square?
-                    1 - From Side Length
-                    2 - From Diagonal
-                    3 - From Area
-                    4 - Go back
-                    --------------------""");
+                --------------------
+                How do you want to create a Square?
+                1 - From Side Length
+                2 - From Diagonal
+                3 - From Area
+                4 - Go back
+                --------------------""");
     }
 
     public static String[] getRequiredProperties(int option) {
         switch (option) {
             case 1 -> {
-                return new String[] { "Side" };
+                return new String[]{"Side"};
             }
             case 2 -> {
-                return new String[] { "Diagonal" };
+                return new String[]{"Diagonal"};
             }
             case 3 -> {
-                return new String[] { "Area" };
+                return new String[]{"Area"};
             }
             default -> throw new IllegalArgumentException("Wrong option");
         }
@@ -90,6 +90,11 @@ public class Square extends Figure {
     }
 
     public double getPerimeter() {
-       return 4 * this.sideLength;
+        return 4 * this.sideLength;
+    }
+
+    @Override
+    public Circle getCircumscribedCircle() {
+        return new Circle(this.diagonalLength, 2);
     }
 }

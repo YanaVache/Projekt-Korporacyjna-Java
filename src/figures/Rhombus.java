@@ -133,4 +133,13 @@ public class Rhombus extends Figure {
     public double getPerimeter() {
         return 4 * this.sideLength;
     }
+
+    @Override
+    public Circle getCircumscribedCircle() {
+        if (this.diagonalFst != this.diagonalSnd) {
+            System.out.println("Can't make circle from this figure");
+            return null;
+        }
+        return new Circle(this.diagonalFst, 2);
+    }
 }

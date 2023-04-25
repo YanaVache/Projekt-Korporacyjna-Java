@@ -29,27 +29,27 @@ public class Program {
                 switch (choice) {
                     case 1 -> {
                         Circle.printGuide();
-                        NEWCreateFigure(scanner, FigureType.Circle);
+                        CreateFigure(scanner, FigureType.Circle);
                     }
                     case 2 -> {
                         Square.printGuide();
-                        NEWCreateFigure(scanner, FigureType.Square);
+                        CreateFigure(scanner, FigureType.Square);
                     }
                     case 3 -> {
                         Rectangle.printGuide();
-                        NEWCreateFigure(scanner, FigureType.Rectangle);
+                        CreateFigure(scanner, FigureType.Rectangle);
                     }
                     case 4 -> {
                         Rhombus.printGuide();
-                        NEWCreateFigure(scanner, FigureType.Rhombus);
+                        CreateFigure(scanner, FigureType.Rhombus);
                     }
                     case 5 -> {
                         EquilateralTriangle.printGuide();
-                        NEWCreateFigure(scanner, FigureType.EquilateralTriangle);
+                        CreateFigure(scanner, FigureType.EquilateralTriangle);
                     }
                     case 6 -> {
                         IsoscelesTriangle.printGuide();
-                        NEWCreateFigure(scanner, FigureType.IsoscelesTriangle);
+                        CreateFigure(scanner, FigureType.IsoscelesTriangle);
                     }
                     case 7 -> showFiguresList(scanner);
                     case 8 -> {
@@ -65,7 +65,7 @@ public class Program {
         }
     }
 
-    private void NEWCreateFigure(Scanner scanner, FigureType fig) {
+    private void CreateFigure(Scanner scanner, FigureType fig) {
         try {
             int option = scanner.nextInt();
             String[] requiredProperties = factory.getProperties(fig, option);
@@ -90,195 +90,6 @@ public class Program {
             values[i] = scanner.nextDouble();
         }
         return values;
-    }
-
-    // TODO - wszystko poniżej do usunięcia
-    private void createFigure(Scanner scanner, int option, int args, String[] s, String figureToCreate) {
-        double[] values = new double[args];
-        for (int i = 0; i < args; i++) {
-            System.out.printf("""
-                    --------------------
-                    Enter %s
-                    --------------------%n""", s[i]);
-            double value = scanner.nextDouble();
-            if (value <= 0) {
-                System.out.printf("%s has to be greater than zero%n", s[i]);
-                return;
-            }
-            values[i] = value;
-        }
-        Figure newFigure;
-        switch (figureToCreate) {
-            case "Circle" -> newFigure = new Circle(values[0], option);
-            case "Square" -> newFigure = new Square(values[0], option);
-            case "Rectangle" -> newFigure = new Rectangle(values[0], values[1], option);
-            case "Rhombus" -> newFigure = new Rhombus(values[0], values[1], option);
-            case "EquilateralTriangle" -> newFigure = new EquilateralTriangle(values[0], option);
-            case "IsoscelesTriangle" -> newFigure = new IsoscelesTriangle(values[0], values[1], option);
-            default -> throw new IllegalArgumentException("");
-        }
-        System.out.println(newFigure.prettyString());
-        this.createdFigures.add(newFigure);
-    }
-
-    private void createCircle(Scanner scanner) {
-        while (true) {
-            System.out.println("""
-                    --------------------
-                    How do you want to create a circle?
-                    1 - From Radius
-                    2 - From Diameter
-                    3 - From Circumference
-                    4 - From Area
-                    5 - Go back
-                    --------------------""");
-            try {
-                int option = scanner.nextInt();
-                switch (option) {
-                    case 1 -> createFigure(scanner, option, 1, new String[]{"Radius"}, "Circle");
-                    case 2 -> createFigure(scanner, option, 1, new String[]{"Diameter"}, "Circle");
-                    case 3 -> createFigure(scanner, option, 1, new String[]{"Circumference"}, "Circle");
-                    case 4 -> createFigure(scanner, option, 1, new String[]{"Area"}, "Circle");
-                    case 5 -> {
-                        return;
-                    }
-                    default -> System.out.println("Wrong number");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Wrong input, enter a positive number");
-                scanner.nextLine();
-            }
-        }
-    }
-
-    private void createRhombus(Scanner scanner) {
-        while (true) {
-            System.out.println("""
-                    --------------------
-                    How do you want to create a rhombus?
-                    1 - From Diagonals
-                    2 - From Diagonal and Area
-                    3 - From Diagonal and Side Length
-                    4 - From Area and Side Length
-                    5 - Go back
-                    --------------------""");
-            try {
-                int option = scanner.nextInt();
-                switch (option) {
-                    case 1 -> createFigure(scanner, option, 2, new String[]{"First Diagonal", "Second Diagonal"},
-                            "Rhombus");
-                    case 2 -> createFigure(scanner, option, 2, new String[]{"Diagonal", "Area"}, "Rhombus");
-                    case 3 -> createFigure(scanner, option, 2, new String[]{"Diagonal", "Side Length"}, "Rhombus");
-                    case 4 -> createFigure(scanner, option, 2, new String[]{"Area", "Side Length"}, "Rhombus");
-                    case 5 -> {
-                        return;
-                    }
-                    default -> System.out.println("Wrong number");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Wrong input");
-                scanner.nextLine();
-            }
-        }
-    }
-
-    private void createRectangle(Scanner scanner) {
-        while (true) {
-            System.out.println("""
-                    --------------------
-                    How do you want to create a Rectangle?
-                    1 - From Side Lengths
-                    2 - From Diagonal and Side Length
-                    3 - From Area and Side Length
-                    4 - From Area and Diagonal
-                    5 - Go back
-                    --------------------""");
-            try {
-                int option = scanner.nextInt();
-                switch (option) {
-                    case 1 -> createFigure(scanner, option, 2, new String[]{"Side length 1", "Side length 2"},
-                            "Rectangle");
-                    case 2 -> createFigure(scanner, option, 2, new String[]{"Diagonal", "Side length"}, "Rectangle");
-                    case 3 -> createFigure(scanner, option, 2, new String[]{"Area", "Side length"}, "Rectangle");
-                    case 4 -> createFigure(scanner, option, 2, new String[]{"Area", "Diagonal"}, "Rectangle");
-                    case 5 -> {
-                        return;
-                    }
-                    default -> System.out.println("Wrong number");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Wrong input");
-                scanner.nextLine();
-            }
-        }
-    }
-
-    private void createEquilateralTriangle(Scanner scanner) {
-        while (true) {
-            System.out.println("""
-                    --------------------
-                    How do you want to create a Equilateral Triangle?
-                    1 - From Edge Length
-                    2 - From Area
-                    3 - From Perimeter
-                    4 - From Height
-                    5 - Go back
-                    --------------------""");
-            try {
-                int option = scanner.nextInt();
-                switch (option) {
-                    case 1 -> createFigure(scanner, option, 1, new String[]{"Edge Length"}, "EquilateralTriangle");
-                    case 2 -> createFigure(scanner, option, 1, new String[]{"Area"}, "EquilateralTriangle");
-                    case 3 -> createFigure(scanner, option, 1, new String[]{"From Perimeter"}, "EquilateralTriangle");
-                    case 4 -> createFigure(scanner, option, 1, new String[]{"From Height"}, "EquilateralTriangle");
-                    case 5 -> {
-                        return;
-                    }
-                    default -> System.out.println("Wrong number");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Wrong input");
-                scanner.nextLine();
-            }
-        }
-    }
-
-    private void createIsoscelesTriangle(Scanner scanner) {
-        while (true) {
-            System.out.println("""
-                    --------------------
-                    How do you want to create a Isosceles Triangle?
-                    1 - From Arm Length and Base Length
-                    2 - From Arm Length and Area
-                    3 - From Arm Length and Height (Dropped on Base)
-                    4 - From Base Length and Area
-                    5 - From Base Length and Height (Dropped on Base)
-                    6 - From Area and Height (Dropped on Base)
-                    7 - Go back
-                    --------------------""");
-            try {
-                int option = scanner.nextInt();
-                switch (option) {
-                    case 1 -> createFigure(scanner, option, 2, new String[]{"Arm Length", "Base Length"},
-                            "IsoscelesTriangle");
-                    case 2 -> createFigure(scanner, option, 2, new String[]{"Arm Length", "Area"}, "IsoscelesTriangle");
-                    case 3 ->
-                            createFigure(scanner, option, 2, new String[]{"Arm Length", "Height"}, "IsoscelesTriangle");
-                    case 4 ->
-                            createFigure(scanner, option, 2, new String[]{"Base Length", "Area"}, "IsoscelesTriangle");
-                    case 5 ->
-                            createFigure(scanner, option, 2, new String[]{"Base Length", "Height"}, "IsoscelesTriangle");
-                    case 6 -> createFigure(scanner, option, 2, new String[]{"Area", "Height"}, "IsoscelesTriangle");
-                    case 7 -> {
-                        return;
-                    }
-                    default -> System.out.println("Wrong number");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Wrong input");
-                scanner.nextLine();
-            }
-        }
     }
 
     private void sortFigures(int option) {
@@ -311,16 +122,15 @@ public class Program {
 
             try {
                 int choice = scanner.nextInt();
-                switch (choice) {
-                    case 1 -> sortFigures(choice);
-                    case 2 -> sortFigures(choice);
-                    case 3 -> sortFigures(choice);
-                    case 4 -> sortFigures(choice);
-                    case 5 -> {
-                        return;
-                    }
-                    default -> System.out.println("Wrong number");
+                if (choice == 5) {
+                    return;
                 }
+                if (choice >= 1 && choice < 5) {
+                    sortFigures(choice);
+                } else {
+                    System.out.println("Wrong number");
+                }
+
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input");
                 scanner.next();
@@ -336,7 +146,6 @@ public class Program {
         }
     }
 
-    // TODO - do wywalenia
     private void createDziwneCircle(Scanner scanner) {
         while (true) {
             System.out.println("""
@@ -354,55 +163,9 @@ public class Program {
                 }
 
                 Figure figure = createdFigures.get(choice - 1);
-
-                if (figure instanceof Rhombus) {
-                    if (((Rhombus) figure).getDiagonalFst() != ((Rhombus) figure).getDiagonal()) {
-                        System.out.println("Can't make circle from this figure");
-                        return;
-                    } else {
-                        Rhombus rhombus = (Rhombus) figure;
-                        Circle circle = new Circle(rhombus.getDiagonalFst(), 2);
-
-                        System.out.println(circle.prettyString());
-                    }
-                }
-
-                if (figure instanceof Circle) {
-                    Circle circle = (Circle) figure;
-                    Circle newCircle = new Circle(circle.getRadius() * 2, 2);
-
-                    System.out.println(newCircle.prettyString());
-                }
-
-                if (figure instanceof Square) {
-                    Square square = (Square) figure;
-                    Circle circle = new Circle(square.getDiagonalLength(), 2);
-
-                    System.out.println(circle.prettyString());
-                }
-
-                if (figure instanceof Rectangle) {
-                    Rectangle rectangle = (Rectangle) figure;
-                    Circle circle = new Circle(rectangle.getDiagonal(), 2);
-
-                    System.out.println(circle.prettyString());
-                }
-
-                if (figure instanceof EquilateralTriangle) {
-                    EquilateralTriangle equilateralTriangle = (EquilateralTriangle) figure;
-                    Circle circle = new Circle(equilateralTriangle.getHeight() * 4 / 3, 2);
-
-                    System.out.println(circle.prettyString());
-                }
-
-                if (figure instanceof IsoscelesTriangle) {
-                    IsoscelesTriangle isoscelesTriangle = (IsoscelesTriangle) figure;
-                    Circle circle = new Circle(
-                            (isoscelesTriangle.getArmLength() * 2 + isoscelesTriangle.getBaseLength())
-                                    / (4 * isoscelesTriangle.getArea()),
-                            2);
-
-                    System.out.println(circle.prettyString());
+                Circle circumscribedCircle = figure.getCircumscribedCircle();
+                if (circumscribedCircle != null) {
+                    System.out.println(circumscribedCircle.prettyString());
                 }
 
             } catch (InputMismatchException e) {

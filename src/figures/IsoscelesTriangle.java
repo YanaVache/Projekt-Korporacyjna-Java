@@ -146,4 +146,9 @@ public class IsoscelesTriangle extends Figure {
     public double getHeightDroppedOnBase() {
         return heightDroppedOnBase;
     }
+
+    @Override
+    public Circle getCircumscribedCircle() {
+        return new Circle(this.armLength * 2 + this.baseLength / (4 * this.area), 2);
+    }
 }

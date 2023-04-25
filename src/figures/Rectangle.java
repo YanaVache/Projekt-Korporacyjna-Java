@@ -110,5 +110,10 @@ public class Rectangle extends Figure {
     public double getPerimeter() {
         return 2 * this.sideLength + 2 * this.width;
     }
+
+    @Override
+    public Circle getCircumscribedCircle() {
+        return new Circle(this.diagonal, 2);
+    }
 }
 
