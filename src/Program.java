@@ -21,11 +21,11 @@ public class Program {
                     5 - Equilateral Triangle
                     6 - Isosceles Triangle
                     7 - Show all created figures
-                    8 - Exit
+                    0 - Exit
                     --------------------""");
             try {
                 int choice = scanner.nextInt();
-                // TODO - przerobić + Naprawić "go backa"
+                // TODO - przerobić
                 switch (choice) {
                     case 1 -> {
                         Circle.printGuide();
@@ -52,7 +52,7 @@ public class Program {
                         CreateFigure(scanner, FigureType.IsoscelesTriangle);
                     }
                     case 7 -> showFiguresList(scanner);
-                    case 8 -> {
+                    case 0 -> {
                         System.out.println("Exiting program...");
                         return;
                     }
@@ -68,6 +68,9 @@ public class Program {
     private void CreateFigure(Scanner scanner, FigureType fig) {
         try {
             int option = scanner.nextInt();
+            if (option == 0) {
+                return;
+            }
             String[] requiredProperties = factory.getProperties(fig, option);
             Double[] properties = inputProperties(scanner, requiredProperties);
             Figure newFigure = factory.createFigure(fig, properties, option);
@@ -117,12 +120,12 @@ public class Program {
                     2 - Area descending
                     3 - Perimeter ascending
                     4 - Perimeter descending
-                    5 - Go back
+                    0 - Go back
                     --------------------""");
 
             try {
                 int choice = scanner.nextInt();
-                if (choice == 5) {
+                if (choice == 0) {
                     return;
                 }
                 if (choice >= 1 && choice < 5) {

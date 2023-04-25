@@ -21,7 +21,7 @@ public class Square extends Figure {
                 1 - From Side Length
                 2 - From Diagonal
                 3 - From Area
-                4 - Go back
+                0 - Go back
                 --------------------""");
     }
 
@@ -57,8 +57,6 @@ public class Square extends Figure {
         this.sideLength = Math.sqrt(a);
         this.diagonalLength = this.sideLength * Math.sqrt(2);
     }
-
-    // TODO tworzenie koła opisanego
 
     @Override
     public String prettyString() {

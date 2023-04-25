@@ -24,7 +24,7 @@ public class EquilateralTriangle extends Figure {
                 2 - From Area
                 3 - From Perimeter
                 4 - From Height
-                5 - Go back
+                0 - Go back
                 --------------------""");
     }
 

@@ -29,7 +29,7 @@ public class IsoscelesTriangle extends Figure {
                 4 - From Base Length and Area
                 5 - From Base Length and Height
                 6 - From Area and Height
-                7 - Go back
+                0 - Go back
                 --------------------""");
     }
 

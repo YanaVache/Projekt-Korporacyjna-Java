@@ -24,7 +24,7 @@ public class Circle extends Figure {
                 2 - From Diameter
                 3 - From Circumference
                 4 - From Area
-                5 - Go back
+                0 - Go back
                 --------------------""");
     }
 

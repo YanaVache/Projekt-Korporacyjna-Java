@@ -24,7 +24,7 @@ public class Rhombus extends Figure {
                 2 - From Diagonal and Area
                 3 - From Diagonal and Side Length
                 4 - From Area and Side Length
-                5 - Go back
+                0 - Go back
                 --------------------""");
     }
 

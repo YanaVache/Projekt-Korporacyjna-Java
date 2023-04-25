@@ -5,7 +5,6 @@ public abstract class Figure implements Comparable<Figure> {
 
     public abstract double getPerimeter();
 
-    // TODO: public abstract Circle getCircumscribedCircle();
     public abstract Circle getCircumscribedCircle();
 
     public static String[] getRequiredProperties(int option) {

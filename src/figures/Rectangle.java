@@ -24,7 +24,7 @@ public class Rectangle extends Figure {
                 2 - From Diagonal and Width
                 3 - From Area and Width
                 4 - From Area and Diagonal
-                5 - Go back
+                0 - Go back
                 --------------------""");
     }
 
