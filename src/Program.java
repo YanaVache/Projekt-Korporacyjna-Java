@@ -26,7 +26,7 @@ public class Program {
                     --------------------""");
             try {
                 int choice = scanner.nextInt();
-                // TODO - przerobić
+                // TODO - przerobić, wrzucić timeCreated do konstruktorów
                 switch (choice) {
                     case 1 -> {
                         Circle.printGuide();
@@ -109,6 +109,10 @@ public class Program {
             this.createdFigures.sort((f1, f2) -> Double.compare(f1.getPerimeter(), f2.getPerimeter()));
         } else if (option == 4) {
             this.createdFigures.sort((f1, f2) -> Double.compare(f2.getPerimeter(), f1.getPerimeter()));
+        } else if (option == 5) {
+            this.createdFigures.sort((f1, f2) -> f1.getTimeCreated().compareTo(f2.getTimeCreated()));
+        } else if (option == 6) {
+            this.createdFigures.sort((f1, f2) -> f2.getTimeCreated().compareTo(f1.getTimeCreated()));
         }
     }
 
@@ -125,6 +129,8 @@ public class Program {
                     2 - Area descending
                     3 - Perimeter ascending
                     4 - Perimeter descending
+                    5 - Time Created ascending
+                    6 - Time Created descending
                     0 - Go back
                     --------------------""");
 
@@ -133,7 +139,7 @@ public class Program {
                 if (choice == 0) {
                     return;
                 }
-                if (choice >= 1 && choice < 5) {
+                if (choice >= 1 && choice < 7) {
                     sortFigures(choice);
                 } else {
                     System.out.println("Wrong number");

@@ -1,11 +1,14 @@
 package figures;
 
+import java.util.Date;
+
 public class IsoscelesTriangle extends Figure {
     private double armLength;
     private double baseLength;
     private double area;
     private double perimeter;
     private double heightDroppedOnBase;
+    private Date timeCreated;
 
     public IsoscelesTriangle(double a, double b, int option) {
         switch (option) {
@@ -63,6 +66,7 @@ public class IsoscelesTriangle extends Figure {
         this.heightDroppedOnBase = Math.sqrt(arm * arm - (base * base) / 4);
         this.area = (base * this.heightDroppedOnBase) / 2;
         this.perimeter = 2 * arm + base;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromArmLengthAndArea(double arm, double area) {
@@ -71,6 +75,7 @@ public class IsoscelesTriangle extends Figure {
         this.baseLength = Math.sqrt(2 * (Math.pow(arm, 2) - Math.sqrt(Math.pow(arm, 4) - 4 * Math.pow(area, 2))));
         this.heightDroppedOnBase = 2 * area / this.baseLength;
         this.perimeter = 2 * this.armLength + this.baseLength;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromArmLengthAndHeight(double arm, double height) {
@@ -79,6 +84,7 @@ public class IsoscelesTriangle extends Figure {
         this.baseLength = 2 * Math.sqrt(arm * arm - height * height);
         this.area = (this.baseLength * this.heightDroppedOnBase) / 2;
         this.perimeter = 2 * this.armLength + this.baseLength;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromBaseLengthAndArea(double base, double area) {
@@ -87,6 +93,7 @@ public class IsoscelesTriangle extends Figure {
         this.heightDroppedOnBase = (2 * area) / base;
         this.armLength = Math.sqrt((base * base) / 4 + this.heightDroppedOnBase * this.heightDroppedOnBase);
         this.perimeter = 2 * this.armLength + this.baseLength;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromBaseLengthAndHeight(double base, double height) {
@@ -95,6 +102,7 @@ public class IsoscelesTriangle extends Figure {
         this.armLength = Math.sqrt((base * base) / 4 + height * height);
         this.area = (base * height) / 2;
         this.perimeter = 2 * this.armLength + this.baseLength;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromAreaAndHeight(double area, double height) {
@@ -103,6 +111,7 @@ public class IsoscelesTriangle extends Figure {
         this.baseLength = (2 * area) / height;
         this.armLength = Math.sqrt((this.baseLength * this.baseLength) / 4 + height * height);
         this.perimeter = 2 * this.armLength + this.baseLength;
+        this.timeCreated = new Date();
     }
 
     @Override
@@ -145,6 +154,10 @@ public class IsoscelesTriangle extends Figure {
 
     public double getHeightDroppedOnBase() {
         return heightDroppedOnBase;
+    }
+
+    public Date getTimeCreated() {
+        return this.timeCreated;
     }
 
     @Override

@@ -1,9 +1,12 @@
 package figures;
 
+import java.util.Date;
+
 public class Square extends Figure {
     private double sideLength;    // Długość boku
     private double diagonalLength;// Długość przekątnej
     private double area; // Pole powierzchni
+    private Date timeCreated;
 
     public Square(double n, int option) {
         switch (option) {
@@ -44,18 +47,21 @@ public class Square extends Figure {
         this.sideLength = s;
         this.diagonalLength = s * Math.sqrt(2);
         this.area = s * s;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromDiagonalLength(double d) {
         this.diagonalLength = d;
         this.sideLength = d / Math.sqrt(2);
         this.area = Math.pow(this.sideLength, 2);
+        this.timeCreated = new Date();
     }
 
     private void calculateFromArea(double a) {
         this.area = a;
         this.sideLength = Math.sqrt(a);
         this.diagonalLength = this.sideLength * Math.sqrt(2);
+        this.timeCreated = new Date();
     }
 
     @Override
@@ -90,6 +96,11 @@ public class Square extends Figure {
     public double getPerimeter() {
         return 4 * this.sideLength;
     }
+
+    public Date getTimeCreated() {
+        return this.timeCreated;
+    }
+
 
     @Override
     public Circle getCircumscribedCircle() {

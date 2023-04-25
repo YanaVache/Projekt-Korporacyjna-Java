@@ -1,10 +1,13 @@
 package figures;
 
+import java.util.Date;
+
 public class Rectangle extends Figure {
     private double sideLength;
     private double width;
     private double area;
     private double diagonal;
+    private Date timeCreated;
 
     public Rectangle(double a, double b, int option) {
         switch (option) {
@@ -51,6 +54,7 @@ public class Rectangle extends Figure {
         this.width = w;
         this.area = l * w;
         this.diagonal = Math.sqrt(Math.pow(l, 2) + Math.pow(w, 2));
+        this.timeCreated = new Date();
     }
 
     private void calculateFromDiagonalAndWidth(double d, double w) {
@@ -58,6 +62,7 @@ public class Rectangle extends Figure {
         this.width = w;
         this.sideLength = Math.sqrt(Math.pow(d, 2) - Math.pow(w, 2));
         this.area = this.sideLength * this.width;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromAreaAndWidth(double a, double w) {
@@ -65,6 +70,7 @@ public class Rectangle extends Figure {
         this.width = w;
         this.sideLength = a / w;
         this.diagonal = Math.sqrt(Math.pow(this.sideLength, 2) + Math.pow(this.width, 2));
+        this.timeCreated = new Date();
     }
 
     private void calculateFromAreaAndDiagonal(double a, double d) {
@@ -72,6 +78,7 @@ public class Rectangle extends Figure {
         this.diagonal = d;
         this.sideLength = Math.sqrt(Math.pow(d, 2) / 2 + Math.sqrt(Math.pow(d, 4) / 4 - Math.pow(a, 2)));
         this.width = a / this.sideLength;
+        this.timeCreated = new Date();
     }
 
     public String prettyString() {
@@ -109,6 +116,10 @@ public class Rectangle extends Figure {
 
     public double getPerimeter() {
         return 2 * this.sideLength + 2 * this.width;
+    }
+
+    public Date getTimeCreated() {
+        return this.timeCreated;
     }
 
     @Override

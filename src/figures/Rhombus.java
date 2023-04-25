@@ -1,10 +1,13 @@
 package figures;
 
+import java.util.Date;
+
 public class Rhombus extends Figure {
     private double sideLength;
     private double area;
     private double diagonalFst;
     private double diagonalSnd;
+    private Date timeCreated;
 
     public Rhombus(double a, double b, int option) {
         switch (option) {
@@ -52,6 +55,7 @@ public class Rhombus extends Figure {
 
         this.sideLength = Math.sqrt(Math.pow(rDiagonalSnd / 2, 2) + Math.pow(rDiagonalFst / 2, 2));
         this.area = (rDiagonalFst * rDiagonalSnd) / 2;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromDiagonalAndArea(double rDiagonal, double rArea) {
@@ -60,6 +64,7 @@ public class Rhombus extends Figure {
         this.diagonalSnd = 2 * rArea / rDiagonal;
 
         this.sideLength = Math.sqrt(Math.pow(diagonalFst / 2, 2) + Math.pow(diagonalSnd / 2, 2));
+        this.timeCreated = new Date();
     }
 
     private void calculateFromDiagonalAndSidesideLength(double rDiagonal, double rsideLength) {
@@ -68,6 +73,7 @@ public class Rhombus extends Figure {
 
         this.diagonalSnd = Math.sqrt(Math.pow(rsideLength, 2) - Math.pow(rDiagonal / 2, 2)) * 2;
         this.area = (this.diagonalFst * this.diagonalSnd) / 2;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromAreaAndSidesideLength(double rArea, double rsideLength) {
@@ -90,6 +96,7 @@ public class Rhombus extends Figure {
 
             this.diagonalFst = d1;
             this.diagonalSnd = d2;
+            this.timeCreated = new Date();
         } else {
             System.out.println("Invalid input, the area and side Length combination is not possible for a rhombus.");
         }
@@ -132,6 +139,10 @@ public class Rhombus extends Figure {
 
     public double getPerimeter() {
         return 4 * this.sideLength;
+    }
+
+    public Date getTimeCreated() {
+        return this.timeCreated;
     }
 
     @Override

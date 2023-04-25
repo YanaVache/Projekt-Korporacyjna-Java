@@ -1,10 +1,13 @@
 package figures;
 
+import java.util.Date;
+
 public class EquilateralTriangle extends Figure {
     private double edgeLength;
     private double area;
     private double perimeter;
     private double height;
+    private Date timeCreated;
 
     public EquilateralTriangle(double n, int option) {
         switch (option) {
@@ -51,6 +54,7 @@ public class EquilateralTriangle extends Figure {
         this.area = (a * a * Math.sqrt(3)) / 4;
         this.perimeter = 3 * a;
         this.height = (a * Math.sqrt(3)) / 2;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromArea(double a) {
@@ -58,6 +62,7 @@ public class EquilateralTriangle extends Figure {
         this.edgeLength = 2 * Math.sqrt(a / Math.sqrt(3));
         this.perimeter = 3 * this.edgeLength;
         this.height = (this.edgeLength * Math.sqrt(3)) / 2;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromPerimeter(double a) {
@@ -65,6 +70,7 @@ public class EquilateralTriangle extends Figure {
         this.edgeLength = a / 3;
         this.height = (this.edgeLength * Math.sqrt(3)) / 2;
         this.area = (this.edgeLength * this.edgeLength * Math.sqrt(3)) / 4;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromHeight(double a) {
@@ -72,6 +78,7 @@ public class EquilateralTriangle extends Figure {
         this.edgeLength = 2 * a / Math.sqrt(3);
         this.perimeter = 3 * this.edgeLength;
         this.area = (this.edgeLength * this.edgeLength * Math.sqrt(3)) / 4;
+        this.timeCreated = new Date();
     }
 
     @Override
@@ -112,5 +119,9 @@ public class EquilateralTriangle extends Figure {
     @Override
     public Circle getCircumscribedCircle() {
         return new Circle(this.height * 4 / 3, 2);
+    }
+
+    public Date getTimeCreated() {
+        return this.timeCreated;
     }
 }

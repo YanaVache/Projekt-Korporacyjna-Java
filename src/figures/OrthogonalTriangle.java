@@ -1,12 +1,15 @@
 package figures;
 
+import java.util.Date;
+
 public class OrthogonalTriangle extends Figure {
     private double aLeg;
     private double bLeg;
     private double hypoteneuse;
     private double area;
+    private Date timeCreated;
 
-    public OrthogonalTriangle(double a, double b, int option) { // sprawdzic czy tworzy trojkat prostokatny!
+    public OrthogonalTriangle(double a, double b, int option) { // TODO: sprawdzic czy tworzy trojkat prostokatny!
         switch (option) {
             case 1 -> calculateFromLegAndLeg(a, b);
             case 2 -> calculateFromLegAndHypoteneuse(a, b);
@@ -51,12 +54,14 @@ public class OrthogonalTriangle extends Figure {
         this.bLeg = b;
         this.hypoteneuse = Math.sqrt(a * a + b * b);
         this.area = (a * b) / 2;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromAreaAndHypoteneuse(double a, double b) {
         this.area = a;
         this.hypoteneuse = b;
         // XD
+        this.timeCreated = new Date();
     }
 
     private void calculateFromLegAndHypoteneuse(double a, double b) {
@@ -64,7 +69,7 @@ public class OrthogonalTriangle extends Figure {
         this.hypoteneuse = b;
         this.bLeg = Math.sqrt(this.hypoteneuse * this.hypoteneuse - this.aLeg * this.aLeg);
         this.area = this.aLeg * this.bLeg / 2;
-
+        this.timeCreated = new Date();
     }
 
     private void calculateFromAreaAndLeg(double a, double b) {
@@ -72,6 +77,7 @@ public class OrthogonalTriangle extends Figure {
         this.bLeg = b;
         this.aLeg = (2 * this.area) / this.bLeg;
         this.hypoteneuse = Math.sqrt(this.aLeg * this.aLeg + this.bLeg * this.bLeg);
+        this.timeCreated = new Date();
     }
 
     @Override
@@ -114,6 +120,10 @@ public class OrthogonalTriangle extends Figure {
     @Override
     public double getPerimeter() {
         return aLeg + bLeg + hypoteneuse;
+    }
+
+    public Date getTimeCreated() {
+        return this.timeCreated;
     }
 
     @Override

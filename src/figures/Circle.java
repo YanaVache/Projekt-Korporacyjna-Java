@@ -1,10 +1,13 @@
 package figures;
 
+import java.util.Date;
+
 public class Circle extends Figure {
     private double radius;         // Promień
     private double diameter;       // Średnica
     private double circumference;  // Obwód
     private double area;           // Pole
+    private Date timeCreated;
 
     public Circle(double n, int option) {
         switch (option) {
@@ -51,6 +54,7 @@ public class Circle extends Figure {
         this.diameter = 2 * this.radius;
         this.circumference = c;
         this.area = Math.PI * this.radius * this.radius;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromDiameter(double d) {
@@ -58,6 +62,7 @@ public class Circle extends Figure {
         this.diameter = d;
         this.circumference = Math.PI * 2 * this.radius;
         this.area = Math.PI * this.radius * this.radius;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromRadius(double r) {
@@ -65,6 +70,7 @@ public class Circle extends Figure {
         this.diameter = 2 * r;
         this.circumference = Math.PI * 2 * r;
         this.area = Math.PI * r * r;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromArea(double a) {
@@ -72,6 +78,7 @@ public class Circle extends Figure {
         this.diameter = 2 * this.radius;
         this.circumference = Math.PI * 2 * this.radius;
         this.area = a;
+        this.timeCreated = new Date();
     }
 
     @Override
@@ -108,6 +115,11 @@ public class Circle extends Figure {
     @Override
     public Circle getCircumscribedCircle() {
         return new Circle(this.radius, 1);
+    }
+
+    @Override
+    public Date getTimeCreated() {
+        return this.timeCreated;
     }
 
     public double getArea() {
