@@ -16,6 +16,36 @@ public class EquilateralTriangle extends Figure {
         }
     }
 
+    public static void printGuide() {
+        System.out.println("""
+                --------------------
+                How do you want to create an Equilateral Triangle?
+                1 - From Edge Length
+                2 - From Area
+                3 - From Perimeter
+                4 - From Height
+                5 - Go back
+                --------------------""");
+    }
+
+    public static String[] getRequiredProperties(int option) {
+        switch (option) {
+            case 1 -> {
+                return new String[]{"Edge Length"};
+            }
+            case 2 -> {
+                return new String[]{"Area"};
+            }
+            case 3 -> {
+                return new String[]{"Perimeter"};
+            }
+            case 4 -> {
+                return new String[]{"Height"};
+            }
+            default -> throw new IllegalArgumentException("Wrong option");
+        }
+    }
+
     private void calculateFromEdgeLength(double a) {
         this.edgeLength = a;
         this.area = (a * a * Math.sqrt(3)) / 4;

@@ -17,7 +17,7 @@ public class Square extends Figure {
     public static void printGuide() {
         System.out.println("""
                     --------------------
-                    How do you want to create a square?
+                    How do you want to create a Square?
                     1 - From Side Length
                     2 - From Diagonal
                     3 - From Area
@@ -38,7 +38,6 @@ public class Square extends Figure {
             }
             default -> throw new IllegalArgumentException("Wrong option");
         }
-
     }
 
     private void calculateFromSideLength(double s) {

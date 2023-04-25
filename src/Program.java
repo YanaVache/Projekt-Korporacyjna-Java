@@ -1,5 +1,7 @@
 import figures.*;
+
 import java.util.*;
+
 import workers.*;
 
 public class Program {
@@ -23,17 +25,32 @@ public class Program {
                     --------------------""");
             try {
                 int choice = scanner.nextInt();
-                // TODO - przerobić
+                // TODO - przerobić + Naprawić "go backa"
                 switch (choice) {
-                    case 1 -> createCircle(scanner);
+                    case 1 -> {
+                        Circle.printGuide();
+                        NEWCreateFigure(scanner, FigureType.Circle);
+                    }
                     case 2 -> {
                         Square.printGuide();
                         NEWCreateFigure(scanner, FigureType.Square);
                     }
-                    case 3 -> createRectangle(scanner);
-                    case 4 -> createRhombus(scanner);
-                    case 5 -> createEquilateralTriangle(scanner);
-                    case 6 -> createIsoscelesTriangle(scanner);
+                    case 3 -> {
+                        Rectangle.printGuide();
+                        NEWCreateFigure(scanner, FigureType.Rectangle);
+                    }
+                    case 4 -> {
+                        Rhombus.printGuide();
+                        NEWCreateFigure(scanner, FigureType.Rhombus);
+                    }
+                    case 5 -> {
+                        EquilateralTriangle.printGuide();
+                        NEWCreateFigure(scanner, FigureType.EquilateralTriangle);
+                    }
+                    case 6 -> {
+                        IsoscelesTriangle.printGuide();
+                        NEWCreateFigure(scanner, FigureType.IsoscelesTriangle);
+                    }
                     case 7 -> showFiguresList(scanner);
                     case 8 -> {
                         System.out.println("Exiting program...");
@@ -61,7 +78,7 @@ public class Program {
             scanner.nextLine();
         }
     }
-    
+
     private Double[] inputProperties(Scanner scanner, String[] props) {
         Double[] values = new Double[props.length];
         for (int i = 0; i < props.length; i++) {

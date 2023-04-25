@@ -16,6 +16,36 @@ public class Rhombus extends Figure {
         }
     }
 
+    public static void printGuide() {
+        System.out.println("""
+                --------------------
+                How do you want to create a Rhombus?
+                1 - From Diagonals
+                2 - From Diagonal and Area
+                3 - From Diagonal and Side Length
+                4 - From Area and Side Length
+                5 - Go back
+                --------------------""");
+    }
+
+    public static String[] getRequiredProperties(int option) {
+        switch (option) {
+            case 1 -> {
+                return new String[]{"Diagonal 1", "Diagonal 2"};
+            }
+            case 2 -> {
+                return new String[]{"Diagonal", "Area"};
+            }
+            case 3 -> {
+                return new String[]{"Diagonal", "Side Length"};
+            }
+            case 4 -> {
+                return new String[]{"Area", "Side Length"};
+            }
+            default -> throw new IllegalArgumentException("Wrong option");
+        }
+    }
+
     private void calculateFromDiagonals(double rDiagonalFst, double rDiagonalSnd) {
         this.diagonalFst = rDiagonalFst;
         this.diagonalSnd = rDiagonalSnd;

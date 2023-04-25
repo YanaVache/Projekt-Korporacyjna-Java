@@ -16,6 +16,36 @@ public class Circle extends Figure {
         }
     }
 
+    public static void printGuide() {
+        System.out.println("""
+                --------------------
+                How do you want to create a Circle?
+                1 - From Radius
+                2 - From Diameter
+                3 - From Circumference
+                4 - From Area
+                5 - Go back
+                --------------------""");
+    }
+
+    public static String[] getRequiredProperties(int option) {
+        switch (option) {
+            case 1 -> {
+                return new String[]{"Radius"};
+            }
+            case 2 -> {
+                return new String[]{"Diameter"};
+            }
+            case 3 -> {
+                return new String[]{"Circumference"};
+            }
+            case 4 -> {
+                return new String[]{"Area"};
+            }
+            default -> throw new IllegalArgumentException("Wrong option");
+        }
+    }
+
     private void calculateFromCircumference(double c) {
         this.radius = c / Math.PI / 2;
         this.diameter = 2 * this.radius;

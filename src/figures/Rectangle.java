@@ -16,6 +16,36 @@ public class Rectangle extends Figure {
         }
     }
 
+    public static void printGuide() {
+        System.out.println("""
+                --------------------
+                How do you want to create a Rectangle?
+                1 - From Side Length and Width
+                2 - From Diagonal and Width
+                3 - From Area and Width
+                4 - From Area and Diagonal
+                5 - Go back
+                --------------------""");
+    }
+
+    public static String[] getRequiredProperties(int option) {
+        switch (option) {
+            case 1 -> {
+                return new String[]{"Side Length", "Width"};
+            }
+            case 2 -> {
+                return new String[]{"Diagonal", "Width"};
+            }
+            case 3 -> {
+                return new String[]{"Area", "Width"};
+            }
+            case 4 -> {
+                return new String[]{"Area", "Diagonal"};
+            }
+            default -> throw new IllegalArgumentException("Wrong option");
+        }
+    }
+
     private void calculateFromsideLengthAndWidth(double l, double w) {
         this.sideLength = l;
         this.width = w;
