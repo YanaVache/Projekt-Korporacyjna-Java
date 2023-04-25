@@ -20,7 +20,8 @@ public class Program {
                     4 - Rhombus
                     5 - Equilateral Triangle
                     6 - Isosceles Triangle
-                    7 - Show all created figures
+                    7 - Orthogonal Triangle
+                    8 - Show all created figures
                     0 - Exit
                     --------------------""");
             try {
@@ -51,7 +52,11 @@ public class Program {
                         IsoscelesTriangle.printGuide();
                         CreateFigure(scanner, FigureType.IsoscelesTriangle);
                     }
-                    case 7 -> showFiguresList(scanner);
+                    case 7 -> {
+                        OrthogonalTriangle.printGuide();
+                        CreateFigure(scanner, FigureType.OrthogonalTriangle);
+                    }
+                    case 8 -> showFiguresList(scanner);
                     case 0 -> {
                         System.out.println("Exiting program...");
                         return;
