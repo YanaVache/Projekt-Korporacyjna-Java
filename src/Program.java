@@ -8,6 +8,7 @@ public class Program {
     private ArrayList<Figure> createdFigures = new ArrayList<>();
     private FigureFactory factory = new FigureFactory();
 
+    // TODO: Stringi wynieść, jakieś generyki zamiast switchowania po cyferkach, więcej testów
     public void runProgram() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -105,7 +106,7 @@ public class Program {
         return values;
     }
 
-    // TODO: Switch albo coś ładniejszego?
+    // TODO: Switch albo coś ładniejszego? opcja i porządek
     private void sortFigures(int option) {
         if (option == 1) {
             this.createdFigures.sort((f1, f2) -> Double.compare(f1.getArea(), f2.getArea()));
@@ -214,6 +215,7 @@ public class Program {
                 Circle circumscribedCircle = figure.getCircumscribedCircle();
                 if (circumscribedCircle != null) {
                     System.out.println(circumscribedCircle.prettyString());
+                    this.createdFigures.add(circumscribedCircle);
                 }
 
             } catch (InputMismatchException e) {
@@ -244,6 +246,7 @@ public class Program {
                 Figure doubledFigure = figure.getDoubledAreaFigure();
                 if (doubledFigure != null) {
                     System.out.println(doubledFigure.prettyString());
+                    this.createdFigures.add(doubledFigure);
                 }
 
             } catch (InputMismatchException e) {

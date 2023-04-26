@@ -60,12 +60,13 @@ public class OrthogonalTriangle extends Figure {
     private void calculateFromAreaAndHypoteneuse(double a, double b) {
         this.area = a;
         this.hypoteneuse = b;
-        // TODO: obliczonka
+        this.aLeg = Math.sqrt(Math.pow(b, 2) / 2 + Math.sqrt(Math.pow(b, 4) / 4 - Math.pow(a / 2, 2)));
+        this.bLeg = (2 * a) / this.aLeg;
         this.timeCreated = new Date();
     }
 
     private void calculateFromLegAndHypoteneuse(double a, double b) {
-        if (a >= b){
+        if (a >= b) {
             System.out.println("Invalid input, Leg Length needs to be smaller than Hypoteneuse");
             return;
         }
@@ -134,7 +135,7 @@ public class OrthogonalTriangle extends Figure {
 
     @Override
     public Circle getCircumscribedCircle() {
-        return new Circle((aLeg * bLeg * hypoteneuse) / (4 * area), 2);
+        return new Circle(hypoteneuse, 2);
     }
 
     @Override
