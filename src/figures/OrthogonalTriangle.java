@@ -9,7 +9,7 @@ public class OrthogonalTriangle extends Figure {
     private double area;
     private Date timeCreated;
 
-    public OrthogonalTriangle(double a, double b, int option) { // TODO: sprawdzic czy tworzy trojkat prostokatny!
+    public OrthogonalTriangle(double a, double b, int option) {
         switch (option) {
             case 1 -> calculateFromLegAndLeg(a, b);
             case 2 -> calculateFromLegAndHypoteneuse(a, b);
@@ -60,11 +60,15 @@ public class OrthogonalTriangle extends Figure {
     private void calculateFromAreaAndHypoteneuse(double a, double b) {
         this.area = a;
         this.hypoteneuse = b;
-        // XD
+        // TODO: obliczonka
         this.timeCreated = new Date();
     }
 
     private void calculateFromLegAndHypoteneuse(double a, double b) {
+        if (a >= b){
+            System.out.println("Invalid input, Leg Length needs to be smaller than Hypoteneuse");
+            return;
+        }
         this.aLeg = a;
         this.hypoteneuse = b;
         this.bLeg = Math.sqrt(this.hypoteneuse * this.hypoteneuse - this.aLeg * this.aLeg);

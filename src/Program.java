@@ -70,6 +70,7 @@ public class Program {
         }
     }
 
+    // TODO: Zmienić try catch NPE na coś ładnego xD
     private void CreateFigure(Scanner scanner, FigureType fig) {
         try {
             int option = scanner.nextInt();
@@ -79,8 +80,12 @@ public class Program {
             String[] requiredProperties = factory.getProperties(fig, option);
             Double[] properties = inputProperties(scanner, requiredProperties);
             Figure newFigure = factory.createFigure(fig, properties, option);
-            createdFigures.add(newFigure);
-            System.out.println(newFigure.prettyString());
+            try {
+                System.out.println(newFigure.prettyString());
+                createdFigures.add(newFigure);
+            } catch (NullPointerException ignored) {
+
+            }
         } catch (InputMismatchException e) {
             System.out.println("Wrong input");
             scanner.nextLine();
