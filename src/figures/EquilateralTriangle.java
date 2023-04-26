@@ -88,7 +88,8 @@ public class EquilateralTriangle extends Figure {
                 + "\nEdge Length: " + String.format("%.2f", this.edgeLength)
                 + "\nArea: " + String.format("%.2f", this.area)
                 + "\nPerimeter: " + String.format("%.2f", this.perimeter)
-                + "\nHeight: " + String.format("%.2f", this.height);
+                + "\nHeight: " + String.format("%.2f", this.height)
+                + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
@@ -97,7 +98,9 @@ public class EquilateralTriangle extends Figure {
                 + " Edge Length: " + String.format("%.2f", this.edgeLength)
                 + " Area: " + String.format("%.2f", this.area)
                 + " Perimeter: " + String.format("%.2f", this.perimeter)
-                + " Height: " + String.format("%.2f", this.height) + "]";
+                + " Height: " + String.format("%.2f", this.height)
+                + " Time Created: " + this.timeCreated.toString()
+                + "]";
     }
 
     public double getEdgeLength() {
@@ -119,6 +122,11 @@ public class EquilateralTriangle extends Figure {
     @Override
     public Circle getCircumscribedCircle() {
         return new Circle(this.height * 4 / 3, 2);
+    }
+
+    @Override
+    public Figure getDoubledAreaFigure() {
+        return new EquilateralTriangle(2 * this.area, 2);
     }
 
     public Date getTimeCreated() {

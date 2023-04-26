@@ -70,7 +70,8 @@ public class Square extends Figure {
                 + "\nSquare"
                 + "\nSide Length: " + String.format("%.2f", this.sideLength)
                 + "\nDiagonal Length: " + String.format("%.2f", this.diagonalLength)
-                + "\nArea: " + String.format("%.2f", this.area);
+                + "\nArea: " + String.format("%.2f", this.area)
+                + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
@@ -78,7 +79,9 @@ public class Square extends Figure {
         return "[Square,"
                 + " Side Length: " + String.format("%.2f", this.sideLength)
                 + " Diagonal Length: " + String.format("%.2f", this.diagonalLength)
-                + " Area: " + String.format("%.2f", this.area) + "]";
+                + " Area: " + String.format("%.2f", this.area)
+                + " Time Created: " + this.timeCreated.toString()
+                + "]";
     }
 
     public double getSideLength() {
@@ -105,5 +108,10 @@ public class Square extends Figure {
     @Override
     public Circle getCircumscribedCircle() {
         return new Circle(this.diagonalLength, 2);
+    }
+
+    @Override
+    public Figure getDoubledAreaFigure() {
+        return new Square(this.area * 2, 3);
     }
 }

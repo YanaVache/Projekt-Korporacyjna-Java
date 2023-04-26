@@ -88,7 +88,8 @@ public class Circle extends Figure {
                 + "\nRadius: " + String.format("%.2f", this.radius)
                 + "\nDiameter: " + String.format("%.2f", this.diameter)
                 + "\nCircumference: " + String.format("%.2f", this.circumference)
-                + "\nArea: " + String.format("%.2f", this.area);
+                + "\nArea: " + String.format("%.2f", this.area)
+                + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
@@ -97,7 +98,9 @@ public class Circle extends Figure {
                 + " Radius: " + String.format("%.2f", this.radius)
                 + " Diameter: " + String.format("%.2f", this.diameter)
                 + " Circumference: " + String.format("%.2f", this.circumference)
-                + " Area: " + String.format("%.2f", this.area) + "]";
+                + " Area: " + String.format("%.2f", this.area)
+                + " Time Created: " + this.timeCreated.toString()
+                + "]";
     }
 
     public double getRadius() {
@@ -115,6 +118,11 @@ public class Circle extends Figure {
     @Override
     public Circle getCircumscribedCircle() {
         return new Circle(this.radius, 1);
+    }
+
+    @Override
+    public Figure getDoubledAreaFigure() {
+        return new Circle(this.area * 2, 4);
     }
 
     @Override

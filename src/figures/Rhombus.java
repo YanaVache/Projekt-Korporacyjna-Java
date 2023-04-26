@@ -109,7 +109,8 @@ public class Rhombus extends Figure {
                 + "\nSide Length: " + String.format("%.2f", this.sideLength)
                 + "\nFirst Diagonal: " + String.format("%.2f", this.diagonalFst)
                 + "\nSecond Diagonal: " + String.format("%.2f", this.diagonalSnd)
-                + "\nArea: " + String.format("%.2f", this.area);
+                + "\nArea: " + String.format("%.2f", this.area)
+                + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
@@ -118,7 +119,9 @@ public class Rhombus extends Figure {
                 + " Side Length: " + String.format("%.2f", this.sideLength)
                 + " First Diagonal: " + String.format("%.2f", this.diagonalFst)
                 + " Second Diagonal: " + String.format("%.2f", this.diagonalSnd)
-                + " Area: " + String.format("%.2f", this.area) + "]";
+                + " Area: " + String.format("%.2f", this.area)
+                + " Time Created: " + this.timeCreated.toString()
+                + "]";
     }
 
     public double getSidesideLength() {
@@ -152,5 +155,10 @@ public class Rhombus extends Figure {
             return null;
         }
         return new Circle(this.diagonalFst, 2);
+    }
+
+    @Override
+    public Figure getDoubledAreaFigure() {
+        return new Rhombus(Math.sqrt(2) * this.diagonalFst, Math.sqrt(2) * this.diagonalSnd, 1);
     }
 }

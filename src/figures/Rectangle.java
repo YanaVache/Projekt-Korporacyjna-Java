@@ -87,7 +87,8 @@ public class Rectangle extends Figure {
                 + "\nSide Length: " + String.format("%.2f", this.sideLength)
                 + "\nWidth: " + String.format("%.2f", this.width)
                 + "\nDiagonal: " + String.format("%.2f", this.diagonal)
-                + "\nArea: " + String.format("%.2f", this.area);
+                + "\nArea: " + String.format("%.2f", this.area)
+                + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
@@ -95,7 +96,9 @@ public class Rectangle extends Figure {
         return "[Rectangle," + "Side Length:" + String.format("%.2f", this.sideLength)
                 + " Width: " + String.format("%.2f", this.width)
                 + " Diagonal: " + String.format("%.2f", this.diagonal)
-                + " Area: " + String.format("%.2f", this.area) + "]";
+                + " Area: " + String.format("%.2f", this.area)
+                + " Time Created: " + this.timeCreated.toString()
+                + "]";
     }
 
     public double getsideLength() {
@@ -125,6 +128,11 @@ public class Rectangle extends Figure {
     @Override
     public Circle getCircumscribedCircle() {
         return new Circle(this.diagonal, 2);
+    }
+
+    @Override
+    public Figure getDoubledAreaFigure() {
+        return new Rectangle(Math.sqrt(2) * this.sideLength, Math.sqrt(2) * this.width, 1);
     }
 }
 

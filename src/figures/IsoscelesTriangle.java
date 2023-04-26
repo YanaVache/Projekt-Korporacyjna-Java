@@ -122,7 +122,8 @@ public class IsoscelesTriangle extends Figure {
                 + "\nBase Length: " + String.format("%.2f", this.baseLength)
                 + "\nArea: " + String.format("%.2f", this.area)
                 + "\nPerimeter: " + String.format("%.2f", this.perimeter)
-                + "\nHeight Dropped on Base: " + String.format("%.2f", this.heightDroppedOnBase);
+                + "\nHeight Dropped on Base: " + String.format("%.2f", this.heightDroppedOnBase)
+                + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
@@ -133,6 +134,7 @@ public class IsoscelesTriangle extends Figure {
                 + " Area: " + String.format("%.2f", this.area)
                 + " Perimeter: " + String.format("%.2f", this.perimeter)
                 + " Height Dropped on Base: " + String.format("%.2f", this.heightDroppedOnBase)
+                + " Time Created: " + this.timeCreated.toString()
                 + "]";
     }
 
@@ -163,5 +165,10 @@ public class IsoscelesTriangle extends Figure {
     @Override
     public Circle getCircumscribedCircle() {
         return new Circle(this.armLength * 2 + this.baseLength / (4 * this.area), 2);
+    }
+
+    @Override
+    public Figure getDoubledAreaFigure() {
+        return new IsoscelesTriangle(Math.sqrt(2) * this.baseLength, Math.sqrt(2) * this.heightDroppedOnBase, 5);
     }
 }

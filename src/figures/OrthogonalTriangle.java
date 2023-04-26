@@ -87,7 +87,8 @@ public class OrthogonalTriangle extends Figure {
                 + "\nArm 1 Length: " + String.format("%.2f", this.aLeg)
                 + "\nArm 2 Length: " + String.format("%.2f", this.bLeg)
                 + "\nHypoteneuse: " + String.format("%.2f", this.hypoteneuse)
-                + "\nArea: " + String.format("%.2f", this.area);
+                + "\nArea: " + String.format("%.2f", this.area)
+                + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
@@ -97,6 +98,7 @@ public class OrthogonalTriangle extends Figure {
                 + " Arm 2 Length: " + String.format("%.2f", this.bLeg)
                 + " Hypoteneuse: " + String.format("%.2f", this.hypoteneuse)
                 + " Area: " + String.format("%.2f", this.area)
+                + " Time Created: " + this.timeCreated.toString()
                 + "]";
     }
 
@@ -129,5 +131,10 @@ public class OrthogonalTriangle extends Figure {
     @Override
     public Circle getCircumscribedCircle() {
         return new Circle((aLeg * bLeg * hypoteneuse) / (4 * area), 2);
+    }
+
+    @Override
+    public Figure getDoubledAreaFigure() {
+        return new OrthogonalTriangle(Math.sqrt(2) * this.aLeg, Math.sqrt(2) * this.bLeg, 1);
     }
 }

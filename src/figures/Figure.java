@@ -5,11 +5,14 @@ import java.util.Date;
 public abstract class Figure implements Comparable<Figure> {
 
     public abstract Date getTimeCreated();
+
     public abstract double getArea();
 
     public abstract double getPerimeter();
 
     public abstract Circle getCircumscribedCircle();
+
+    public abstract Figure getDoubledAreaFigure();
 
     public static String[] getRequiredProperties(int option) {
         throw new UnsupportedOperationException("Not supported yet.");
