@@ -105,6 +105,7 @@ public class Program {
         return values;
     }
 
+    // TODO: Switch albo coś ładniejszego?
     private void sortFigures(int option) {
         if (option == 1) {
             this.createdFigures.sort((f1, f2) -> Double.compare(f1.getArea(), f2.getArea()));
@@ -161,16 +162,44 @@ public class Program {
                 System.out.printf("\n#%d ", i++);
                 System.out.println(figure);
             }
-            createDziwneCircle(scanner);
+            pickAction(scanner);
         }
     }
 
+    // TODO: Poniższe metody jakoś wynieśc do abstrakcji
+    private void pickAction(Scanner scanner) {
+        while (true) {
+            System.out.println("""
+                    --------------------
+                    0 - Go back
+                    1 - Create circle from figure
+                    2 - Double the area of figure
+                    --------------------""");
+            try {
+                int choice = scanner.nextInt();
+                if (choice == 0) {
+                    return;
+                }
+                if (choice == 1) {
+                    createDziwneCircle(scanner);
+                } else if (choice == 2) {
+                    doubleTheAreaOfFigure(scanner);
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong input");
+            } catch (ArithmeticException e) {
+                System.out.println("Can't create circle from this figure");
+            }
+        }
+    }
+
+    // TODO: Zmienić nazwę tej metody
     private void createDziwneCircle(Scanner scanner) {
         while (true) {
             System.out.println("""
                     --------------------
                     0 - Go back
-                    # - Create circle from figure number #
+                    # - Create circle from figure #
                     --------------------""");
             try {
                 int choice = scanner.nextInt();
@@ -191,6 +220,34 @@ public class Program {
                 System.out.println("Wrong input");
             } catch (ArithmeticException e) {
                 System.out.println("Can't create circle from this figure");
+            }
+        }
+    }
+
+    private void doubleTheAreaOfFigure(Scanner scanner) {
+        while (true) {
+            System.out.println("""
+                    --------------------
+                    0 - Go back
+                    # - Double the area of figure #
+                    --------------------""");
+            try {
+                int choice = scanner.nextInt();
+                if (choice == 0) {
+                    return;
+                }
+                if (choice > createdFigures.size()) {
+                    throw new InputMismatchException();
+                }
+
+                Figure figure = createdFigures.get(choice - 1);
+                Figure doubledFigure = figure.getDoubledAreaFigure();
+                if (doubledFigure != null) {
+                    System.out.println(doubledFigure.prettyString());
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong input");
             }
         }
     }
