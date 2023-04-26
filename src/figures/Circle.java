@@ -1,10 +1,13 @@
 package figures;
 
+import java.util.Date;
+
 public class Circle extends Figure {
     private double radius;         // Promień
     private double diameter;       // Średnica
     private double circumference;  // Obwód
     private double area;           // Pole
+    private Date timeCreated;
 
     public Circle(double n, int option) {
         switch (option) {
@@ -16,11 +19,42 @@ public class Circle extends Figure {
         }
     }
 
+    public static void printGuide() {
+        System.out.println("""
+                --------------------
+                How do you want to create a Circle?
+                1 - From Radius
+                2 - From Diameter
+                3 - From Circumference
+                4 - From Area
+                0 - Go back
+                --------------------""");
+    }
+
+    public static String[] getRequiredProperties(int option) {
+        switch (option) {
+            case 1 -> {
+                return new String[]{"Radius"};
+            }
+            case 2 -> {
+                return new String[]{"Diameter"};
+            }
+            case 3 -> {
+                return new String[]{"Circumference"};
+            }
+            case 4 -> {
+                return new String[]{"Area"};
+            }
+            default -> throw new IllegalArgumentException("Wrong option");
+        }
+    }
+
     private void calculateFromCircumference(double c) {
         this.radius = c / Math.PI / 2;
         this.diameter = 2 * this.radius;
         this.circumference = c;
         this.area = Math.PI * this.radius * this.radius;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromDiameter(double d) {
@@ -28,6 +62,7 @@ public class Circle extends Figure {
         this.diameter = d;
         this.circumference = Math.PI * 2 * this.radius;
         this.area = Math.PI * this.radius * this.radius;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromRadius(double r) {
@@ -35,6 +70,7 @@ public class Circle extends Figure {
         this.diameter = 2 * r;
         this.circumference = Math.PI * 2 * r;
         this.area = Math.PI * r * r;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromArea(double a) {
@@ -42,6 +78,7 @@ public class Circle extends Figure {
         this.diameter = 2 * this.radius;
         this.circumference = Math.PI * 2 * this.radius;
         this.area = a;
+        this.timeCreated = new Date();
     }
 
     @Override
@@ -51,7 +88,8 @@ public class Circle extends Figure {
                 + "\nRadius: " + String.format("%.2f", this.radius)
                 + "\nDiameter: " + String.format("%.2f", this.diameter)
                 + "\nCircumference: " + String.format("%.2f", this.circumference)
-                + "\nArea: " + String.format("%.2f", this.area);
+                + "\nArea: " + String.format("%.2f", this.area)
+                + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
@@ -60,7 +98,9 @@ public class Circle extends Figure {
                 + " Radius: " + String.format("%.2f", this.radius)
                 + " Diameter: " + String.format("%.2f", this.diameter)
                 + " Circumference: " + String.format("%.2f", this.circumference)
-                + " Area: " + String.format("%.2f", this.area) + "]";
+                + " Area: " + String.format("%.2f", this.area)
+                + " Time Created: " + this.timeCreated.toString()
+                + "]";
     }
 
     public double getRadius() {
@@ -73,6 +113,21 @@ public class Circle extends Figure {
 
     public double getPerimeter() {
         return circumference;
+    }
+
+    @Override
+    public Circle getCircumscribedCircle() {
+        return new Circle(this.radius, 1);
+    }
+
+    @Override
+    public Figure getDoubledAreaFigure() {
+        return new Circle(this.area * 2, 4);
+    }
+
+    @Override
+    public Date getTimeCreated() {
+        return this.timeCreated;
     }
 
     public double getArea() {

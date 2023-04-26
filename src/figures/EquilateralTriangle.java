@@ -1,10 +1,13 @@
 package figures;
 
+import java.util.Date;
+
 public class EquilateralTriangle extends Figure {
     private double edgeLength;
     private double area;
     private double perimeter;
     private double height;
+    private Date timeCreated;
 
     public EquilateralTriangle(double n, int option) {
         switch (option) {
@@ -16,11 +19,42 @@ public class EquilateralTriangle extends Figure {
         }
     }
 
+    public static void printGuide() {
+        System.out.println("""
+                --------------------
+                How do you want to create an Equilateral Triangle?
+                1 - From Edge Length
+                2 - From Area
+                3 - From Perimeter
+                4 - From Height
+                0 - Go back
+                --------------------""");
+    }
+
+    public static String[] getRequiredProperties(int option) {
+        switch (option) {
+            case 1 -> {
+                return new String[]{"Edge Length"};
+            }
+            case 2 -> {
+                return new String[]{"Area"};
+            }
+            case 3 -> {
+                return new String[]{"Perimeter"};
+            }
+            case 4 -> {
+                return new String[]{"Height"};
+            }
+            default -> throw new IllegalArgumentException("Wrong option");
+        }
+    }
+
     private void calculateFromEdgeLength(double a) {
         this.edgeLength = a;
         this.area = (a * a * Math.sqrt(3)) / 4;
         this.perimeter = 3 * a;
         this.height = (a * Math.sqrt(3)) / 2;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromArea(double a) {
@@ -28,6 +62,7 @@ public class EquilateralTriangle extends Figure {
         this.edgeLength = 2 * Math.sqrt(a / Math.sqrt(3));
         this.perimeter = 3 * this.edgeLength;
         this.height = (this.edgeLength * Math.sqrt(3)) / 2;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromPerimeter(double a) {
@@ -35,6 +70,7 @@ public class EquilateralTriangle extends Figure {
         this.edgeLength = a / 3;
         this.height = (this.edgeLength * Math.sqrt(3)) / 2;
         this.area = (this.edgeLength * this.edgeLength * Math.sqrt(3)) / 4;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromHeight(double a) {
@@ -42,6 +78,7 @@ public class EquilateralTriangle extends Figure {
         this.edgeLength = 2 * a / Math.sqrt(3);
         this.perimeter = 3 * this.edgeLength;
         this.area = (this.edgeLength * this.edgeLength * Math.sqrt(3)) / 4;
+        this.timeCreated = new Date();
     }
 
     @Override
@@ -51,7 +88,8 @@ public class EquilateralTriangle extends Figure {
                 + "\nEdge Length: " + String.format("%.2f", this.edgeLength)
                 + "\nArea: " + String.format("%.2f", this.area)
                 + "\nPerimeter: " + String.format("%.2f", this.perimeter)
-                + "\nHeight: " + String.format("%.2f", this.height);
+                + "\nHeight: " + String.format("%.2f", this.height)
+                + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
@@ -60,7 +98,9 @@ public class EquilateralTriangle extends Figure {
                 + " Edge Length: " + String.format("%.2f", this.edgeLength)
                 + " Area: " + String.format("%.2f", this.area)
                 + " Perimeter: " + String.format("%.2f", this.perimeter)
-                + " Height: " + String.format("%.2f", this.height) + "]";
+                + " Height: " + String.format("%.2f", this.height)
+                + " Time Created: " + this.timeCreated.toString()
+                + "]";
     }
 
     public double getEdgeLength() {
@@ -77,5 +117,19 @@ public class EquilateralTriangle extends Figure {
 
     public double getHeight() {
         return height;
+    }
+
+    @Override
+    public Circle getCircumscribedCircle() {
+        return new Circle(this.height * 4 / 3, 2);
+    }
+
+    @Override
+    public Figure getDoubledAreaFigure() {
+        return new EquilateralTriangle(2 * this.area, 2);
+    }
+
+    public Date getTimeCreated() {
+        return this.timeCreated;
     }
 }

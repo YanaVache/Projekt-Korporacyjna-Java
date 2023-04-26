@@ -1,10 +1,13 @@
 package figures;
 
+import java.util.Date;
+
 public class Rectangle extends Figure {
     private double sideLength;
     private double width;
     private double area;
     private double diagonal;
+    private Date timeCreated;
 
     public Rectangle(double a, double b, int option) {
         switch (option) {
@@ -16,11 +19,42 @@ public class Rectangle extends Figure {
         }
     }
 
+    public static void printGuide() {
+        System.out.println("""
+                --------------------
+                How do you want to create a Rectangle?
+                1 - From Side Length and Width
+                2 - From Diagonal and Width
+                3 - From Area and Width
+                4 - From Area and Diagonal
+                0 - Go back
+                --------------------""");
+    }
+
+    public static String[] getRequiredProperties(int option) {
+        switch (option) {
+            case 1 -> {
+                return new String[]{"Side Length", "Width"};
+            }
+            case 2 -> {
+                return new String[]{"Diagonal", "Width"};
+            }
+            case 3 -> {
+                return new String[]{"Area", "Width"};
+            }
+            case 4 -> {
+                return new String[]{"Area", "Diagonal"};
+            }
+            default -> throw new IllegalArgumentException("Wrong option");
+        }
+    }
+
     private void calculateFromsideLengthAndWidth(double l, double w) {
         this.sideLength = l;
         this.width = w;
         this.area = l * w;
         this.diagonal = Math.sqrt(Math.pow(l, 2) + Math.pow(w, 2));
+        this.timeCreated = new Date();
     }
 
     private void calculateFromDiagonalAndWidth(double d, double w) {
@@ -28,6 +62,7 @@ public class Rectangle extends Figure {
         this.width = w;
         this.sideLength = Math.sqrt(Math.pow(d, 2) - Math.pow(w, 2));
         this.area = this.sideLength * this.width;
+        this.timeCreated = new Date();
     }
 
     private void calculateFromAreaAndWidth(double a, double w) {
@@ -35,6 +70,7 @@ public class Rectangle extends Figure {
         this.width = w;
         this.sideLength = a / w;
         this.diagonal = Math.sqrt(Math.pow(this.sideLength, 2) + Math.pow(this.width, 2));
+        this.timeCreated = new Date();
     }
 
     private void calculateFromAreaAndDiagonal(double a, double d) {
@@ -42,6 +78,7 @@ public class Rectangle extends Figure {
         this.diagonal = d;
         this.sideLength = Math.sqrt(Math.pow(d, 2) / 2 + Math.sqrt(Math.pow(d, 4) / 4 - Math.pow(a, 2)));
         this.width = a / this.sideLength;
+        this.timeCreated = new Date();
     }
 
     public String prettyString() {
@@ -50,7 +87,8 @@ public class Rectangle extends Figure {
                 + "\nSide Length: " + String.format("%.2f", this.sideLength)
                 + "\nWidth: " + String.format("%.2f", this.width)
                 + "\nDiagonal: " + String.format("%.2f", this.diagonal)
-                + "\nArea: " + String.format("%.2f", this.area);
+                + "\nArea: " + String.format("%.2f", this.area)
+                + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
@@ -58,7 +96,9 @@ public class Rectangle extends Figure {
         return "[Rectangle," + "Side Length:" + String.format("%.2f", this.sideLength)
                 + " Width: " + String.format("%.2f", this.width)
                 + " Diagonal: " + String.format("%.2f", this.diagonal)
-                + " Area: " + String.format("%.2f", this.area) + "]";
+                + " Area: " + String.format("%.2f", this.area)
+                + " Time Created: " + this.timeCreated.toString()
+                + "]";
     }
 
     public double getsideLength() {
@@ -79,6 +119,20 @@ public class Rectangle extends Figure {
 
     public double getPerimeter() {
         return 2 * this.sideLength + 2 * this.width;
+    }
+
+    public Date getTimeCreated() {
+        return this.timeCreated;
+    }
+
+    @Override
+    public Circle getCircumscribedCircle() {
+        return new Circle(this.diagonal, 2);
+    }
+
+    @Override
+    public Figure getDoubledAreaFigure() {
+        return new Rectangle(Math.sqrt(2) * this.sideLength, Math.sqrt(2) * this.width, 1);
     }
 }
 
