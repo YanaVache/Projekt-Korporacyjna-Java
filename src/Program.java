@@ -167,7 +167,7 @@ public class Program {
         }
     }
 
-    // TODO: Poniższe metody jakoś wynieśc do abstrakcji
+    // TODO: Poniższe metody jakoś wynieść do abstrakcji
     private void pickAction(Scanner scanner) {
         while (true) {
             System.out.println("""
@@ -175,6 +175,7 @@ public class Program {
                     0 - Go back
                     1 - Create circle from figure
                     2 - Double the area of figure
+                    3 - Delete figure
                     --------------------""");
             try {
                 int choice = scanner.nextInt();
@@ -185,6 +186,10 @@ public class Program {
                     createDziwneCircle(scanner);
                 } else if (choice == 2) {
                     doubleTheAreaOfFigure(scanner);
+                } else if (choice == 3) {
+                    deleteFigure(scanner);
+                } else {
+                    System.out.println("Wrong number");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input");
@@ -248,6 +253,32 @@ public class Program {
                     System.out.println(doubledFigure.prettyString());
                     this.createdFigures.add(doubledFigure);
                 }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong input");
+            }
+        }
+    }
+
+    private void deleteFigure(Scanner scanner) {
+        while (true) {
+            System.out.println("""
+                    --------------------
+                    0 - Go back
+                    # - Delete figure #
+                    --------------------""");
+            try {
+                int choice = scanner.nextInt();
+                if (choice == 0) {
+                    return;
+                }
+                if (choice > createdFigures.size()) {
+                    throw new InputMismatchException();
+                }
+
+                Figure figure = createdFigures.get(choice - 1);
+                createdFigures.remove(figure);
+                System.out.println("Figure deleted");
 
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input");
