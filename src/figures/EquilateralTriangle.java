@@ -132,4 +132,8 @@ public class EquilateralTriangle extends Figure {
     public Date getTimeCreated() {
         return this.timeCreated;
     }
+
+    public int getVertices() {
+        return 3;
+    }
 }

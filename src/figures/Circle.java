@@ -133,4 +133,8 @@ public class Circle extends Figure {
     public double getArea() {
         return area;
     }
+
+    public int getVertices() {
+        return Integer.MAX_VALUE;
+    }
 }

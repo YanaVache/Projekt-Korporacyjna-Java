@@ -128,4 +128,8 @@ public class Elipse extends Figure {
     public Figure getDoubledAreaFigure() {
         return new Elipse(this.majorAxis * 2, this.minorAxis * 2, 3);
     }
+
+    public int getVertices() {
+        return Integer.MAX_VALUE;
+    }
 }

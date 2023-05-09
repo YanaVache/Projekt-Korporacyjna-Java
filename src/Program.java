@@ -113,19 +113,31 @@ public class Program {
 
     // TODO: Switch albo coś ładniejszego? opcja i porządek
     private void sortFigures(int option) {
-        if (option == 1) {
-            this.createdFigures.sort((f1, f2) -> Double.compare(f1.getArea(), f2.getArea()));
-        } else if (option == 2) {
-            this.createdFigures.sort((f1, f2) -> Double.compare(f2.getArea(), f1.getArea()));
-        } else if (option == 3) {
-            this.createdFigures.sort((f1, f2) -> Double.compare(f1.getPerimeter(), f2.getPerimeter()));
-        } else if (option == 4) {
-            this.createdFigures.sort((f1, f2) -> Double.compare(f2.getPerimeter(), f1.getPerimeter()));
-        } else if (option == 5) {
-            this.createdFigures.sort((f1, f2) -> f1.getTimeCreated().compareTo(f2.getTimeCreated()));
-        } else if (option == 6) {
-            this.createdFigures.sort((f1, f2) -> f2.getTimeCreated().compareTo(f1.getTimeCreated()));
+        Comparator<Figure> comparator = null;
+
+        switch (option / 10) {
+            case 1 -> comparator = Comparator.comparingInt(Figure::getVertices);
+            case 2 -> comparator = Comparator.comparingInt(Figure::getVertices).reversed();
         }
+
+        if (comparator == null) {
+            throw new IllegalArgumentException("Wrong option");
+        }
+
+        switch (option % 10) {
+            case 1 -> comparator = comparator.thenComparingDouble(Figure::getArea);
+            case 2 -> comparator = comparator.thenComparingDouble(Figure::getArea).reversed();
+            case 3 -> comparator = comparator.thenComparingDouble(Figure::getPerimeter);
+            case 4 -> comparator = comparator.thenComparingDouble(Figure::getPerimeter).reversed();
+            case 5 -> comparator = comparator.thenComparing(Figure::getTimeCreated);
+            case 6 -> comparator = comparator.thenComparing(Figure::getTimeCreated).reversed();
+        }
+
+        if (comparator == null) {
+            throw new IllegalArgumentException("Wrong option");
+        }
+
+        createdFigures.sort(comparator);
     }
 
     private void showFiguresList(Scanner scanner) {
@@ -134,9 +146,32 @@ public class Program {
                 System.out.println("No figures created yet");
                 return;
             }
+            int finalChoice = 0;
+            System.out.println("""
+                    Choose primary sorting method:
+                    1 - Vertices ascending
+                    2 - Vertices descending
+                    0 - Go back
+                    """);
+            try {
+                int choice = scanner.nextInt();
+                if (choice == 0) {
+                    return;
+                }
+                if (choice >= 1 && choice < 3) {
+                    finalChoice = choice;
+                    finalChoice *= 10;
+                } else {
+                    System.out.println("Wrong number");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong input");
+                scanner.next();
+            }
             System.out.println("""
                     --------------------
-                    Sort by:
+                    Choose secondary sorting method:
                     1 - Area ascending
                     2 - Area descending
                     3 - Perimeter ascending
@@ -152,7 +187,8 @@ public class Program {
                     return;
                 }
                 if (choice >= 1 && choice < 7) {
-                    sortFigures(choice);
+                    finalChoice += choice;
+                    sortFigures(finalChoice);
                 } else {
                     System.out.println("Wrong number");
                 }

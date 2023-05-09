@@ -6,6 +6,8 @@ public abstract class Figure implements Comparable<Figure> {
 
     public abstract Date getTimeCreated();
 
+    public abstract int getVertices();
+
     public abstract double getArea();
 
     public abstract double getPerimeter();

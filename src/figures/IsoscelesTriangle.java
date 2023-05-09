@@ -171,4 +171,8 @@ public class IsoscelesTriangle extends Figure {
     public Figure getDoubledAreaFigure() {
         return new IsoscelesTriangle(Math.sqrt(2) * this.baseLength, Math.sqrt(2) * this.heightDroppedOnBase, 5);
     }
+
+    public int getVertices() {
+        return 3;
+    }
 }

@@ -142,4 +142,8 @@ public class OrthogonalTriangle extends Figure {
     public Figure getDoubledAreaFigure() {
         return new OrthogonalTriangle(Math.sqrt(2) * this.aLeg, Math.sqrt(2) * this.bLeg, 1);
     }
+
+    public int getVertices() {
+        return 3;
+    }
 }

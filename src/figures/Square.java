@@ -114,4 +114,8 @@ public class Square extends Figure {
     public Figure getDoubledAreaFigure() {
         return new Square(this.area * 2, 3);
     }
+
+    public int getVertices() {
+        return 4;
+    }
 }

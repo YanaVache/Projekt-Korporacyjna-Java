@@ -161,4 +161,8 @@ public class Rhombus extends Figure {
     public Figure getDoubledAreaFigure() {
         return new Rhombus(Math.sqrt(2) * this.diagonalFst, Math.sqrt(2) * this.diagonalSnd, 1);
     }
+
+    public int getVertices() {
+        return 4;
+    }
 }

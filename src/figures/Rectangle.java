@@ -134,5 +134,9 @@ public class Rectangle extends Figure {
     public Figure getDoubledAreaFigure() {
         return new Rectangle(Math.sqrt(2) * this.sideLength, Math.sqrt(2) * this.width, 1);
     }
+
+    public int getVertices() {
+        return 4;
+    }
 }
 
