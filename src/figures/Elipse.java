@@ -21,7 +21,7 @@ public class Elipse extends Figure {
     public static void printGuide() {
         System.out.println("""
                 --------------------
-                How do you want to create a Rhombus?
+                How do you want to create a Elipse?
                 1 - From Minor Axis and Area
                 2 - From Major Aaxis and Area
                 3 - From Minor Axis and Major Axis
