@@ -8,4 +8,5 @@ public enum FigureType {
     EquilateralTriangle,
     IsoscelesTriangle,
     OrthogonalTriangle,
+    Elipse,
 }

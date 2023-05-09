@@ -15,6 +15,7 @@ public class FigureFactory {
         _workers.add(new EquilateralTriangleWorker());
         _workers.add(new IsoscelesTriangleWorker());
         _workers.add(new OrthogonalTriangleWorker());
+        _workers.add(new ElipseWorker());
     }
 
     public void addWorker(IFigureFactoryWorker worker) {
