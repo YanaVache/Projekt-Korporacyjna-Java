@@ -2,7 +2,6 @@ package workers;
 
 import figures.Elipse;
 import figures.Figure;
-import figures.Rhombus;
 
 public class ElipseWorker implements IFigureFactoryWorker {
     @Override

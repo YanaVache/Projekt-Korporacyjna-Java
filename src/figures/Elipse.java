@@ -1,5 +1,7 @@
 package figures;
 
+import Config.Config;
+
 import java.util.Date;
 
 public class Elipse extends Figure {
@@ -72,20 +74,20 @@ public class Elipse extends Figure {
     public String prettyString() {
         return "--------------------"
                 + "\nElipse"
-                + "\nMajor Axis: " + String.format("%.2f", this.majorAxis)
-                + "\nMinor Axis: " + String.format("%.2f", this.minorAxis)
-                + "\nPerimeter: " + String.format("%.2f", this.perimeter)
-                + "\nArea: " + String.format("%.2f", this.area)
+                + "\nMajor Axis: " + String.format(Config.format, this.majorAxis)
+                + "\nMinor Axis: " + String.format(Config.format, this.minorAxis)
+                + "\nPerimeter: " + String.format(Config.format, this.perimeter)
+                + "\nArea: " + String.format(Config.format, this.area)
                 + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
         return "[Elipse,"
-                + " Major Axis: " + String.format("%.2f", this.majorAxis)
-                + " Minor Axis: " + String.format("%.2f", this.minorAxis)
-                + " Perimeter: " + String.format("%.2f", this.perimeter)
-                + " Area: " + String.format("%.2f", this.area)
+                + " Major Axis: " + String.format(Config.format, this.majorAxis)
+                + " Minor Axis: " + String.format(Config.format, this.minorAxis)
+                + " Perimeter: " + String.format(Config.format, this.perimeter)
+                + " Area: " + String.format(Config.format, this.area)
                 + " Time Created: " + this.timeCreated.toString()
                 + "]";
     }

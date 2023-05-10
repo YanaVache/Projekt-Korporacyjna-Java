@@ -1,5 +1,7 @@
 package figures;
 
+import Config.Config;
+
 import java.util.Date;
 
 public class OrthogonalTriangle extends Figure {
@@ -89,20 +91,20 @@ public class OrthogonalTriangle extends Figure {
     public String prettyString() {
         return "--------------------"
                 + "\nOrthogonal Triangle"
-                + "\nArm 1 Length: " + String.format("%.2f", this.aLeg)
-                + "\nArm 2 Length: " + String.format("%.2f", this.bLeg)
-                + "\nHypoteneuse: " + String.format("%.2f", this.hypoteneuse)
-                + "\nArea: " + String.format("%.2f", this.area)
+                + "\nArm 1 Length: " + String.format(Config.format, this.aLeg)
+                + "\nArm 2 Length: " + String.format(Config.format, this.bLeg)
+                + "\nHypoteneuse: " + String.format(Config.format, this.hypoteneuse)
+                + "\nArea: " + String.format(Config.format, this.area)
                 + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
         return "[Orthogonal Triangle"
-                + " Arm 1 Length: " + String.format("%.2f", this.aLeg)
-                + " Arm 2 Length: " + String.format("%.2f", this.bLeg)
-                + " Hypoteneuse: " + String.format("%.2f", this.hypoteneuse)
-                + " Area: " + String.format("%.2f", this.area)
+                + " Arm 1 Length: " + String.format(Config.format, this.aLeg)
+                + " Arm 2 Length: " + String.format(Config.format, this.bLeg)
+                + " Hypoteneuse: " + String.format(Config.format, this.hypoteneuse)
+                + " Area: " + String.format(Config.format, this.area)
                 + " Time Created: " + this.timeCreated.toString()
                 + "]";
     }

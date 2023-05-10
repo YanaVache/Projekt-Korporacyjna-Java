@@ -1,5 +1,7 @@
 package figures;
 
+import Config.Config;
+
 import java.util.Date;
 
 public class Rhombus extends Figure {
@@ -106,20 +108,20 @@ public class Rhombus extends Figure {
     public String prettyString() {
         return "--------------------"
                 + "\nRhombus"
-                + "\nSide Length: " + String.format("%.2f", this.sideLength)
-                + "\nFirst Diagonal: " + String.format("%.2f", this.diagonalFst)
-                + "\nSecond Diagonal: " + String.format("%.2f", this.diagonalSnd)
-                + "\nArea: " + String.format("%.2f", this.area)
+                + "\nSide Length: " + String.format(Config.format, this.sideLength)
+                + "\nFirst Diagonal: " + String.format(Config.format, this.diagonalFst)
+                + "\nSecond Diagonal: " + String.format(Config.format, this.diagonalSnd)
+                + "\nArea: " + String.format(Config.format, this.area)
                 + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
         return "[Rhombus,"
-                + " Side Length: " + String.format("%.2f", this.sideLength)
-                + " First Diagonal: " + String.format("%.2f", this.diagonalFst)
-                + " Second Diagonal: " + String.format("%.2f", this.diagonalSnd)
-                + " Area: " + String.format("%.2f", this.area)
+                + " Side Length: " + String.format(Config.format, this.sideLength)
+                + " First Diagonal: " + String.format(Config.format, this.diagonalFst)
+                + " Second Diagonal: " + String.format(Config.format, this.diagonalSnd)
+                + " Area: " + String.format(Config.format, this.area)
                 + " Time Created: " + this.timeCreated.toString()
                 + "]";
     }

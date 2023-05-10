@@ -1,5 +1,7 @@
 package figures;
 
+import Config.Config;
+
 import java.util.Date;
 
 public class Rectangle extends Figure {
@@ -84,19 +86,19 @@ public class Rectangle extends Figure {
     public String prettyString() {
         return "--------------------"
                 + "\nRectangle"
-                + "\nSide Length: " + String.format("%.2f", this.sideLength)
-                + "\nWidth: " + String.format("%.2f", this.width)
-                + "\nDiagonal: " + String.format("%.2f", this.diagonal)
-                + "\nArea: " + String.format("%.2f", this.area)
+                + "\nSide Length: " + String.format(Config.format, this.sideLength)
+                + "\nWidth: " + String.format(Config.format, this.width)
+                + "\nDiagonal: " + String.format(Config.format, this.diagonal)
+                + "\nArea: " + String.format(Config.format, this.area)
                 + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
-        return "[Rectangle," + "Side Length:" + String.format("%.2f", this.sideLength)
-                + " Width: " + String.format("%.2f", this.width)
-                + " Diagonal: " + String.format("%.2f", this.diagonal)
-                + " Area: " + String.format("%.2f", this.area)
+        return "[Rectangle," + "Side Length:" + String.format(Config.format, this.sideLength)
+                + " Width: " + String.format(Config.format, this.width)
+                + " Diagonal: " + String.format(Config.format, this.diagonal)
+                + " Area: " + String.format(Config.format, this.area)
                 + " Time Created: " + this.timeCreated.toString()
                 + "]";
     }

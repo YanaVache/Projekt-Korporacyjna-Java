@@ -1,5 +1,7 @@
 package figures;
 
+import Config.Config;
+
 import java.util.Date;
 
 public class Circle extends Figure {
@@ -85,20 +87,20 @@ public class Circle extends Figure {
     public String prettyString() {
         return "--------------------"
                 + "\nCircle"
-                + "\nRadius: " + String.format("%.2f", this.radius)
-                + "\nDiameter: " + String.format("%.2f", this.diameter)
-                + "\nCircumference: " + String.format("%.2f", this.circumference)
-                + "\nArea: " + String.format("%.2f", this.area)
+                + "\nRadius: " + String.format(Config.format, this.radius)
+                + "\nDiameter: " + String.format(Config.format, this.diameter)
+                + "\nCircumference: " + String.format(Config.format, this.circumference)
+                + "\nArea: " + String.format(Config.format, this.area)
                 + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
         return "[Circle,"
-                + " Radius: " + String.format("%.2f", this.radius)
-                + " Diameter: " + String.format("%.2f", this.diameter)
-                + " Circumference: " + String.format("%.2f", this.circumference)
-                + " Area: " + String.format("%.2f", this.area)
+                + " Radius: " + String.format(Config.format, this.radius)
+                + " Diameter: " + String.format(Config.format, this.diameter)
+                + " Circumference: " + String.format(Config.format, this.circumference)
+                + " Area: " + String.format(Config.format, this.area)
                 + " Time Created: " + this.timeCreated.toString()
                 + "]";
     }

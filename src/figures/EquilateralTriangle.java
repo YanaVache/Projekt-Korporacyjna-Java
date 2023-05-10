@@ -1,5 +1,7 @@
 package figures;
 
+import Config.Config;
+
 import java.util.Date;
 
 public class EquilateralTriangle extends Figure {
@@ -85,20 +87,20 @@ public class EquilateralTriangle extends Figure {
     public String prettyString() {
         return "--------------------"
                 + "\nEquilateral Triangle"
-                + "\nEdge Length: " + String.format("%.2f", this.edgeLength)
-                + "\nArea: " + String.format("%.2f", this.area)
-                + "\nPerimeter: " + String.format("%.2f", this.perimeter)
-                + "\nHeight: " + String.format("%.2f", this.height)
+                + "\nEdge Length: " + String.format(Config.format, this.edgeLength)
+                + "\nArea: " + String.format(Config.format, this.area)
+                + "\nPerimeter: " + String.format(Config.format, this.perimeter)
+                + "\nHeight: " + String.format(Config.format, this.height)
                 + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
         return "[Equilateral Triangle"
-                + " Edge Length: " + String.format("%.2f", this.edgeLength)
-                + " Area: " + String.format("%.2f", this.area)
-                + " Perimeter: " + String.format("%.2f", this.perimeter)
-                + " Height: " + String.format("%.2f", this.height)
+                + " Edge Length: " + String.format(Config.format, this.edgeLength)
+                + " Area: " + String.format(Config.format, this.area)
+                + " Perimeter: " + String.format(Config.format, this.perimeter)
+                + " Height: " + String.format(Config.format, this.height)
                 + " Time Created: " + this.timeCreated.toString()
                 + "]";
     }

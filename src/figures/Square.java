@@ -1,5 +1,7 @@
 package figures;
 
+import Config.Config;
+
 import java.util.Date;
 
 public class Square extends Figure {
@@ -68,18 +70,18 @@ public class Square extends Figure {
     public String prettyString() {
         return "--------------------"
                 + "\nSquare"
-                + "\nSide Length: " + String.format("%.2f", this.sideLength)
-                + "\nDiagonal Length: " + String.format("%.2f", this.diagonalLength)
-                + "\nArea: " + String.format("%.2f", this.area)
+                + "\nSide Length: " + String.format(Config.format, this.sideLength)
+                + "\nDiagonal Length: " + String.format(Config.format, this.diagonalLength)
+                + "\nArea: " + String.format(Config.format, this.area)
                 + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
         return "[Square,"
-                + " Side Length: " + String.format("%.2f", this.sideLength)
-                + " Diagonal Length: " + String.format("%.2f", this.diagonalLength)
-                + " Area: " + String.format("%.2f", this.area)
+                + " Side Length: " + String.format(Config.format, this.sideLength)
+                + " Diagonal Length: " + String.format(Config.format, this.diagonalLength)
+                + " Area: " + String.format(Config.format, this.area)
                 + " Time Created: " + this.timeCreated.toString()
                 + "]";
     }

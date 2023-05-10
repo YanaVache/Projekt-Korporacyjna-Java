@@ -1,5 +1,7 @@
 import figures.*;
 
+import Config.Config;
+
 import java.util.*;
 
 import workers.*;
@@ -24,6 +26,7 @@ public class Program {
                     7 - Orthogonal Triangle
                     8 - Elipse
                     9 - Show all created figures
+                    -1 - Configure format of numbers
                     0 - Exit
                     --------------------""");
             try {
@@ -63,6 +66,7 @@ public class Program {
                         CreateFigure(scanner, FigureType.Elipse);
                     }
                     case 9 -> showFiguresList(scanner);
+                    case -1 -> configureFormat(scanner);
                     case 0 -> {
                         System.out.println("Exiting program...");
                         return;
@@ -124,14 +128,18 @@ public class Program {
             throw new IllegalArgumentException("Wrong option");
         }
 
-        switch (option % 10) {
-            case 1 -> comparator = comparator.thenComparingDouble(Figure::getArea);
-            case 2 -> comparator = comparator.thenComparingDouble(Figure::getArea).reversed();
-            case 3 -> comparator = comparator.thenComparingDouble(Figure::getPerimeter);
-            case 4 -> comparator = comparator.thenComparingDouble(Figure::getPerimeter).reversed();
-            case 5 -> comparator = comparator.thenComparing(Figure::getTimeCreated);
-            case 6 -> comparator = comparator.thenComparing(Figure::getTimeCreated).reversed();
-        }
+        comparator = comparator.thenComparing((f1, f2) -> {
+            switch (option % 10) {
+                case 1: return Double.compare(f1.getArea(), f2.getArea());
+                case 2: return Double.compare(f2.getArea(), f1.getArea());
+                case 3: return Double.compare(f1.getPerimeter(), f2.getPerimeter());
+                case 4: return Double.compare(f2.getPerimeter(), f1.getPerimeter());
+                case 5: return f1.getTimeCreated().compareTo(f2.getTimeCreated());
+                case 6: return f2.getTimeCreated().compareTo(f1.getTimeCreated());
+                default: throw new IllegalArgumentException("Wrong option");
+                
+            }
+        });
 
         if (comparator == null) {
             throw new IllegalArgumentException("Wrong option");
@@ -324,6 +332,27 @@ public class Program {
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input");
             }
+        }
+    }
+
+    public void configureFormat(Scanner scanner) {
+        System.out.println("""
+                --------------------
+                Input new format of numbers
+                --------------------
+                """);
+        try {
+            int choice = scanner.nextInt();
+            if (choice == 0) {
+                return;
+            }
+            if (choice >= 0) {
+                Config.format = String.format("%%.%df", choice);
+            } else {
+                System.out.println("Wrong number");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Wrong input");
         }
     }
 }

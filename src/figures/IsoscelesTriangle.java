@@ -1,5 +1,7 @@
 package figures;
 
+import Config.Config;
+
 import java.util.Date;
 
 public class IsoscelesTriangle extends Figure {
@@ -118,22 +120,22 @@ public class IsoscelesTriangle extends Figure {
     public String prettyString() {
         return "--------------------"
                 + "\nIsosceles Triangle"
-                + "\nArm Length: " + String.format("%.2f", this.armLength)
-                + "\nBase Length: " + String.format("%.2f", this.baseLength)
-                + "\nArea: " + String.format("%.2f", this.area)
-                + "\nPerimeter: " + String.format("%.2f", this.perimeter)
-                + "\nHeight Dropped on Base: " + String.format("%.2f", this.heightDroppedOnBase)
+                + "\nArm Length: " + String.format(Config.format, this.armLength)
+                + "\nBase Length: " + String.format(Config.format, this.baseLength)
+                + "\nArea: " + String.format(Config.format, this.area)
+                + "\nPerimeter: " + String.format(Config.format, this.perimeter)
+                + "\nHeight Dropped on Base: " + String.format(Config.format, this.heightDroppedOnBase)
                 + "\nTime Created: " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
         return "[Isosceles Triangle"
-                + " Arm Length: " + String.format("%.2f", this.armLength)
-                + " Base Length: " + String.format("%.2f", this.baseLength)
-                + " Area: " + String.format("%.2f", this.area)
-                + " Perimeter: " + String.format("%.2f", this.perimeter)
-                + " Height Dropped on Base: " + String.format("%.2f", this.heightDroppedOnBase)
+                + " Arm Length: " + String.format(Config.format, this.armLength)
+                + " Base Length: " + String.format(Config.format, this.baseLength)
+                + " Area: " + String.format(Config.format, this.area)
+                + " Perimeter: " + String.format(Config.format, this.perimeter)
+                + " Height Dropped on Base: " + String.format(Config.format, this.heightDroppedOnBase)
                 + " Time Created: " + this.timeCreated.toString()
                 + "]";
     }
