@@ -24,7 +24,7 @@ public class Program {
                     5 - Equilateral Triangle
                     6 - Isosceles Triangle
                     7 - Orthogonal Triangle
-                    8 - Elipse
+                    8 - Ellipse
                     9 - Show all created figures
                     -1 - Configure format of numbers
                     0 - Exit
@@ -62,8 +62,8 @@ public class Program {
                         CreateFigure(scanner, FigureType.OrthogonalTriangle);
                     }
                     case 8 -> {
-                        Elipse.printGuide();
-                        CreateFigure(scanner, FigureType.Elipse);
+                        Ellipse.printGuide();
+                        CreateFigure(scanner, FigureType.Ellipse);
                     }
                     case 9 -> showFiguresList(scanner);
                     case -1 -> configureFormat(scanner);
@@ -156,10 +156,12 @@ public class Program {
             }
             int finalChoice = 0;
             System.out.println("""
+                    --------------------
                     Choose primary sorting method:
                     1 - Vertices ascending
                     2 - Vertices descending
                     0 - Go back
+                    --------------------
                     """);
             try {
                 int choice = scanner.nextInt();
@@ -244,6 +246,13 @@ public class Program {
                 System.out.println("Wrong input");
             } catch (ArithmeticException e) {
                 System.out.println("Can't create circle from this figure");
+            }
+
+            System.out.println("Created figures:");
+            int i = 1;
+            for (Figure figure : createdFigures) {
+                System.out.printf("\n#%d ", i++);
+                System.out.println(figure);
             }
         }
     }

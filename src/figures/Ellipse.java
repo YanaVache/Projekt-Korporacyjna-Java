@@ -4,14 +4,14 @@ import Config.Config;
 
 import java.util.Date;
 
-public class Elipse extends Figure {
+public class Ellipse extends Figure {
     private double majorAxis;
     private double minorAxis;
     private double area;
     private double perimeter;
     private Date timeCreated;
 
-    public Elipse(double a, double b, int option) {
+    public Ellipse(double a, double b, int option) {
         switch (option) {
             case 1 -> countMajorAxisFromMinorAxisAndArea(a, b);
             case 2 -> countMinorAxisFromMajorAxisAndArea(a, b);
@@ -23,7 +23,7 @@ public class Elipse extends Figure {
     public static void printGuide() {
         System.out.println("""
                 --------------------
-                How do you want to create a Elipse?
+                How do you want to create a Ellipse?
                 1 - From Minor Axis and Area
                 2 - From Major Aaxis and Area
                 3 - From Minor Axis and Major Axis
@@ -47,7 +47,7 @@ public class Elipse extends Figure {
     }
 
     private void countMajorAxisFromMinorAxisAndArea(double minorAxis, double area) {
-        this.majorAxis = area / ((Math.PI * minorAxis / 2));
+        this.majorAxis = area / ((Math.PI * minorAxis));
         this.minorAxis = minorAxis;
         this.area = area;
         this.perimeter = countPerimeter(this.majorAxis, this.minorAxis);
@@ -56,7 +56,7 @@ public class Elipse extends Figure {
 
     private void countMinorAxisFromMajorAxisAndArea(double majorAxis, double area) {
         this.majorAxis = majorAxis;
-        this.minorAxis = area / (Math.PI * (majorAxis / 2));
+        this.minorAxis = area / (Math.PI * (majorAxis));
         this.area = area;
         this.perimeter = countPerimeter(this.majorAxis, this.minorAxis);
         this.timeCreated = new Date();
@@ -65,7 +65,7 @@ public class Elipse extends Figure {
     private void countAreaFromMinorAxisAndMajorAxis(double minorAxis, double majorAxis) {
         this.majorAxis = majorAxis;
         this.minorAxis = minorAxis;
-        this.area = Math.PI * (minorAxis / 2) * (majorAxis / 2);
+        this.area = Math.PI * (minorAxis) * (majorAxis);
         this.perimeter = countPerimeter(this.majorAxis, this.minorAxis);
         this.timeCreated = new Date();
     }
@@ -73,7 +73,7 @@ public class Elipse extends Figure {
     @Override
     public String prettyString() {
         return "--------------------"
-                + "\nElipse"
+                + "\nEllipse"
                 + "\nMajor Axis: " + String.format(Config.format, this.majorAxis)
                 + "\nMinor Axis: " + String.format(Config.format, this.minorAxis)
                 + "\nPerimeter: " + String.format(Config.format, this.perimeter)
@@ -83,7 +83,7 @@ public class Elipse extends Figure {
 
     @Override
     public String toString() {
-        return "[Elipse,"
+        return "[Ellipse,"
                 + " Major Axis: " + String.format(Config.format, this.majorAxis)
                 + " Minor Axis: " + String.format(Config.format, this.minorAxis)
                 + " Perimeter: " + String.format(Config.format, this.perimeter)
@@ -94,9 +94,6 @@ public class Elipse extends Figure {
 
 
     public static double countPerimeter(double majorAxis, double minorAxis) {
-        majorAxis /= 2;
-        minorAxis /= 2;
-
         double h = Math.pow(majorAxis - minorAxis, 2) / Math.pow(majorAxis + minorAxis, 2);
         return Math.PI * (majorAxis + minorAxis) * (1 + (1/Math.pow(2,2)) * h + (1/Math.pow(2,6))*Math.pow(h, 2));
     }
@@ -128,7 +125,7 @@ public class Elipse extends Figure {
 
     @Override
     public Figure getDoubledAreaFigure() {
-        return new Elipse(this.majorAxis * 2, this.minorAxis * 2, 3);
+        return new Ellipse(this.majorAxis * 2, this.minorAxis * 2, 3);
     }
 
     public int getVertices() {
