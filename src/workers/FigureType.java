@@ -9,4 +9,5 @@ public enum FigureType {
     IsoscelesTriangle,
     OrthogonalTriangle,
     Ellipse,
+    IsoscelesTrapezoid,
 }

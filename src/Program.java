@@ -2,7 +2,11 @@ import figures.*;
 
 import Config.Config;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 import workers.*;
 
@@ -25,7 +29,9 @@ public class Program {
                     6 - Isosceles Triangle
                     7 - Orthogonal Triangle
                     8 - Ellipse
-                    9 - Show all created figures
+                    9 - Isosceles Trapezoid
+                    10 - Show all created figures
+                    11 - Save figures to file
                     -1 - Configure format of numbers
                     0 - Exit
                     --------------------""");
@@ -65,7 +71,12 @@ public class Program {
                         Ellipse.printGuide();
                         CreateFigure(scanner, FigureType.Ellipse);
                     }
-                    case 9 -> showFiguresList(scanner);
+                    case 9 -> {
+                        IsoscelesTrapezoid.printGuide();
+                        CreateFigure(scanner, FigureType.IsoscelesTrapezoid);
+                    }
+                    case 10 -> showFiguresList(scanner);
+                    case 11 -> saveFiguresToFile(scanner);
                     case -1 -> configureFormat(scanner);
                     case 0 -> {
                         System.out.println("Exiting program...");
@@ -118,96 +129,82 @@ public class Program {
     // TODO: Switch albo coś ładniejszego? opcja i porządek
     private void sortFigures(int option) {
         Comparator<Figure> comparator = null;
-
-        switch (option / 10) {
-            case 1 -> comparator = Comparator.comparingInt(Figure::getVertices);
-            case 2 -> comparator = Comparator.comparingInt(Figure::getVertices).reversed();
+    
+        switch (option) {
+            case 1:
+                comparator = Comparator.comparingInt(Figure::getVertices);
+                break;
+            case 2:
+                comparator = Comparator.comparingInt(Figure::getVertices).reversed();
+                break;
+            case 3:
+                comparator = Comparator.comparingDouble(Figure::getArea);
+                break;
+            case 4:
+                comparator = Comparator.comparingDouble(Figure::getArea).reversed();
+                break;
+            case 5:
+                comparator = Comparator.comparingDouble(Figure::getPerimeter);
+                break;
+            case 6:
+                comparator = Comparator.comparingDouble(Figure::getPerimeter).reversed();
+                break;
+            case 7:
+                comparator = Comparator.comparing(Figure::getTimeCreated);
+                break;
+            case 8:
+                comparator = Comparator.comparing(Figure::getTimeCreated).reversed();
+                break;
+            default:
+                throw new IllegalArgumentException("Wrong option");
         }
-
+    
         if (comparator == null) {
             throw new IllegalArgumentException("Wrong option");
         }
-
-        comparator = comparator.thenComparing((f1, f2) -> {
-            switch (option % 10) {
-                case 1: return Double.compare(f1.getArea(), f2.getArea());
-                case 2: return Double.compare(f2.getArea(), f1.getArea());
-                case 3: return Double.compare(f1.getPerimeter(), f2.getPerimeter());
-                case 4: return Double.compare(f2.getPerimeter(), f1.getPerimeter());
-                case 5: return f1.getTimeCreated().compareTo(f2.getTimeCreated());
-                case 6: return f2.getTimeCreated().compareTo(f1.getTimeCreated());
-                default: throw new IllegalArgumentException("Wrong option");
-                
-            }
-        });
-
-        if (comparator == null) {
-            throw new IllegalArgumentException("Wrong option");
-        }
-
+    
         createdFigures.sort(comparator);
     }
-
+    
     private void showFiguresList(Scanner scanner) {
         while (true) {
             if (createdFigures.isEmpty()) {
                 System.out.println("No figures created yet");
                 return;
             }
+    
             int finalChoice = 0;
             System.out.println("""
                     --------------------
-                    Choose primary sorting method:
+                    Choose sorting method:
                     1 - Vertices ascending
                     2 - Vertices descending
+                    3 - Area ascending
+                    4 - Area descending
+                    5 - Perimeter ascending
+                    6 - Perimeter descending
+                    7 - Time Created ascending
+                    8 - Time Created descending
                     0 - Go back
                     --------------------
                     """);
+    
             try {
                 int choice = scanner.nextInt();
                 if (choice == 0) {
                     return;
                 }
-                if (choice >= 1 && choice < 3) {
+                if (choice >= 1 && choice <= 8) {
                     finalChoice = choice;
-                    finalChoice *= 10;
-                } else {
-                    System.out.println("Wrong number");
-                }
-
-            } catch (InputMismatchException e) {
-                System.out.println("Wrong input");
-                scanner.next();
-            }
-            System.out.println("""
-                    --------------------
-                    Choose secondary sorting method:
-                    1 - Area ascending
-                    2 - Area descending
-                    3 - Perimeter ascending
-                    4 - Perimeter descending
-                    5 - Time Created ascending
-                    6 - Time Created descending
-                    0 - Go back
-                    --------------------""");
-
-            try {
-                int choice = scanner.nextInt();
-                if (choice == 0) {
-                    return;
-                }
-                if (choice >= 1 && choice < 7) {
-                    finalChoice += choice;
                     sortFigures(finalChoice);
                 } else {
                     System.out.println("Wrong number");
                 }
-
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input");
                 scanner.next();
             }
-
+    
             System.out.println("Created figures:");
             int i = 1;
             for (Figure figure : createdFigures) {
@@ -217,7 +214,29 @@ public class Program {
             pickAction(scanner);
         }
     }
+    
+    public CompletableFuture<Void> saveFiguresToFileAsync(String fileName) {
+        return CompletableFuture.runAsync(() -> {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+                for (Figure figure : createdFigures) {
+                    writer.write(figure.toString());
+                    writer.newLine();
+                }
+                System.out.println("Figures saved to file: " + fileName);
+            } catch (IOException e) {
+                System.out.println("An error occurred while saving the figures to file.");
+            }
+        });
+    }
 
+    private void saveFiguresToFile(Scanner scanner) {
+        System.out.println("Enter the file name:");
+        String fileName = scanner.next();
+
+        CompletableFuture<Void> saveFuture = saveFiguresToFileAsync(fileName);
+        saveFuture.join();
+    }
+    
     // TODO: Poniższe metody jakoś wynieść do abstrakcji
     private void pickAction(Scanner scanner) {
         while (true) {
