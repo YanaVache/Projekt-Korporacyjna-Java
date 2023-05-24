@@ -294,7 +294,7 @@ public class Program {
                             .create();
                     String json = gson.toJson(selectedFigures);
 
-                    try (FileWriter writer = new FileWriter("figures.json")) {
+                    try (FileWriter writer = new FileWriter("src/values/figures.json")) {
                         writer.write(json);
                     } catch (IOException e) {
                         e.printStackTrace();
