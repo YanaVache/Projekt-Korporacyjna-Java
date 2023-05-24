@@ -1,7 +1,8 @@
 # Definicja zmiennych
 SRCDIR = src
 BINDIR = bin
-JFLAGS = -d $(BINDIR)
+LIBDIR = lib
+JFLAGS = -d $(BINDIR) -cp .:$(LIBDIR)/gson-2.10.1.jar
 JC = javac
 JVM = java
 SOURCES = $(shell find $(SRCDIR) -name "*.java")
@@ -16,7 +17,7 @@ compile:
 
 # Uruchomienie
 run:
-	$(JVM) -cp $(BINDIR) Main
+	$(JVM) -cp .:$(BINDIR):$(LIBDIR)/gson-2.10.1.jar Main
 
 # Czyszczenie
 clean:

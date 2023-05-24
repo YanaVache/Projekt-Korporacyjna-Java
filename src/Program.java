@@ -6,7 +6,17 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+//import Config.FigureAdapter;
+import com.google.gson.GsonBuilder;
+
+import com.google.gson.Gson;
+=======
 import java.util.concurrent.CompletableFuture;
+
 
 import workers.*;
 
@@ -14,7 +24,8 @@ public class Program {
     private ArrayList<Figure> createdFigures = new ArrayList<>();
     private FigureFactory factory = new FigureFactory();
 
-    // TODO: Stringi wynieść, jakieś generyki zamiast switchowania po cyferkach, więcej testów
+    // TODO: Stringi wynieść, jakieś generyki zamiast switchowania po cyferkach,
+    // więcej testów
     public void runProgram() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -30,8 +41,9 @@ public class Program {
                     7 - Orthogonal Triangle
                     8 - Ellipse
                     9 - Isosceles Trapezoid
-                    10 - Show all created figures
-                    11 - Save figures to file
+                    10 - Any Triangle
+                    11 - Show all created figures
+                    12 - Save figures to file
                     -1 - Configure format of numbers
                     0 - Exit
                     --------------------""");
@@ -71,12 +83,16 @@ public class Program {
                         Ellipse.printGuide();
                         CreateFigure(scanner, FigureType.Ellipse);
                     }
-                    case 9 -> {
+                    case 9 -> showFiguresList(scanner);
                         IsoscelesTrapezoid.printGuide();
                         CreateFigure(scanner, FigureType.IsoscelesTrapezoid);
                     }
-                    case 10 -> showFiguresList(scanner);
-                    case 11 -> saveFiguresToFile(scanner);
+                    case 10 -> {
+                        AnyTriangle.printGuide();
+                        CreateFigure(scanner, FigureType.AnyTriangle);
+                    }
+                    case 11 -> showFiguresList(scanner);
+                    case 12 -> saveFiguresToFile(scanner);
                     case -1 -> configureFormat(scanner);
                     case 0 -> {
                         System.out.println("Exiting program...");
@@ -206,11 +222,7 @@ public class Program {
             }
     
             System.out.println("Created figures:");
-            int i = 1;
-            for (Figure figure : createdFigures) {
-                System.out.printf("\n#%d ", i++);
-                System.out.println(figure);
-            }
+            printFigures();
             pickAction(scanner);
         }
     }
@@ -246,6 +258,7 @@ public class Program {
                     1 - Create circle from figure
                     2 - Double the area of figure
                     3 - Delete figure
+                    4 - Select figures to save to Json
                     --------------------""");
             try {
                 int choice = scanner.nextInt();
@@ -258,6 +271,8 @@ public class Program {
                     doubleTheAreaOfFigure(scanner);
                 } else if (choice == 3) {
                     deleteFigure(scanner);
+                } else if (choice == 4) {
+                    saveFiguresToJson(scanner);
                 } else {
                     System.out.println("Wrong number");
                 }
@@ -268,11 +283,60 @@ public class Program {
             }
 
             System.out.println("Created figures:");
-            int i = 1;
-            for (Figure figure : createdFigures) {
-                System.out.printf("\n#%d ", i++);
-                System.out.println(figure);
+            printFigures();
+        }
+    }
+
+    private void saveFiguresToJson(Scanner scanner) {
+
+        List<Figure> selectedFigures = new ArrayList<>();
+
+        while (true) {
+            printFigures();
+            System.out.println("""
+                    --------------------
+                    -1 - Go back
+                    0 - Save Selected figures to Json
+                    # - Select figure #
+                    --------------------""");
+            try {
+                int choice = scanner.nextInt();
+                if (choice == -1) {
+                    return;
+                } else if (choice == 0) {
+                    Gson gson = new GsonBuilder().setPrettyPrinting()
+                            //.registerTypeAdapter(Figure.class, new FigureAdapter())
+                            .create();
+                    String json = gson.toJson(selectedFigures);
+
+                    try (FileWriter writer = new FileWriter("src/values/figures.json")) {
+                        writer.write(json);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                } else if (choice > createdFigures.size()) {
+                    throw new InputMismatchException();
+                } else {
+                    Figure figure = createdFigures.get(choice - 1);
+                    if (!selectedFigures.contains(figure)) {
+                        selectedFigures.add(figure);
+                    } else {
+                        System.out.println("Figure already selected");
+                    }
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong input");
             }
+            
+        }
+    }
+
+    private void printFigures(){
+        int i = 1;
+        for (Figure figure : createdFigures) {
+            System.out.printf("\n#%d ", i++);
+            System.out.println(figure);
         }
     }
 
