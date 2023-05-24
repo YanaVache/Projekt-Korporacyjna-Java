@@ -3,6 +3,13 @@ import figures.*;
 import Config.Config;
 
 import java.util.*;
+import java.io.FileWriter;
+import java.io.IOException;
+
+//import Config.FigureAdapter;
+import com.google.gson.GsonBuilder;
+
+import com.google.gson.Gson;
 
 import workers.*;
 
@@ -10,7 +17,8 @@ public class Program {
     private ArrayList<Figure> createdFigures = new ArrayList<>();
     private FigureFactory factory = new FigureFactory();
 
-    // TODO: Stringi wynieść, jakieś generyki zamiast switchowania po cyferkach, więcej testów
+    // TODO: Stringi wynieść, jakieś generyki zamiast switchowania po cyferkach,
+    // więcej testów
     public void runProgram() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -135,14 +143,21 @@ public class Program {
 
         comparator = comparator.thenComparing((f1, f2) -> {
             switch (option % 10) {
-                case 1: return Double.compare(f1.getArea(), f2.getArea());
-                case 2: return Double.compare(f2.getArea(), f1.getArea());
-                case 3: return Double.compare(f1.getPerimeter(), f2.getPerimeter());
-                case 4: return Double.compare(f2.getPerimeter(), f1.getPerimeter());
-                case 5: return f1.getTimeCreated().compareTo(f2.getTimeCreated());
-                case 6: return f2.getTimeCreated().compareTo(f1.getTimeCreated());
-                default: throw new IllegalArgumentException("Wrong option");
-                
+                case 1:
+                    return Double.compare(f1.getArea(), f2.getArea());
+                case 2:
+                    return Double.compare(f2.getArea(), f1.getArea());
+                case 3:
+                    return Double.compare(f1.getPerimeter(), f2.getPerimeter());
+                case 4:
+                    return Double.compare(f2.getPerimeter(), f1.getPerimeter());
+                case 5:
+                    return f1.getTimeCreated().compareTo(f2.getTimeCreated());
+                case 6:
+                    return f2.getTimeCreated().compareTo(f1.getTimeCreated());
+                default:
+                    throw new IllegalArgumentException("Wrong option");
+
             }
         });
 
@@ -214,11 +229,7 @@ public class Program {
             }
 
             System.out.println("Created figures:");
-            int i = 1;
-            for (Figure figure : createdFigures) {
-                System.out.printf("\n#%d ", i++);
-                System.out.println(figure);
-            }
+            printFigures();
             pickAction(scanner);
         }
     }
@@ -232,6 +243,7 @@ public class Program {
                     1 - Create circle from figure
                     2 - Double the area of figure
                     3 - Delete figure
+                    4 - Select figures to save to Json
                     --------------------""");
             try {
                 int choice = scanner.nextInt();
@@ -244,6 +256,8 @@ public class Program {
                     doubleTheAreaOfFigure(scanner);
                 } else if (choice == 3) {
                     deleteFigure(scanner);
+                } else if (choice == 4) {
+                    saveFiguresToJson(scanner);
                 } else {
                     System.out.println("Wrong number");
                 }
@@ -254,11 +268,60 @@ public class Program {
             }
 
             System.out.println("Created figures:");
-            int i = 1;
-            for (Figure figure : createdFigures) {
-                System.out.printf("\n#%d ", i++);
-                System.out.println(figure);
+            printFigures();
+        }
+    }
+
+    private void saveFiguresToJson(Scanner scanner) {
+
+        List<Figure> selectedFigures = new ArrayList<>();
+
+        while (true) {
+            printFigures();
+            System.out.println("""
+                    --------------------
+                    -1 - Go back
+                    0 - Save Selected figures to Json
+                    # - Select figure #
+                    --------------------""");
+            try {
+                int choice = scanner.nextInt();
+                if (choice == -1) {
+                    return;
+                } else if (choice == 0) {
+                    Gson gson = new GsonBuilder().setPrettyPrinting()
+                            //.registerTypeAdapter(Figure.class, new FigureAdapter())
+                            .create();
+                    String json = gson.toJson(selectedFigures);
+
+                    try (FileWriter writer = new FileWriter("figures.json")) {
+                        writer.write(json);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                } else if (choice > createdFigures.size()) {
+                    throw new InputMismatchException();
+                } else {
+                    Figure figure = createdFigures.get(choice - 1);
+                    if (!selectedFigures.contains(figure)) {
+                        selectedFigures.add(figure);
+                    } else {
+                        System.out.println("Figure already selected");
+                    }
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong input");
             }
+            
+        }
+    }
+
+    private void printFigures(){
+        int i = 1;
+        for (Figure figure : createdFigures) {
+            System.out.printf("\n#%d ", i++);
+            System.out.println(figure);
         }
     }
 
