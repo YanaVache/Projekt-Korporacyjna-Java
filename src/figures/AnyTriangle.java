@@ -107,9 +107,9 @@ public class AnyTriangle extends Figure {
 
   @Override
   public Figure getDoubledAreaFigure() {
-    double newSideA = sideA * 2;
-    double newSideB = sideB * 2;
-    double newSideC = sideC * 2;
+    double newSideA = this.sideA * Math.sqrt(2);
+    double newSideB = this.sideB * Math.sqrt(2);
+    double newSideC = this.sideC * Math.sqrt(2);
     return new AnyTriangle(newSideA, newSideB, newSideC, 1);
   }
 
