@@ -14,9 +14,8 @@ import java.io.IOException;
 import com.google.gson.GsonBuilder;
 
 import com.google.gson.Gson;
-=======
-import java.util.concurrent.CompletableFuture;
 
+import java.util.concurrent.CompletableFuture;
 
 import workers.*;
 
@@ -42,8 +41,9 @@ public class Program {
                     8 - Ellipse
                     9 - Isosceles Trapezoid
                     10 - Any Triangle
-                    11 - Show all created figures
-                    12 - Save figures to file
+                    11 - Regular Hexagon
+                    12 - Show all created figures
+                    13 - Save figures to file
                     -1 - Configure format of numbers
                     0 - Exit
                     --------------------""");
@@ -83,7 +83,7 @@ public class Program {
                         Ellipse.printGuide();
                         CreateFigure(scanner, FigureType.Ellipse);
                     }
-                    case 9 -> showFiguresList(scanner);
+                    case 9 -> {
                         IsoscelesTrapezoid.printGuide();
                         CreateFigure(scanner, FigureType.IsoscelesTrapezoid);
                     }
@@ -91,8 +91,12 @@ public class Program {
                         AnyTriangle.printGuide();
                         CreateFigure(scanner, FigureType.AnyTriangle);
                     }
-                    case 11 -> showFiguresList(scanner);
-                    case 12 -> saveFiguresToFile(scanner);
+                    case 11 -> {
+                        RegularHexagon.printGuide();
+                        CreateFigure(scanner, FigureType.RegularHexagon);
+                    }
+                    case 12 -> showFiguresList(scanner);
+                    case 13 -> saveFiguresToFile(scanner);
                     case -1 -> configureFormat(scanner);
                     case 0 -> {
                         System.out.println("Exiting program...");
@@ -145,7 +149,7 @@ public class Program {
     // TODO: Switch albo coś ładniejszego? opcja i porządek
     private void sortFigures(int option) {
         Comparator<Figure> comparator = null;
-    
+
         switch (option) {
             case 1:
                 comparator = Comparator.comparingInt(Figure::getVertices);
@@ -174,21 +178,21 @@ public class Program {
             default:
                 throw new IllegalArgumentException("Wrong option");
         }
-    
+
         if (comparator == null) {
             throw new IllegalArgumentException("Wrong option");
         }
-    
+
         createdFigures.sort(comparator);
     }
-    
+
     private void showFiguresList(Scanner scanner) {
         while (true) {
             if (createdFigures.isEmpty()) {
                 System.out.println("No figures created yet");
                 return;
             }
-    
+
             int finalChoice = 0;
             System.out.println("""
                     --------------------
@@ -204,7 +208,7 @@ public class Program {
                     0 - Go back
                     --------------------
                     """);
-    
+
             try {
                 int choice = scanner.nextInt();
                 if (choice == 0) {
@@ -220,13 +224,13 @@ public class Program {
                 System.out.println("Wrong input");
                 scanner.next();
             }
-    
+
             System.out.println("Created figures:");
             printFigures();
             pickAction(scanner);
         }
     }
-    
+
     public CompletableFuture<Void> saveFiguresToFileAsync(String fileName) {
         return CompletableFuture.runAsync(() -> {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
@@ -248,7 +252,7 @@ public class Program {
         CompletableFuture<Void> saveFuture = saveFiguresToFileAsync(fileName);
         saveFuture.join();
     }
-    
+
     // TODO: Poniższe metody jakoś wynieść do abstrakcji
     private void pickAction(Scanner scanner) {
         while (true) {
@@ -305,7 +309,7 @@ public class Program {
                     return;
                 } else if (choice == 0) {
                     Gson gson = new GsonBuilder().setPrettyPrinting()
-                            //.registerTypeAdapter(Figure.class, new FigureAdapter())
+                            // .registerTypeAdapter(Figure.class, new FigureAdapter())
                             .create();
                     String json = gson.toJson(selectedFigures);
 
@@ -328,11 +332,11 @@ public class Program {
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input");
             }
-            
+
         }
     }
 
-    private void printFigures(){
+    private void printFigures() {
         int i = 1;
         for (Figure figure : createdFigures) {
             System.out.printf("\n#%d ", i++);

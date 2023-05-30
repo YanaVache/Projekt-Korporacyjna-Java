@@ -10,5 +10,6 @@ public enum FigureType {
     OrthogonalTriangle,
     Ellipse,
     IsoscelesTrapezoid,
-    AnyTriangle
+    AnyTriangle,
+    RegularHexagon
 }
