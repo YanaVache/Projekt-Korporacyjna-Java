@@ -2,6 +2,8 @@ package figures;
 
 import java.util.Date;
 
+import java.util.ArrayList;
+import java.util.List;
 import Config.Config;
 
 public class Circle extends Figure {
@@ -10,6 +12,8 @@ public class Circle extends Figure {
     private double circumference; // Obwód
     private double area; // Pole
     private Date timeCreated;
+
+    private static List<Circle> createdFigures = new ArrayList<>();
 
     public Circle(double n, int option) {
         switch (option) {
@@ -132,5 +136,30 @@ public class Circle extends Figure {
 
     public int getVertices() {
         return Integer.MAX_VALUE;
+    }
+
+    public static boolean isDuplicate(Circle figure) {
+        for (Circle existingFigure : createdFigures) {
+            if (existingFigure.equals(figure)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Circle other = (Circle) obj;
+
+        return Double.compare(this.radius, other.radius) == 0 &&
+                Double.compare(this.diameter, other.diameter) == 0 &&
+                Double.compare(this.circumference, other.circumference) == 0 &&
+                Double.compare(this.area, other.area) == 0;
     }
 }

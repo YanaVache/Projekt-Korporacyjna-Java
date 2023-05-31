@@ -1,6 +1,8 @@
 package figures;
 
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 
 import Config.Config;
 
@@ -10,6 +12,8 @@ public class RegularHexagon extends Figure {
     private double perimeter;
     private Date timeCreated;
 
+    private static List<RegularHexagon> createdFigures = new ArrayList<>();
+    
     public RegularHexagon(double a, int option) {
         switch (option) {
             case 1 -> calculateFromSide(a);
@@ -113,4 +117,29 @@ public class RegularHexagon extends Figure {
     public int getVertices() {
         return 6;
     }
+
+    public static boolean isDuplicate(RegularHexagon figure) {
+        for (RegularHexagon existingFigure : createdFigures) {
+            if (existingFigure.equals(figure)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        RegularHexagon other = (RegularHexagon) obj;
+        
+        return Double.compare(this.side, other.side) == 0 &&
+               Double.compare(this.area, other.area) == 0 &&
+               Double.compare(this.perimeter, other.perimeter) == 0;
+    }
+
 }

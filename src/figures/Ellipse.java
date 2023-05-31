@@ -2,6 +2,8 @@ package figures;
 
 import java.util.Date;
 
+import java.util.ArrayList;
+import java.util.List;
 import Config.Config;
 
 public class Ellipse extends Figure {
@@ -10,6 +12,8 @@ public class Ellipse extends Figure {
     private double area;
     private double perimeter;
     private Date timeCreated;
+
+    private static List<Ellipse> createdFigures = new ArrayList<>();
 
     public Ellipse(double a, double b, int option) {
         switch (option) {
@@ -129,5 +133,29 @@ public class Ellipse extends Figure {
 
     public int getVertices() {
         return Integer.MAX_VALUE;
+    }
+    public static boolean isDuplicate(Ellipse figure) {
+        for (Ellipse existingFigure : createdFigures) {
+            if (existingFigure.equals(figure)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Ellipse other = (Ellipse) obj;
+    
+        return Double.compare(this.majorAxis, other.majorAxis) == 0 &&
+               Double.compare(this.minorAxis, other.minorAxis) == 0 &&
+               Double.compare(this.area, other.area) == 0 &&
+               Double.compare(this.perimeter, other.perimeter) == 0;
     }
 }

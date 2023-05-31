@@ -1,7 +1,8 @@
 package figures;
 
 import java.util.Date;
-
+import java.util.ArrayList;
+import java.util.List;
 import Config.Config;
 
 public class IsoscelesTriangle extends Figure {
@@ -11,6 +12,8 @@ public class IsoscelesTriangle extends Figure {
     private double perimeter;
     private double heightDroppedOnBase;
     private Date timeCreated;
+
+    private static List<IsoscelesTriangle> createdFigures = new ArrayList<>();
 
     public IsoscelesTriangle(double a, double b, int option) {
         switch (option) {
@@ -170,5 +173,31 @@ public class IsoscelesTriangle extends Figure {
 
     public int getVertices() {
         return 3;
+    }
+
+    public static boolean isDuplicate(IsoscelesTriangle figure) {
+        for (IsoscelesTriangle existingFigure : createdFigures) {
+            if (existingFigure.equals(figure)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        IsoscelesTriangle other = (IsoscelesTriangle) obj;
+    
+        return Double.compare(this.armLength, other.armLength) == 0 &&
+               Double.compare(this.baseLength, other.baseLength) == 0 &&
+               Double.compare(this.area, other.area) == 0 &&
+               Double.compare(this.perimeter, other.perimeter) == 0 &&
+               Double.compare(this.heightDroppedOnBase, other.heightDroppedOnBase) == 0;
     }
 }

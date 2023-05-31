@@ -2,6 +2,8 @@ package figures;
 
 import java.util.Date;
 
+import java.util.ArrayList;
+import java.util.List;
 import Config.Config;
 
 public class OrthogonalTriangle extends Figure {
@@ -10,6 +12,8 @@ public class OrthogonalTriangle extends Figure {
     private double hypoteneuse;
     private double area;
     private Date timeCreated;
+
+    private static List<OrthogonalTriangle> createdFigures = new ArrayList<>();
 
     public OrthogonalTriangle(double a, double b, int option) {
         switch (option) {
@@ -141,5 +145,30 @@ public class OrthogonalTriangle extends Figure {
 
     public int getVertices() {
         return 3;
+    }
+
+    public static boolean isDuplicate(OrthogonalTriangle figure) {
+        for (OrthogonalTriangle existingFigure : createdFigures) {
+            if (existingFigure.equals(figure)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        OrthogonalTriangle other = (OrthogonalTriangle) obj;
+    
+        return Double.compare(this.aLeg, other.aLeg) == 0 &&
+               Double.compare(this.bLeg, other.bLeg) == 0 &&
+               Double.compare(this.hypoteneuse, other.hypoteneuse) == 0 &&
+               Double.compare(this.area, other.area) == 0;
     }
 }

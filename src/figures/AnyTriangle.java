@@ -1,7 +1,8 @@
 package figures;
 
 import java.util.Date;
-
+import java.util.ArrayList;
+import java.util.List;
 import Config.Config;
 
 public class AnyTriangle extends Figure {
@@ -10,6 +11,8 @@ public class AnyTriangle extends Figure {
   private double sideC;
   private double area;
   private Date timeCreated;
+
+  private static List<AnyTriangle> createdFigures = new ArrayList<>();
 
   public AnyTriangle(double a, double b, double c, int option) {
     switch (option) {
@@ -110,6 +113,31 @@ public class AnyTriangle extends Figure {
 
   public int getVertices() {
     return 3;
+  }
+
+  public static boolean isDuplicate(AnyTriangle figure) {
+    for (AnyTriangle existingFigure : createdFigures) {
+      if (existingFigure.equals(figure)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+    AnyTriangle other = (AnyTriangle) obj;
+
+    return Double.compare(this.sideA, other.sideA) == 0 &&
+        Double.compare(this.sideB, other.sideB) == 0 &&
+        Double.compare(this.sideC, other.sideC) == 0 &&
+        Double.compare(this.area, other.area) == 0;
   }
 
 }

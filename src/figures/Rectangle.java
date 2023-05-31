@@ -2,6 +2,8 @@ package figures;
 
 import java.util.Date;
 
+import java.util.ArrayList;
+import java.util.List;
 import Config.Config;
 
 public class Rectangle extends Figure {
@@ -10,6 +12,8 @@ public class Rectangle extends Figure {
     private double area;
     private double diagonal;
     private Date timeCreated;
+
+    private static List<Rectangle> createdFigures = new ArrayList<>();
 
     public Rectangle(double a, double b, int option) {
         switch (option) {
@@ -134,5 +138,29 @@ public class Rectangle extends Figure {
 
     public int getVertices() {
         return 4;
+    }
+    public static boolean isDuplicate(Rectangle figure) {
+        for (Rectangle existingFigure : createdFigures) {
+            if (existingFigure.equals(figure)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Rectangle other = (Rectangle) obj;
+    
+        return Double.compare(this.sideLength, other.sideLength) == 0 &&
+               Double.compare(this.width, other.width) == 0 &&
+               Double.compare(this.area, other.area) == 0 &&
+               Double.compare(this.diagonal, other.diagonal) == 0;
     }
 }

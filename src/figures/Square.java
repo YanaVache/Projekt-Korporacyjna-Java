@@ -1,7 +1,8 @@
 package figures;
 
 import java.util.Date;
-
+import java.util.ArrayList;
+import java.util.List;
 import Config.Config;
 
 public class Square extends Figure {
@@ -9,6 +10,8 @@ public class Square extends Figure {
     private double diagonalLength;// Długość przekątnej
     private double area; // Pole powierzchni
     private Date timeCreated;
+
+    private static List<Square> createdFigures = new ArrayList<>();
 
     public Square(double n, int option) {
         switch (option) {
@@ -115,5 +118,29 @@ public class Square extends Figure {
 
     public int getVertices() {
         return 4;
+    }
+
+    public static boolean isDuplicate(Square figure) {
+        for (Square existingFigure : createdFigures) {
+            if (existingFigure.equals(figure)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Square other = (Square) obj;
+    
+        return Double.compare(this.sideLength, other.sideLength) == 0 &&
+               Double.compare(this.diagonalLength, other.diagonalLength) == 0 &&
+               Double.compare(this.area, other.area) == 0;
     }
 }

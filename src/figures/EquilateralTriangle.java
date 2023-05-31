@@ -2,6 +2,8 @@ package figures;
 
 import java.util.Date;
 
+import java.util.ArrayList;
+import java.util.List;
 import Config.Config;
 
 public class EquilateralTriangle extends Figure {
@@ -10,6 +12,8 @@ public class EquilateralTriangle extends Figure {
     private double perimeter;
     private double height;
     private Date timeCreated;
+
+    private static List<EquilateralTriangle> createdFigures = new ArrayList<>();
 
     public EquilateralTriangle(double n, int option) {
         switch (option) {
@@ -133,5 +137,30 @@ public class EquilateralTriangle extends Figure {
 
     public int getVertices() {
         return 3;
+    }
+
+    public static boolean isDuplicate(EquilateralTriangle figure) {
+        for (EquilateralTriangle existingFigure : createdFigures) {
+            if (existingFigure.equals(figure)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        EquilateralTriangle other = (EquilateralTriangle) obj;
+    
+        return Double.compare(this.edgeLength, other.edgeLength) == 0 &&
+               Double.compare(this.area, other.area) == 0 &&
+               Double.compare(this.perimeter, other.perimeter) == 0 &&
+               Double.compare(this.height, other.height) == 0;
     }
 }

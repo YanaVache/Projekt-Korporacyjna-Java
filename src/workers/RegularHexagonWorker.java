@@ -18,7 +18,7 @@ public class RegularHexagonWorker implements IFigureFactoryWorker {
     public String[] getProperties(int option) {
         return RegularHexagon.getRequiredProperties(option);
     }
-
+    
     @Override
     public Figure CreateFigure(Double[] properties, int option) {
         return new RegularHexagon(properties[0], option);

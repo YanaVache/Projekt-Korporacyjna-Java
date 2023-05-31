@@ -2,6 +2,8 @@ package figures;
 
 import java.util.Date;
 
+import java.util.ArrayList;
+import java.util.List;
 import Config.Config;
 
 public class IsoscelesTrapezoid extends Figure {
@@ -11,6 +13,8 @@ public class IsoscelesTrapezoid extends Figure {
     private double height;
     private double area;
     private Date timeCreated;
+
+    private static List<IsoscelesTrapezoid> createdFigures = new ArrayList<>();
 
     public IsoscelesTrapezoid(double a, double b, double c, int option) {
         switch (option) {
@@ -205,5 +209,31 @@ public class IsoscelesTrapezoid extends Figure {
 
     public int getVertices() {
         return 4;
+    }
+
+    public static boolean isDuplicate(IsoscelesTrapezoid figure) {
+        for (IsoscelesTrapezoid existingFigure : createdFigures) {
+            if (existingFigure.equals(figure)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        IsoscelesTrapezoid other = (IsoscelesTrapezoid) obj;
+    
+        return Double.compare(this.base1, other.base1) == 0 &&
+               Double.compare(this.base2, other.base2) == 0 &&
+               Double.compare(this.leg, other.leg) == 0 &&
+               Double.compare(this.height, other.height) == 0 &&
+               Double.compare(this.area, other.area) == 0;
     }
 }
