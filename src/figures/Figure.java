@@ -1,6 +1,7 @@
 package figures;
 
 import java.util.Date;
+import Config.Config;
 
 public abstract class Figure implements Comparable<Figure> {
 
@@ -17,11 +18,11 @@ public abstract class Figure implements Comparable<Figure> {
     public abstract Figure getDoubledAreaFigure();
 
     public static String[] getRequiredProperties(int option) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException(Config.bundle.getString("figure.not_supported"));
     }
 
     public static void printGuide() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException(Config.bundle.getString("figure.not_supported"));
     }
 
     public abstract String prettyString();
@@ -31,4 +32,3 @@ public abstract class Figure implements Comparable<Figure> {
         return Double.compare(this.getArea(), otherFigure.getArea());
     }
 }
-

@@ -1,11 +1,11 @@
 package figures;
 
-import Config.Config;
-
 import java.util.Date;
 
+import Config.Config;
+
 public class Square extends Figure {
-    private double sideLength;    // Długość boku
+    private double sideLength; // Długość boku
     private double diagonalLength;// Długość przekątnej
     private double area; // Pole powierzchni
     private Date timeCreated;
@@ -15,33 +15,26 @@ public class Square extends Figure {
             case 1 -> calculateFromSideLength(n);
             case 2 -> calculateFromDiagonalLength(n);
             case 3 -> calculateFromArea(n);
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
     public static void printGuide() {
-        System.out.println("""
-                --------------------
-                How do you want to create a Square?
-                1 - From Side Length
-                2 - From Diagonal
-                3 - From Area
-                0 - Go back
-                --------------------""");
+        System.out.println(Config.bundle.getString("figure.create_square_guide"));
     }
 
     public static String[] getRequiredProperties(int option) {
         switch (option) {
             case 1 -> {
-                return new String[]{"Side"};
+                return new String[] { "Side" };
             }
             case 2 -> {
-                return new String[]{"Diagonal"};
+                return new String[] { "Diagonal" };
             }
             case 3 -> {
-                return new String[]{"Area"};
+                return new String[] { "Area" };
             }
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
@@ -69,20 +62,24 @@ public class Square extends Figure {
     @Override
     public String prettyString() {
         return "--------------------"
-                + "\nSquare"
-                + "\nSide Length: " + String.format(Config.format, this.sideLength)
-                + "\nDiagonal Length: " + String.format(Config.format, this.diagonalLength)
-                + "\nArea: " + String.format(Config.format, this.area)
-                + "\nTime Created: " + this.timeCreated.toString();
+                + "\n" + Config.bundle.getString("figure.type_square")
+                + "\n" + Config.bundle.getString("figure.side") + ": "
+                + String.format(Config.format, this.sideLength)
+                + "\n" + Config.bundle.getString("figure.diagonal") + ": "
+                + String.format(Config.format, this.diagonalLength)
+                + "\n" + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + "\n" + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
-        return "[Square,"
-                + " Side Length: " + String.format(Config.format, this.sideLength)
-                + " Diagonal Length: " + String.format(Config.format, this.diagonalLength)
-                + " Area: " + String.format(Config.format, this.area)
-                + " Time Created: " + this.timeCreated.toString()
+        return "[" + Config.bundle.getString("figure.type_square")
+                + "," + " " + Config.bundle.getString("figure.side") + ":"
+                + String.format(Config.format, this.sideLength)
+                + " " + Config.bundle.getString("figure.diagonal") + ": "
+                + String.format(Config.format, this.diagonalLength)
+                + " " + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + " " + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString()
                 + "]";
     }
 
@@ -105,7 +102,6 @@ public class Square extends Figure {
     public Date getTimeCreated() {
         return this.timeCreated;
     }
-
 
     @Override
     public Circle getCircumscribedCircle() {

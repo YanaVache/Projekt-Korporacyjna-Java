@@ -1,8 +1,8 @@
 package figures;
 
-import Config.Config;
-
 import java.util.Date;
+
+import Config.Config;
 
 public class AnyTriangle extends Figure {
   private double sideA;
@@ -14,26 +14,20 @@ public class AnyTriangle extends Figure {
   public AnyTriangle(double a, double b, double c, int option) {
     switch (option) {
       case 1 -> calculateFromSides(a, b, c);
-      default -> throw new IllegalArgumentException("Wrong option");
+      default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
     }
   }
 
   public static void printGuide() {
-    System.out.println(
-        """
-            --------------------
-            How do you want to create a AnyTriangle?
-            1 - From Sides
-            0 - Go back
-            --------------------""");
+    System.out.println(Config.bundle.getString("figure.create_any_triangle_guide"));
   }
-  
+
   public static String[] getRequiredProperties(int option) {
     switch (option) {
       case 1 -> {
         return new String[] { "Side A", "Side B", "Side C" };
       }
-      default -> throw new IllegalArgumentException("Wrong option");
+      default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
     }
   }
 
@@ -50,31 +44,32 @@ public class AnyTriangle extends Figure {
     return Math.sqrt(p * (p - a) * (p - b) * (p - c));
   }
 
-
   @Override
   public String prettyString() {
     return "--------------------"
-            + "\nAny Triangle"
-            + "\nSide A: " + String.format(Config.format, this.sideA)
-            + "\nSide B: " + String.format(Config.format, this.sideB)
-            + "\nSide C: " + String.format(Config.format, this.sideC)
-            + "\nArea: " + String.format(Config.format, this.area)
-            + "\nPerimeter: " + String.format(Config.format, this.sideA + this.sideB + this.sideC)
-        + "\nTime created: " + this.timeCreated.toString();
+        + "\n" + Config.bundle.getString("figure.type_anytriangle")
+        + "\n" + Config.bundle.getString("figure.side") + " A: " + String.format(Config.format, this.sideA)
+        + "\n" + Config.bundle.getString("figure.side") + " B: " + String.format(Config.format, this.sideB)
+        + "\n" + Config.bundle.getString("figure.side") + " C: " + String.format(Config.format, this.sideC)
+        + "\n" + Config.bundle.getString("figure.area") + String.format(Config.format, this.area)
+        + "\n" + Config.bundle.getString("figure.perimeter")
+        + String.format(Config.format, this.sideA + this.sideB + this.sideC)
+        + "\n" + Config.bundle.getString("figure.time_created") + this.timeCreated.toString();
   }
-    
+
   @Override
   public String toString() {
-    return "[Any Triangle"
-        + " Side A: " + String.format(Config.format, this.sideA)
-        + " Side B: " + String.format(Config.format, this.sideB)
-        + " Side C: " + String.format(Config.format, this.sideC)
-        + " Area: " + String.format(Config.format, this.area)
-        + " Perimeter: " + String.format(Config.format, this.sideA + this.sideB + this.sideC)
-        + " Time created: " + this.timeCreated.toString()
+    return "[" + Config.bundle.getString("figure.type_anytriangle")
+        + " " + Config.bundle.getString("figure.side") + " A: " + String.format(Config.format, this.sideA)
+        + " " + Config.bundle.getString("figure.side") + " B: " + String.format(Config.format, this.sideB)
+        + " " + Config.bundle.getString("figure.side") + " C: " + String.format(Config.format, this.sideC)
+        + " " + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+        + " " + Config.bundle.getString("figure.perimeter") + ": "
+        + String.format(Config.format, this.sideA + this.sideB + this.sideC)
+        + " " + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString()
         + "]";
   }
-  
+
   public double getSideA() {
     return sideA;
   }

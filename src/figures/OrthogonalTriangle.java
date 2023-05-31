@@ -1,8 +1,8 @@
 package figures;
 
-import Config.Config;
-
 import java.util.Date;
+
+import Config.Config;
 
 public class OrthogonalTriangle extends Figure {
     private double aLeg;
@@ -17,37 +17,29 @@ public class OrthogonalTriangle extends Figure {
             case 2 -> calculateFromLegAndHypoteneuse(a, b);
             case 3 -> calculateFromAreaAndHypoteneuse(a, b);
             case 4 -> calculateFromAreaAndLeg(a, b);
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
     public static void printGuide() {
-        System.out.println("""
-                --------------------
-                How do you want to create an Orthogonal Triangle?
-                1 - From Legs Length
-                2 - From Leg Length and Hypoteneuse
-                3 - From Area and Hypoteneuse
-                4 - From Area and Leg Length
-                0 - Go back
-                --------------------""");
+        System.out.println(Config.bundle.getString("figure.create_orthogonal_triangle_guide"));
     }
 
     public static String[] getRequiredProperties(int option) {
         switch (option) {
             case 1 -> {
-                return new String[]{"Leg 1 Length", "Leg 2 Length"};
+                return new String[] { "Leg 1 Length", "Leg 2 Length" };
             }
             case 2 -> {
-                return new String[]{"Leg Length", "Hypoteneuse"};
+                return new String[] { "Leg Length", "Hypoteneuse" };
             }
             case 3 -> {
-                return new String[]{"Area", "Hypoteneuse"};
+                return new String[] { "Area", "Hypoteneuse" };
             }
             case 4 -> {
-                return new String[]{"Area", "Leg Length"};
+                return new String[] { "Area", "Leg Length" };
             }
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
@@ -69,7 +61,7 @@ public class OrthogonalTriangle extends Figure {
 
     private void calculateFromLegAndHypoteneuse(double a, double b) {
         if (a >= b) {
-            System.out.println("Invalid input, Leg Length needs to be smaller than Hypoteneuse");
+            System.out.println(Config.bundle.getString("figure.invalid_input"));
             return;
         }
         this.aLeg = a;
@@ -90,22 +82,24 @@ public class OrthogonalTriangle extends Figure {
     @Override
     public String prettyString() {
         return "--------------------"
-                + "\nOrthogonal Triangle"
-                + "\nArm 1 Length: " + String.format(Config.format, this.aLeg)
-                + "\nArm 2 Length: " + String.format(Config.format, this.bLeg)
-                + "\nHypoteneuse: " + String.format(Config.format, this.hypoteneuse)
-                + "\nArea: " + String.format(Config.format, this.area)
-                + "\nTime Created: " + this.timeCreated.toString();
+                + "\n" + Config.bundle.getString("figure.type_orthogonal_triangle")
+                + "\n" + Config.bundle.getString("figure.arm") + " 1" + ": " + String.format(Config.format, this.aLeg)
+                + "\n" + Config.bundle.getString("figure.arm") + "2" + ": " + String.format(Config.format, this.bLeg)
+                + "\n" + Config.bundle.getString("figure.hypoteneuse") + ": "
+                + String.format(Config.format, this.hypoteneuse)
+                + "\n" + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + "\n" + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
-        return "[Orthogonal Triangle"
-                + " Arm 1 Length: " + String.format(Config.format, this.aLeg)
-                + " Arm 2 Length: " + String.format(Config.format, this.bLeg)
-                + " Hypoteneuse: " + String.format(Config.format, this.hypoteneuse)
-                + " Area: " + String.format(Config.format, this.area)
-                + " Time Created: " + this.timeCreated.toString()
+        return "[" + Config.bundle.getString("figure.type_orthogonal_triangle")
+                + " " + Config.bundle.getString("figure.arm") + " 1" + ": " + String.format(Config.format, this.aLeg)
+                + " " + Config.bundle.getString("figure.arm") + " 2" + ": " + String.format(Config.format, this.bLeg)
+                + " " + Config.bundle.getString("figure.hypoteneuse") + ": "
+                + String.format(Config.format, this.hypoteneuse)
+                + " " + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + " " + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString()
                 + "]";
     }
 

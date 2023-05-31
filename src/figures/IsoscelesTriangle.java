@@ -1,8 +1,8 @@
 package figures;
 
-import Config.Config;
-
 import java.util.Date;
+
+import Config.Config;
 
 public class IsoscelesTriangle extends Figure {
     private double armLength;
@@ -20,45 +20,35 @@ public class IsoscelesTriangle extends Figure {
             case 4 -> calculateFromBaseLengthAndArea(a, b);
             case 5 -> calculateFromBaseLengthAndHeight(a, b);
             case 6 -> calculateFromAreaAndHeight(a, b);
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
     public static void printGuide() {
-        System.out.println("""
-                --------------------
-                How do you want to create an Isosceles Triangle?
-                1 - From Arm Length and Base Length
-                2 - From Arm Length and Area
-                3 - From Arm Length and Height
-                4 - From Base Length and Area
-                5 - From Base Length and Height
-                6 - From Area and Height
-                0 - Go back
-                --------------------""");
+        System.out.println(Config.bundle.getString("figure.create_isosceles_triangle_guide"));
     }
 
     public static String[] getRequiredProperties(int option) {
         switch (option) {
             case 1 -> {
-                return new String[]{"Arm Length", "Base Length"};
+                return new String[] { "Arm Length", "Base Length" };
             }
             case 2 -> {
-                return new String[]{"Arm Length", "Area"};
+                return new String[] { "Arm Length", "Area" };
             }
             case 3 -> {
-                return new String[]{"Arm Length", "Height"};
+                return new String[] { "Arm Length", "Height" };
             }
             case 4 -> {
-                return new String[]{"Base Length", "Area"};
+                return new String[] { "Base Length", "Area" };
             }
             case 5 -> {
-                return new String[]{"Base Length", "Height"};
+                return new String[] { "Base Length", "Height" };
             }
             case 6 -> {
-                return new String[]{"Area", "Height"};
+                return new String[] { "Area", "Height" };
             }
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
@@ -119,24 +109,28 @@ public class IsoscelesTriangle extends Figure {
     @Override
     public String prettyString() {
         return "--------------------"
-                + "\nIsosceles Triangle"
-                + "\nArm Length: " + String.format(Config.format, this.armLength)
-                + "\nBase Length: " + String.format(Config.format, this.baseLength)
-                + "\nArea: " + String.format(Config.format, this.area)
-                + "\nPerimeter: " + String.format(Config.format, this.perimeter)
-                + "\nHeight Dropped on Base: " + String.format(Config.format, this.heightDroppedOnBase)
-                + "\nTime Created: " + this.timeCreated.toString();
+                + "\n" + Config.bundle.getString("figure.type_isosceles_triangle")
+                + "\n" + Config.bundle.getString("figure.arm") + ": " + String.format(Config.format, this.armLength)
+                + "\n" + Config.bundle.getString("figure.base") + ": " + String.format(Config.format, this.baseLength)
+                + "\n" + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + "\n" + Config.bundle.getString("figure.perimeter") + ": "
+                + String.format(Config.format, this.perimeter)
+                + "\n" + Config.bundle.getString("figure.height_dropped_on_base") + ": "
+                + String.format(Config.format, this.heightDroppedOnBase)
+                + "\n" + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
-        return "[Isosceles Triangle"
-                + " Arm Length: " + String.format(Config.format, this.armLength)
-                + " Base Length: " + String.format(Config.format, this.baseLength)
-                + " Area: " + String.format(Config.format, this.area)
-                + " Perimeter: " + String.format(Config.format, this.perimeter)
-                + " Height Dropped on Base: " + String.format(Config.format, this.heightDroppedOnBase)
-                + " Time Created: " + this.timeCreated.toString()
+        return "[" + Config.bundle.getString("figure.type_isosceles_triangle")
+                + " " + Config.bundle.getString("figure.arm") + ": " + String.format(Config.format, this.armLength)
+                + " " + Config.bundle.getString("figure.base") + ": " + String.format(Config.format, this.baseLength)
+                + " " + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + " " + Config.bundle.getString("figure.perimeter") + ": "
+                + String.format(Config.format, this.perimeter)
+                + " " + Config.bundle.getString("figure.height_dropped_on_base") + ": "
+                + String.format(Config.format, this.heightDroppedOnBase)
+                + " " + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString()
                 + "]";
     }
 

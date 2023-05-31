@@ -1,7 +1,5 @@
 import figures.*;
 
-import Config.Config;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,6 +10,8 @@ import java.io.IOException;
 
 //import Config.FigureAdapter;
 import com.google.gson.GsonBuilder;
+
+import Config.Config;
 
 import com.google.gson.Gson;
 
@@ -26,27 +26,10 @@ public class Program {
     // TODO: Stringi wynieść, jakieś generyki zamiast switchowania po cyferkach,
     // więcej testów
     public void runProgram() {
+
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("""
-                    --------------------
-                    What figure do you want to create?
-                    1 - Circle
-                    2 - Square
-                    3 - Rectangle
-                    4 - Rhombus
-                    5 - Equilateral Triangle
-                    6 - Isosceles Triangle
-                    7 - Orthogonal Triangle
-                    8 - Ellipse
-                    9 - Isosceles Trapezoid
-                    10 - Any Triangle
-                    11 - Regular Hexagon
-                    12 - Show all created figures
-                    13 - Save figures to file
-                    -1 - Configure format of numbers
-                    0 - Exit
-                    --------------------""");
+            System.out.println(Config.bundle.getString("menu.main"));
             try {
                 int choice = scanner.nextInt();
                 // TODO - przerobić, wrzucić timeCreated do konstruktorów
@@ -97,17 +80,40 @@ public class Program {
                     }
                     case 12 -> showFiguresList(scanner);
                     case 13 -> saveFiguresToFile(scanner);
+                    case 14 -> changeLanguage(scanner);
                     case -1 -> configureFormat(scanner);
                     case 0 -> {
-                        System.out.println("Exiting program...");
+                        System.out.println(Config.bundle.getString("menu.exit"));
                         return;
                     }
-                    default -> System.out.println("Wrong number");
+                    default -> System.out.println(Config.bundle.getString("menu.wrong_number"));
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Wrong input");
+                System.out.println(Config.bundle.getString("menu.wrong_input"));
                 scanner.next();
             }
+        }
+    }
+
+    private void changeLanguage(Scanner scanner){
+        System.out.println(Config.bundle.getString("menu.language_option"));
+        try {
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1 -> {
+                    Config.bundle = ResourceBundle.getBundle("language", new Locale("en", "US"));
+                }
+                case 2 -> {
+                    Config.bundle = ResourceBundle.getBundle("language", new Locale("pl", "PL"));
+                }
+                case 0 -> {
+                    return;
+                }
+                default -> System.out.println(Config.bundle.getString("menu.wrong_number"));
+            }
+        } catch (InputMismatchException e) {
+            System.out.println(Config.bundle.getString("menu.wrong_input"));
+            scanner.next();
         }
     }
 
@@ -128,7 +134,7 @@ public class Program {
 
             }
         } catch (InputMismatchException e) {
-            System.out.println("Wrong input");
+            System.out.println(Config.bundle.getString("menu.wrong_input"));
             scanner.nextLine();
         }
     }
@@ -136,11 +142,7 @@ public class Program {
     private Double[] inputProperties(Scanner scanner, String[] props) {
         Double[] values = new Double[props.length];
         for (int i = 0; i < props.length; i++) {
-            System.out.printf("""
-                    --------------------
-                    Enter %s
-                    --------------------
-                    """, props[i]);
+            System.out.printf(Config.bundle.getString("menu.enter"), props[i]);
             values[i] = scanner.nextDouble();
         }
         return values;
@@ -176,11 +178,11 @@ public class Program {
                 comparator = Comparator.comparing(Figure::getTimeCreated).reversed();
                 break;
             default:
-                throw new IllegalArgumentException("Wrong option");
+                throw new IllegalArgumentException(Config.bundle.getString("menu.wrong_number"));
         }
 
         if (comparator == null) {
-            throw new IllegalArgumentException("Wrong option");
+            throw new IllegalArgumentException(Config.bundle.getString("menu.wrong_number"));
         }
 
         createdFigures.sort(comparator);
@@ -189,25 +191,12 @@ public class Program {
     private void showFiguresList(Scanner scanner) {
         while (true) {
             if (createdFigures.isEmpty()) {
-                System.out.println("No figures created yet");
+                System.out.println(Config.bundle.getString("menu.no_figures"));
                 return;
             }
 
             int finalChoice = 0;
-            System.out.println("""
-                    --------------------
-                    Choose sorting method:
-                    1 - Vertices ascending
-                    2 - Vertices descending
-                    3 - Area ascending
-                    4 - Area descending
-                    5 - Perimeter ascending
-                    6 - Perimeter descending
-                    7 - Time Created ascending
-                    8 - Time Created descending
-                    0 - Go back
-                    --------------------
-                    """);
+            System.out.println(Config.bundle.getString("menu.show_figures"));
 
             try {
                 int choice = scanner.nextInt();
@@ -218,14 +207,14 @@ public class Program {
                     finalChoice = choice;
                     sortFigures(finalChoice);
                 } else {
-                    System.out.println("Wrong number");
+                    System.out.println(Config.bundle.getString("menu.wrong_number"));
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Wrong input");
+                System.out.println(Config.bundle.getString("menu.wrong_number"));
                 scanner.next();
             }
 
-            System.out.println("Created figures:");
+            System.out.println(Config.bundle.getString("menu.created_figures"));
             printFigures();
             pickAction(scanner);
         }
@@ -238,15 +227,15 @@ public class Program {
                     writer.write(figure.toString());
                     writer.newLine();
                 }
-                System.out.println("Figures saved to file: " + fileName);
+                System.out.println(Config.bundle.getString("menu.figures_saved") + fileName);
             } catch (IOException e) {
-                System.out.println("An error occurred while saving the figures to file.");
+                System.out.println(Config.bundle.getString("menu.saving_error"));
             }
         });
     }
 
     private void saveFiguresToFile(Scanner scanner) {
-        System.out.println("Enter the file name:");
+        System.out.println(Config.bundle.getString("menu.enter_filename"));
         String fileName = scanner.next();
 
         CompletableFuture<Void> saveFuture = saveFiguresToFileAsync(fileName);
@@ -256,14 +245,7 @@ public class Program {
     // TODO: Poniższe metody jakoś wynieść do abstrakcji
     private void pickAction(Scanner scanner) {
         while (true) {
-            System.out.println("""
-                    --------------------
-                    0 - Go back
-                    1 - Create circle from figure
-                    2 - Double the area of figure
-                    3 - Delete figure
-                    4 - Select figures to save to Json
-                    --------------------""");
+            System.out.println(Config.bundle.getString("menu.pick_action"));
             try {
                 int choice = scanner.nextInt();
                 if (choice == 0) {
@@ -278,15 +260,15 @@ public class Program {
                 } else if (choice == 4) {
                     saveFiguresToJson(scanner);
                 } else {
-                    System.out.println("Wrong number");
+                    System.out.println(Config.bundle.getString("menu.wrong_number"));
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Wrong input");
+                System.out.println(Config.bundle.getString("menu.wrong_input"));
             } catch (ArithmeticException e) {
-                System.out.println("Can't create circle from this figure");
+                System.out.println(Config.bundle.getString("menu.cant_circle"));
             }
 
-            System.out.println("Created figures:");
+            System.out.println(Config.bundle.getString("menu.created_figures"));
             printFigures();
         }
     }
@@ -297,12 +279,7 @@ public class Program {
 
         while (true) {
             printFigures();
-            System.out.println("""
-                    --------------------
-                    -1 - Go back
-                    0 - Save Selected figures to Json
-                    # - Select figure #
-                    --------------------""");
+            System.out.println(Config.bundle.getString("menu.save_to_json"));
             try {
                 int choice = scanner.nextInt();
                 if (choice == -1) {
@@ -326,11 +303,11 @@ public class Program {
                     if (!selectedFigures.contains(figure)) {
                         selectedFigures.add(figure);
                     } else {
-                        System.out.println("Figure already selected");
+                        System.out.println(Config.bundle.getString("menu.figure_already_selected"));
                     }
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Wrong input");
+                System.out.println(Config.bundle.getString("menu.wrong_input"));
             }
 
         }
@@ -347,11 +324,7 @@ public class Program {
     // TODO: Zmienić nazwę tej metody
     private void createDziwneCircle(Scanner scanner) {
         while (true) {
-            System.out.println("""
-                    --------------------
-                    0 - Go back
-                    # - Create circle from figure #
-                    --------------------""");
+            System.out.println(Config.bundle.getString("menu.create_weird_circle"));
             try {
                 int choice = scanner.nextInt();
                 if (choice == 0) {
@@ -369,20 +342,16 @@ public class Program {
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println("Wrong input");
+                System.out.println(Config.bundle.getString("menu.wrong_input"));
             } catch (ArithmeticException e) {
-                System.out.println("Can't create circle from this figure");
+                System.out.println(Config.bundle.getString("menu.cant_circle"));
             }
         }
     }
 
     private void doubleTheAreaOfFigure(Scanner scanner) {
         while (true) {
-            System.out.println("""
-                    --------------------
-                    0 - Go back
-                    # - Double the area of figure #
-                    --------------------""");
+            System.out.println(Config.bundle.getString("menu.double_area"));
             try {
                 int choice = scanner.nextInt();
                 if (choice == 0) {
@@ -400,18 +369,14 @@ public class Program {
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println("Wrong input");
+                System.out.println(Config.bundle.getString("menu.wrong_input"));
             }
         }
     }
 
     private void deleteFigure(Scanner scanner) {
         while (true) {
-            System.out.println("""
-                    --------------------
-                    0 - Go back
-                    # - Delete figure #
-                    --------------------""");
+            System.out.println(Config.bundle.getString("menu.delete_figure"));
             try {
                 int choice = scanner.nextInt();
                 if (choice == 0) {
@@ -423,20 +388,16 @@ public class Program {
 
                 Figure figure = createdFigures.get(choice - 1);
                 createdFigures.remove(figure);
-                System.out.println("Figure deleted");
+                System.out.println(Config.bundle.getString("menu.figure_deleted"));
 
             } catch (InputMismatchException e) {
-                System.out.println("Wrong input");
+                System.out.println(Config.bundle.getString("menu.wrong_input"));
             }
         }
     }
 
     public void configureFormat(Scanner scanner) {
-        System.out.println("""
-                --------------------
-                Input new format of numbers
-                --------------------
-                """);
+        System.out.println(Config.bundle.getString("menu.configure_format"));
         try {
             int choice = scanner.nextInt();
             if (choice == 0) {
@@ -445,10 +406,10 @@ public class Program {
             if (choice >= 0) {
                 Config.format = String.format("%%.%df", choice);
             } else {
-                System.out.println("Wrong number");
+                System.out.println(Config.bundle.getString("menu.wrong_number"));
             }
         } catch (InputMismatchException e) {
-            System.out.println("Wrong input");
+            System.out.println(Config.bundle.getString("menu.wrong_input"));
         }
     }
 }

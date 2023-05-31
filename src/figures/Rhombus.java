@@ -1,8 +1,8 @@
 package figures;
 
-import Config.Config;
-
 import java.util.Date;
+
+import Config.Config;
 
 public class Rhombus extends Figure {
     private double sideLength;
@@ -17,7 +17,7 @@ public class Rhombus extends Figure {
             case 2 -> calculateFromDiagonalAndArea(a, b);
             case 3 -> calculateFromDiagonalAndSidesideLength(a, b);
             case 4 -> calculateFromAreaAndSidesideLength(a, b);
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
@@ -36,18 +36,18 @@ public class Rhombus extends Figure {
     public static String[] getRequiredProperties(int option) {
         switch (option) {
             case 1 -> {
-                return new String[]{"Diagonal 1", "Diagonal 2"};
+                return new String[] { "Diagonal 1", "Diagonal 2" };
             }
             case 2 -> {
-                return new String[]{"Diagonal", "Area"};
+                return new String[] { "Diagonal", "Area" };
             }
             case 3 -> {
-                return new String[]{"Diagonal", "Side Length"};
+                return new String[] { "Diagonal", "Side Length" };
             }
             case 4 -> {
-                return new String[]{"Area", "Side Length"};
+                return new String[] { "Area", "Side Length" };
             }
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
@@ -100,29 +100,34 @@ public class Rhombus extends Figure {
             this.diagonalSnd = d2;
             this.timeCreated = new Date();
         } else {
-            System.out.println("Invalid input, the area and side Length combination is not possible for a rhombus.");
+            System.out.println(Config.bundle.getString("figure.invalid_input"));
         }
     }
 
     @Override
     public String prettyString() {
         return "--------------------"
-                + "\nRhombus"
-                + "\nSide Length: " + String.format(Config.format, this.sideLength)
-                + "\nFirst Diagonal: " + String.format(Config.format, this.diagonalFst)
-                + "\nSecond Diagonal: " + String.format(Config.format, this.diagonalSnd)
-                + "\nArea: " + String.format(Config.format, this.area)
-                + "\nTime Created: " + this.timeCreated.toString();
+                + "\n" + Config.bundle.getString("figure.type_rhombus")
+                + "\n" + Config.bundle.getString("figure.side") + ": " + String.format(Config.format, this.sideLength)
+                + "\n" + Config.bundle.getString("figure.diagonal") + " 1" + ": "
+                + String.format(Config.format, this.diagonalFst)
+                + "\n" + Config.bundle.getString("figure.diagonal") + " 2" + ": "
+                + String.format(Config.format, this.diagonalSnd)
+                + "\n" + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + "\n" + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
-        return "[Rhombus,"
-                + " Side Length: " + String.format(Config.format, this.sideLength)
-                + " First Diagonal: " + String.format(Config.format, this.diagonalFst)
-                + " Second Diagonal: " + String.format(Config.format, this.diagonalSnd)
-                + " Area: " + String.format(Config.format, this.area)
-                + " Time Created: " + this.timeCreated.toString()
+        return "[" + Config.bundle.getString("figure.type_rhombus")
+                + "," + " " + Config.bundle.getString("figure.side") + ":"
+                + String.format(Config.format, this.sideLength)
+                + " " + Config.bundle.getString("figure.diagonal") + " 1" + ": "
+                + String.format(Config.format, this.diagonalFst)
+                + " " + Config.bundle.getString("figure.diagonal") + " 2" + ": "
+                + String.format(Config.format, this.diagonalSnd)
+                + " " + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + " " + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString()
                 + "]";
     }
 

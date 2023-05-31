@@ -1,8 +1,8 @@
 package figures;
 
-import Config.Config;
-
 import java.util.Date;
+
+import Config.Config;
 
 public class IsoscelesTrapezoid extends Figure {
     private double base1;
@@ -22,24 +22,12 @@ public class IsoscelesTrapezoid extends Figure {
             case 6 -> calculateFromBase2AndLegAndHeight(a, b, c);
             case 7 -> calculateFromBase2AndHeightAndArea(a, b, c);
             case 8 -> calculateFromLegAndHeightAndArea(a, b, c);
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
     public static void printGuide() {
-        System.out.println("""
-                --------------------
-                How do you want to create an Isosceles Trapezoid?
-                1 - From Bases and Height
-                2 - From Bases and Leg
-                3 - From Bases and Area
-                4 - From Base 1, Leg and Height
-                5 - From Base 1, Height and Area
-                6 - From Base 2, Leg and Height
-                7 - From Base 2, Height and Area
-                8 - From Leg, Height and Area
-                0 - Go back
-                --------------------""");
+        System.out.println(Config.bundle.getString("figure.create_isosceles_trapezoid_guide"));
     }
 
     public static String[] getRequiredProperties(int option) {
@@ -68,7 +56,7 @@ public class IsoscelesTrapezoid extends Figure {
             case 8 -> {
                 return new String[] { "Leg", "Height", "Area" };
             }
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
@@ -147,24 +135,24 @@ public class IsoscelesTrapezoid extends Figure {
     @Override
     public String prettyString() {
         return "--------------------"
-                + "\nIsosceles Trapezoid"
-                + "\nBase 1: " + String.format(Config.format, this.base1)
-                + "\nBase 2: " + String.format(Config.format, this.base2)
-                + "\nLeg: " + String.format(Config.format, this.leg)
-                + "\nHeight: " + String.format(Config.format, this.height)
-                + "\nArea: " + String.format(Config.format, this.area)
-                + "\nTime Created: " + this.timeCreated.toString();
+                + "\n" + Config.bundle.getString("figure.type_isosceles_trapezoid")
+                + "\n" + Config.bundle.getString("figure.base") + " 1" + ": " + String.format(Config.format, this.base1)
+                + "\n" + Config.bundle.getString("figure.base") + " 2" + ": " + String.format(Config.format, this.base2)
+                + "\n" + Config.bundle.getString("figure.leg") + ": " + String.format(Config.format, this.leg)
+                + "\n" + Config.bundle.getString("figure.height") + ": " + String.format(Config.format, this.height)
+                + "\n" + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + "\n" + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
-        return "[Isosceles Trapezoid,"
-                + " Base 1: " + String.format(Config.format, this.base1)
-                + " Base 2: " + String.format(Config.format, this.base2)
-                + " Leg: " + String.format(Config.format, this.leg)
-                + " Height: " + String.format(Config.format, this.height)
-                + " Area: " + String.format(Config.format, this.area)
-                + " Time Created: " + this.timeCreated.toString()
+        return "[" + Config.bundle.getString("figure.type_isosceles_trapezoid") + ","
+                + " " + Config.bundle.getString("figure.base") + " 1" + ": " + String.format(Config.format, this.base1)
+                + " " + Config.bundle.getString("figure.base") + " 2" + ": " + String.format(Config.format, this.base2)
+                + " " + Config.bundle.getString("figure.leg") + ": " + String.format(Config.format, this.leg)
+                + " " + Config.bundle.getString("figure.height") + ": " + String.format(Config.format, this.height)
+                + " " + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + " " + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString()
                 + "]";
     }
 

@@ -1,8 +1,8 @@
 package figures;
 
-import Config.Config;
-
 import java.util.Date;
+
+import Config.Config;
 
 public class EquilateralTriangle extends Figure {
     private double edgeLength;
@@ -17,37 +17,30 @@ public class EquilateralTriangle extends Figure {
             case 2 -> calculateFromArea(n);
             case 3 -> calculateFromPerimeter(n);
             case 4 -> calculateFromHeight(n);
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
     public static void printGuide() {
-        System.out.println("""
-                --------------------
-                How do you want to create an Equilateral Triangle?
-                1 - From Edge Length
-                2 - From Area
-                3 - From Perimeter
-                4 - From Height
-                0 - Go back
-                --------------------""");
+        System.out.println(Config.bundle.getString("figure.create_equilateral_triangle_guide"));
+
     }
 
     public static String[] getRequiredProperties(int option) {
         switch (option) {
             case 1 -> {
-                return new String[]{"Edge Length"};
+                return new String[] { "Edge Length" };
             }
             case 2 -> {
-                return new String[]{"Area"};
+                return new String[] { "Area" };
             }
             case 3 -> {
-                return new String[]{"Perimeter"};
+                return new String[] { "Perimeter" };
             }
             case 4 -> {
-                return new String[]{"Height"};
+                return new String[] { "Height" };
             }
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
@@ -83,25 +76,28 @@ public class EquilateralTriangle extends Figure {
         this.timeCreated = new Date();
     }
 
-    @Override
     public String prettyString() {
         return "--------------------"
-                + "\nEquilateral Triangle"
-                + "\nEdge Length: " + String.format(Config.format, this.edgeLength)
-                + "\nArea: " + String.format(Config.format, this.area)
-                + "\nPerimeter: " + String.format(Config.format, this.perimeter)
-                + "\nHeight: " + String.format(Config.format, this.height)
-                + "\nTime Created: " + this.timeCreated.toString();
+                + "\n" + Config.bundle.getString("figure.type_equilateral_triangle")
+                + "\n" + Config.bundle.getString("figure.edge_length") + ": "
+                + String.format(Config.format, this.edgeLength)
+                + "\n" + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + "\n" + Config.bundle.getString("figure.perimeter") + ": "
+                + String.format(Config.format, this.perimeter)
+                + "\n" + Config.bundle.getString("figure.height") + ": " + String.format(Config.format, this.height)
+                + "\n" + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
-        return "[Equilateral Triangle"
-                + " Edge Length: " + String.format(Config.format, this.edgeLength)
-                + " Area: " + String.format(Config.format, this.area)
-                + " Perimeter: " + String.format(Config.format, this.perimeter)
-                + " Height: " + String.format(Config.format, this.height)
-                + " Time Created: " + this.timeCreated.toString()
+        return "[" + Config.bundle.getString("figure.type_equilateral_triangle") + ","
+                + " " + Config.bundle.getString("figure.edge_length") + ": "
+                + String.format(Config.format, this.edgeLength)
+                + " " + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + " " + Config.bundle.getString("figure.perimeter") + ": "
+                + String.format(Config.format, this.perimeter)
+                + " " + Config.bundle.getString("figure.height") + ": " + String.format(Config.format, this.height)
+                + " " + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString()
                 + "]";
     }
 

@@ -1,8 +1,8 @@
 package figures;
 
-import Config.Config;
-
 import java.util.Date;
+
+import Config.Config;
 
 public class Rectangle extends Figure {
     private double sideLength;
@@ -17,37 +17,29 @@ public class Rectangle extends Figure {
             case 2 -> calculateFromDiagonalAndWidth(a, b);
             case 3 -> calculateFromAreaAndWidth(a, b);
             case 4 -> calculateFromAreaAndDiagonal(a, b);
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
     public static void printGuide() {
-        System.out.println("""
-                --------------------
-                How do you want to create a Rectangle?
-                1 - From Side Length and Width
-                2 - From Diagonal and Width
-                3 - From Area and Width
-                4 - From Area and Diagonal
-                0 - Go back
-                --------------------""");
+        System.out.println(Config.bundle.getString("figure.create_rectangle_guide"));
     }
 
     public static String[] getRequiredProperties(int option) {
         switch (option) {
             case 1 -> {
-                return new String[]{"Side Length", "Width"};
+                return new String[] { "Side Length", "Width" };
             }
             case 2 -> {
-                return new String[]{"Diagonal", "Width"};
+                return new String[] { "Diagonal", "Width" };
             }
             case 3 -> {
-                return new String[]{"Area", "Width"};
+                return new String[] { "Area", "Width" };
             }
             case 4 -> {
-                return new String[]{"Area", "Diagonal"};
+                return new String[] { "Area", "Diagonal" };
             }
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
@@ -83,23 +75,26 @@ public class Rectangle extends Figure {
         this.timeCreated = new Date();
     }
 
+    @Override
     public String prettyString() {
         return "--------------------"
-                + "\nRectangle"
-                + "\nSide Length: " + String.format(Config.format, this.sideLength)
-                + "\nWidth: " + String.format(Config.format, this.width)
-                + "\nDiagonal: " + String.format(Config.format, this.diagonal)
-                + "\nArea: " + String.format(Config.format, this.area)
-                + "\nTime Created: " + this.timeCreated.toString();
+                + "\n" + Config.bundle.getString("figure.type_rectangle")
+                + "\n" + Config.bundle.getString("figure.side") + ": " + String.format(Config.format, this.sideLength)
+                + "\n" + Config.bundle.getString("figure.width") + ": " + String.format(Config.format, this.width)
+                + "\n" + Config.bundle.getString("figure.diagonal") + ": " + String.format(Config.format, this.diagonal)
+                + "\n" + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + "\n" + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
-        return "[Rectangle," + "Side Length:" + String.format(Config.format, this.sideLength)
-                + " Width: " + String.format(Config.format, this.width)
-                + " Diagonal: " + String.format(Config.format, this.diagonal)
-                + " Area: " + String.format(Config.format, this.area)
-                + " Time Created: " + this.timeCreated.toString()
+        return "[" + Config.bundle.getString("figure.type_rectangle")
+                + "," + " " + Config.bundle.getString("figure.side") + ":"
+                + String.format(Config.format, this.sideLength)
+                + " " + Config.bundle.getString("figure.width") + ": " + String.format(Config.format, this.width)
+                + " " + Config.bundle.getString("figure.diagonal") + ": " + String.format(Config.format, this.diagonal)
+                + " " + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + " " + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString()
                 + "]";
     }
 
@@ -141,4 +136,3 @@ public class Rectangle extends Figure {
         return 4;
     }
 }
-

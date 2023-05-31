@@ -1,8 +1,8 @@
 package figures;
 
-import Config.Config;
-
 import java.util.Date;
+
+import Config.Config;
 
 public class RegularHexagon extends Figure {
     private double side;
@@ -15,19 +15,12 @@ public class RegularHexagon extends Figure {
             case 1 -> calculateFromSide(a);
             case 2 -> calculateFromArea(a);
             case 3 -> calculateFromPerimeter(a);
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
     public static void printGuide() {
-        System.out.println("""
-                --------------------
-                How do you want to create a Regular Hexagon?
-                1 - From Side Length
-                2 - From Area
-                3 - From Perimeter
-                0 - Go back
-                --------------------""");
+        System.out.println(Config.bundle.getString("figure.create_regular_hexagon_guide"));
     }
 
     public static String[] getRequiredProperties(int option) {
@@ -41,7 +34,7 @@ public class RegularHexagon extends Figure {
             case 3 -> {
                 return new String[] { "Perimeter" };
             }
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
@@ -69,20 +62,22 @@ public class RegularHexagon extends Figure {
     @Override
     public String prettyString() {
         return "--------------------"
-                + "\nRegular Hexagon"
-                + "\nSide Length: " + String.format(Config.format, this.side)
-                + "\nArea: " + String.format(Config.format, this.area)
-                + "\nPerimeter: " + String.format(Config.format, this.perimeter)
-                + "\nTime Created: " + this.timeCreated.toString();
+                + "\n" + Config.bundle.getString("figure.type_regular_hexagon")
+                + "\n" + Config.bundle.getString("figure.side") + ": " + String.format(Config.format, this.side)
+                + "\n" + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + "\n" + Config.bundle.getString("figure.perimeter") + ": "
+                + String.format(Config.format, this.perimeter)
+                + "\n" + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
-        return "[Regular Hexagon,"
-                + " Side Length: " + String.format(Config.format, this.side)
-                + " Area: " + String.format(Config.format, this.area)
-                + " Perimeter: " + String.format(Config.format, this.perimeter)
-                + " Time Created: " + this.timeCreated.toString()
+        return "[" + Config.bundle.getString("figure.type_regular_hexagon")
+                + "," + " " + Config.bundle.getString("figure.side") + ":" + String.format(Config.format, this.side)
+                + " " + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + " " + Config.bundle.getString("figure.perimeter") + ": "
+                + String.format(Config.format, this.perimeter)
+                + " " + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString()
                 + "]";
     }
 

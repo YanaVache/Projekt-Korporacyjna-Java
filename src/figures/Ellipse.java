@@ -1,8 +1,8 @@
 package figures;
 
-import Config.Config;
-
 import java.util.Date;
+
+import Config.Config;
 
 public class Ellipse extends Figure {
     private double majorAxis;
@@ -16,19 +16,12 @@ public class Ellipse extends Figure {
             case 1 -> countMajorAxisFromMinorAxisAndArea(a, b);
             case 2 -> countMinorAxisFromMajorAxisAndArea(a, b);
             case 3 -> countAreaFromMinorAxisAndMajorAxis(a, b);
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
     public static void printGuide() {
-        System.out.println("""
-                --------------------
-                How do you want to create a Ellipse?
-                1 - From Minor Axis and Area
-                2 - From Major Aaxis and Area
-                3 - From Minor Axis and Major Axis
-                0 - Go back
-                --------------------""");
+        System.out.println(Config.bundle.getString("figure.create_ellipse_guide"));
     }
 
     public static String[] getRequiredProperties(int option) {
@@ -42,7 +35,7 @@ public class Ellipse extends Figure {
             case 3 -> {
                 return new String[] { "Minor Axis", "Major Axis" };
             }
-            default -> throw new IllegalArgumentException("Wrong option");
+            default -> throw new IllegalArgumentException(Config.bundle.getString("figure.wrong_option"));
         }
     }
 
@@ -73,29 +66,35 @@ public class Ellipse extends Figure {
     @Override
     public String prettyString() {
         return "--------------------"
-                + "\nEllipse"
-                + "\nMajor Axis: " + String.format(Config.format, this.majorAxis)
-                + "\nMinor Axis: " + String.format(Config.format, this.minorAxis)
-                + "\nPerimeter: " + String.format(Config.format, this.perimeter)
-                + "\nArea: " + String.format(Config.format, this.area)
-                + "\nTime Created: " + this.timeCreated.toString();
+                + "\n" + Config.bundle.getString("figure.type_ellipse")
+                + "\n" + Config.bundle.getString("figure.major_axis") + ": "
+                + String.format(Config.format, this.majorAxis)
+                + "\n" + Config.bundle.getString("figure.minor_axis") + ": "
+                + String.format(Config.format, this.minorAxis)
+                + "\n" + Config.bundle.getString("figure.perimeter") + ": "
+                + String.format(Config.format, this.perimeter)
+                + "\n" + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + "\n" + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString();
     }
 
     @Override
     public String toString() {
-        return "[Ellipse,"
-                + " Major Axis: " + String.format(Config.format, this.majorAxis)
-                + " Minor Axis: " + String.format(Config.format, this.minorAxis)
-                + " Perimeter: " + String.format(Config.format, this.perimeter)
-                + " Area: " + String.format(Config.format, this.area)
-                + " Time Created: " + this.timeCreated.toString()
+        return "[" + Config.bundle.getString("figure.type_ellipse") + ","
+                + " " + Config.bundle.getString("figure.major_axis") + ": "
+                + String.format(Config.format, this.majorAxis)
+                + " " + Config.bundle.getString("figure.minor_axis") + ": "
+                + String.format(Config.format, this.minorAxis)
+                + " " + Config.bundle.getString("figure.perimeter") + ": "
+                + String.format(Config.format, this.perimeter)
+                + " " + Config.bundle.getString("figure.area") + ": " + String.format(Config.format, this.area)
+                + " " + Config.bundle.getString("figure.time_created") + ": " + this.timeCreated.toString()
                 + "]";
     }
 
-
     public static double countPerimeter(double majorAxis, double minorAxis) {
         double h = Math.pow(majorAxis - minorAxis, 2) / Math.pow(majorAxis + minorAxis, 2);
-        return Math.PI * (majorAxis + minorAxis) * (1 + (1/Math.pow(2,2)) * h + (1/Math.pow(2,6))*Math.pow(h, 2));
+        return Math.PI * (majorAxis + minorAxis)
+                * (1 + (1 / Math.pow(2, 2)) * h + (1 / Math.pow(2, 6)) * Math.pow(h, 2));
     }
 
     public double getMajorAxis() {
